@@ -1,0 +1,203 @@
+type Query {
+  viewer: User!
+  user(id: ID!): User
+  verifyToken(token: String!): User
+  userPosts(userId: ID!): [Post!]
+  posts: [Post!]
+  news: [News!]
+  newsComments(contentId: ID!): [Comment!]
+  getContentComments(contentId: ID!, relationship: ContentEnum!): [Comment!]
+  getMissingChallenges(type: ChallengeType!): [Challenge!]
+  getCompletedChallenges(type: ChallengeType!): [Challenge!]
+  getJournals: [Journal!]
+  getCommunities: [Community!]
+}
+
+type Mutation {
+  signUp(input: SignUpInput!): Int!
+  signIn(email: String!, password: String, adminOnly: Boolean): AuthUser!
+  logOut: Int
+  updateProfile(input: UpdateUserInput!): Int
+  addFriend(user: String!, friend: String!): [User!]
+  createArticle(input: CreateNewsInput!): Int
+  createComment(
+    text: String!
+    content_id: ID!
+    relationship: ContentEnum!
+  ): Comment
+  likeContent(contentId: ID!, contentType: ContentEnum!): Int
+  unlikeContent(contentId: ID!, contentType: ContentEnum!): Int
+  createPost(input: PostInput!): Post
+  deletePost(postId: ID!): Int
+  createChallenge(input: ChallengeInput!): Challenge
+  createAnswerChallenge(input: AnswerInput!): Int
+  createJournal(title: String!, text: String!, value: ChallengeType!): Int
+  updateJournal(id: ID!, title: String, text: String, value: ChallengeType): Int
+  deleteJournal(journalId: ID!): Int
+}
+
+scalar Date
+
+enum ROLES {
+  USER
+  EDITOR
+  ADMIIN
+}
+
+enum ContentEnum {
+  NEWS
+  POSTS
+  COMMENTS
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  name: String!
+  lastName: String!
+  community: ID!
+  birthday: Date!
+  bio: String
+  profilePic: MediaInput
+}
+
+input UpdateUserInput {
+  bio: String
+  media: MediaInput
+}
+
+input CreateNewsInput {
+  title: String!
+  text: String!
+  cover: MediaInput
+  media: [MediaInput]
+  extLinks: [String]
+}
+
+input PostInput {
+  text: String!
+  media: [MediaInput]
+}
+
+input AnswerInput {
+  answer: String
+  media: [MediaInput]
+  challengeId: String!
+}
+
+input MediaInput {
+  uri: String!
+  type: String!
+  fileName: String!
+  base64: String!
+}
+
+interface Node {
+  id: ID!
+}
+
+type User implements Node {
+  name: String!
+  lastName: String!
+  birthday: String!
+  friends: [User!]
+  community: Community
+  email: String!
+  profilePic: String
+  id: ID!
+  role: ROLES!
+  bio: String
+}
+
+type AuthUser {
+  user: User!
+  authToken: String!
+}
+
+type Community implements Node {
+  id: ID!
+  city: String
+  state: String
+  country: String!
+  zipCode: String
+  name: String!
+}
+
+type Post implements Node {
+  id: ID!
+  text: String
+  user: User!
+  likes: Int!
+  isLikedByUser: Boolean!
+  media: [String!]
+  comments: [Comment!]
+  isOwner: Boolean
+}
+
+type News implements Node {
+  id: ID!
+  text: String!
+  user: User!
+  title: String!
+  likes: Int!
+  isLikedByUser: Boolean!
+  comments: [Comment!]
+  cover: String
+  extLinks: [String!]
+  gallery: [String!]
+}
+
+type Comment implements Node {
+  id: ID!
+  author: User!
+  likes: Int!
+  isLikedByUser: Boolean!
+  comments: [Comment!]
+  text: String!
+}
+
+type Journal implements Node {
+  id: ID!
+  title: String!
+  text: String!
+  value: ChallengeType
+  created_at: Date!
+}
+
+# ESPACIO Objects
+
+enum AnswerType {
+  ANSWER_CLOSE
+  ANSWER_OPEN
+  VIEW_MEDIA
+  UPLOAD_FILE
+}
+
+enum ChallengeType {
+  PERSONAL_INTEGRITY
+  SPIRITUALITY
+  BELONGING_COMMUNITY
+  ACTIVE_CITIZENSHIP
+  TRANSFORMATIVE_ACTION
+}
+
+type Challenge implements Node {
+  id: ID!
+  question: String!
+  title: String!
+  isLocked: Boolean!
+  challengeType: ChallengeType!
+  answer: String!
+  answerType: AnswerType!
+  options: [String]
+}
+
+input ChallengeInput {
+  id: ID!
+  title: String!
+  question: String!
+  isLocked: Boolean!
+  challengeType: ChallengeType!
+  answer: String!
+  answerType: AnswerType!
+}

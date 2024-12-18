@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<4944e52faf3504ddb92d065896a1b92a>>
+ * @generated SignedSource<<ccc724040247f0356cf138c5ff90f7f8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,9 +10,9 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 export type CreateNewsInput = {
-  cover: MediaInput;
-  extLinks?: ReadonlyArray<string> | null | undefined;
-  media?: ReadonlyArray<MediaInput> | null | undefined;
+  cover?: MediaInput | null | undefined;
+  extLinks?: ReadonlyArray<string | null | undefined> | null | undefined;
+  media?: ReadonlyArray<MediaInput | null | undefined> | null | undefined;
   text: string;
   title: string;
 };

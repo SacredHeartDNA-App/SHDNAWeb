@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9f0fb0c2bc66aff9501bef3be497c36b>>
+ * @generated SignedSource<<cfc28a36d3e1898443caed0807e7864e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,10 +12,7 @@ import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type SHDNAHomeViewQuery$variables = Record<PropertyKey, never>;
 export type SHDNAHomeViewQuery$data = {
-  readonly news: ReadonlyArray<{
-    readonly title: string;
-    readonly " $fragmentSpreads": FragmentRefs<"SHDNANewsBlockFragment">;
-  }> | null | undefined;
+  readonly " $fragmentSpreads": FragmentRefs<"SHDNAHomeView_RefetchableFragment">;
 };
 export type SHDNAHomeViewQuery = {
   response: SHDNAHomeViewQuery$data;
@@ -27,7 +24,7 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "title",
+  "name": "name",
   "storageKey": null
 },
 v1 = {
@@ -45,21 +42,9 @@ return {
     "name": "SHDNAHomeViewQuery",
     "selections": [
       {
-        "alias": null,
         "args": null,
-        "concreteType": "News",
-        "kind": "LinkedField",
-        "name": "news",
-        "plural": true,
-        "selections": [
-          (v0/*: any*/),
-          {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "SHDNANewsBlockFragment"
-          }
-        ],
-        "storageKey": null
+        "kind": "FragmentSpread",
+        "name": "SHDNAHomeView_RefetchableFragment"
       }
     ],
     "type": "Query",
@@ -79,7 +64,13 @@ return {
         "name": "news",
         "plural": true,
         "selections": [
-          (v0/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "title",
+            "storageKey": null
+          },
           {
             "alias": null,
             "args": null,
@@ -102,13 +93,7 @@ return {
             "name": "user",
             "plural": false,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "name",
-                "storageKey": null
-              },
+              (v0/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -130,8 +115,28 @@ return {
                 "name": "bio",
                 "storageKey": null
               },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "Community",
+                "kind": "LinkedField",
+                "name": "community",
+                "plural": false,
+                "selections": [
+                  (v0/*: any*/),
+                  (v1/*: any*/)
+                ],
+                "storageKey": null
+              },
               (v1/*: any*/)
             ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "likes",
             "storageKey": null
           },
           (v1/*: any*/)
@@ -141,16 +146,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "70dcf03bbdc401a124aa398212723528",
+    "cacheID": "b9abb692c7fa10192a806077be51404c",
     "id": null,
     "metadata": {},
     "name": "SHDNAHomeViewQuery",
     "operationKind": "query",
-    "text": "query SHDNAHomeViewQuery {\n  news {\n    title\n    ...SHDNANewsBlockFragment\n    id\n  }\n}\n\nfragment SHDNANewsBlockFragment on News {\n  cover\n  title\n  text\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n}\n"
+    "text": "query SHDNAHomeViewQuery {\n  ...SHDNAHomeView_RefetchableFragment\n}\n\nfragment SHDNAHomeView_RefetchableFragment on Query {\n  news {\n    title\n    ...SHDNANewsBlockFragment\n    id\n  }\n}\n\nfragment SHDNANewsBlockFragment on News {\n  cover\n  title\n  text\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n  ...SHDNANewsView\n}\n\nfragment SHDNANewsView on News {\n  likes\n  text\n  id\n}\n\nfragment SHDNAProfileView_Fragment on User {\n  name\n  lastName\n  community {\n    name\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n  ...SHDNAProfileView_Fragment\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b82bca15771d4ac203525f8771344f3a";
+(node as any).hash = "dba6d6a6a4e62a1d68565bcd28898c3b";
 
 export default node;

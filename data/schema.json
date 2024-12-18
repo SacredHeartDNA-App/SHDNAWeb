@@ -1,0 +1,360 @@
+[
+  {
+    "className": "_User",
+    "fields": {
+      "objectId": {
+        "type": "String"
+      },
+      "createdAt": {
+        "type": "Date"
+      },
+      "updatedAt": {
+        "type": "Date"
+      },
+      "ACL": {
+        "type": "ACL"
+      },
+      "username": {
+        "type": "String"
+      },
+      "password": {
+        "type": "String"
+      },
+      "email": {
+        "type": "String"
+      },
+      "emailVerified": {
+        "type": "Boolean"
+      },
+      "authData": {
+        "type": "Object"
+      },
+      "name": {
+        "type": "String",
+        "required": true
+      },
+      "lastName": {
+        "type": "String",
+        "required": false
+      },
+      "birthday": {
+        "type": "String",
+        "required": true
+      },
+      "bio": {
+        "type": "String",
+        "required": false
+      },
+      "community": {
+        "type": "Pointer",
+        "targetClass": "_User",
+        "required": true
+      },
+      "friends": {
+        "type": "Relation",
+        "targetClass": "_User",
+        "required": false
+      },
+      "Role": {
+        "type": "Number",
+        "required": false,
+        "defaultValue": 0
+      }
+    },
+    "classLevelPermissions": {
+      "find": {
+        "*": true
+      },
+      "count": {
+        "*": true
+      },
+      "get": {
+        "*": true
+      },
+      "create": {
+        "*": true
+      },
+      "update": {
+        "*": true
+      },
+      "delete": {
+        "*": true
+      },
+      "addField": {
+        "*": true
+      },
+      "protectedFields": {
+        "*": []
+      }
+    },
+    "indexes": {
+      "_id_": {
+        "_id": 1
+      },
+      "username_1": {
+        "username": 1
+      },
+      "case_insensitive_username": {
+        "username": 1
+      },
+      "email_1": {
+        "email": 1
+      },
+      "case_insensitive_email": {
+        "email": 1
+      }
+    }
+  },
+  {
+    "className": "_Role",
+    "fields": {
+      "objectId": {
+        "type": "String"
+      },
+      "createdAt": {
+        "type": "Date"
+      },
+      "updatedAt": {
+        "type": "Date"
+      },
+      "ACL": {
+        "type": "ACL"
+      },
+      "name": {
+        "type": "String"
+      },
+      "users": {
+        "type": "Relation",
+        "targetClass": "_User"
+      },
+      "roles": {
+        "type": "Relation",
+        "targetClass": "_Role"
+      }
+    },
+    "classLevelPermissions": {
+      "find": {
+        "*": true
+      },
+      "count": {
+        "*": true
+      },
+      "get": {
+        "*": true
+      },
+      "create": {
+        "*": true
+      },
+      "update": {
+        "*": true
+      },
+      "delete": {
+        "*": true
+      },
+      "addField": {
+        "*": true
+      },
+      "protectedFields": {
+        "*": []
+      }
+    },
+    "indexes": {
+      "_id_": {
+        "_id": 1
+      },
+      "name_1": {
+        "name": 1
+      }
+    }
+  },
+  {
+    "className": "Community",
+    "fields": {
+      "objectId": {
+        "type": "String"
+      },
+      "createdAt": {
+        "type": "Date"
+      },
+      "updatedAt": {
+        "type": "Date"
+      },
+      "ACL": {
+        "type": "ACL"
+      },
+      "country": {
+        "type": "String",
+        "required": true
+      },
+      "state": {
+        "type": "String",
+        "required": false
+      },
+      "city": {
+        "type": "String",
+        "required": false
+      },
+      "zipCode": {
+        "type": "Number",
+        "required": false
+      },
+      "name": {
+        "type": "String",
+        "required": true
+      }
+    },
+    "classLevelPermissions": {
+      "find": {
+        "*": true
+      },
+      "count": {
+        "*": true
+      },
+      "get": {
+        "*": true
+      },
+      "create": {
+        "*": true
+      },
+      "update": {
+        "*": true
+      },
+      "delete": {
+        "*": true
+      },
+      "addField": {
+        "*": true
+      },
+      "protectedFields": {
+        "*": []
+      }
+    },
+    "indexes": {
+      "_id_": {
+        "_id": 1
+      }
+    }
+  },
+  {
+    "className": "Post",
+    "fields": {
+      "objectId": {
+        "type": "String"
+      },
+      "createdAt": {
+        "type": "Date"
+      },
+      "updatedAt": {
+        "type": "Date"
+      },
+      "ACL": {
+        "type": "ACL"
+      },
+      "test": {
+        "type": "String",
+        "required": true
+      },
+      "author": {
+        "type": "Pointer",
+        "targetClass": "_User",
+        "required": true
+      },
+      "likes": {
+        "type": "Number",
+        "required": false,
+        "defaultValue": 0
+      },
+      "comments": {
+        "type": "Relation",
+        "targetClass": "Comments",
+        "required": false
+      }
+    },
+    "classLevelPermissions": {
+      "find": {
+        "*": true
+      },
+      "count": {
+        "*": true
+      },
+      "get": {
+        "*": true
+      },
+      "create": {
+        "*": true
+      },
+      "update": {
+        "*": true
+      },
+      "delete": {
+        "*": true
+      },
+      "addField": {
+        "*": true
+      },
+      "protectedFields": {
+        "*": []
+      }
+    }
+  },
+  {
+    "className": "Comments",
+    "fields": {
+      "objectId": {
+        "type": "String"
+      },
+      "createdAt": {
+        "type": "Date"
+      },
+      "updatedAt": {
+        "type": "Date"
+      },
+      "ACL": {
+        "type": "ACL"
+      },
+      "author": {
+        "type": "Pointer",
+        "targetClass": "_User",
+        "required": true
+      },
+      "content": {
+        "type": "String",
+        "required": true
+      },
+      "likes": {
+        "type": "Number",
+        "required": false,
+        "defaultValue": 0
+      },
+      "comments": {
+        "type": "Relation",
+        "targetClass": "_User",
+        "required": false
+      }
+    },
+    "classLevelPermissions": {
+      "find": {
+        "requiresAuthentication": true
+      },
+      "count": {
+        "requiresAuthentication": true
+      },
+      "get": {
+        "requiresAuthentication": true
+      },
+      "create": {
+        "requiresAuthentication": true
+      },
+      "update": {
+        "requiresAuthentication": true
+      },
+      "delete": {
+        "requiresAuthentication": true
+      },
+      "addField": {},
+      "protectedFields": {
+        "*": []
+      }
+    }
+  }
+]

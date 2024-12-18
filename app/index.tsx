@@ -1,4 +1,8 @@
-import { Text, View } from "react-native";
+import { Colors } from "@/assets/SHDNAColors";
+import SHDNAWebSignIn from "@/src/Views/SHDNAWebSignIn";
+import { View } from "react-native";
+import { useFonts } from "expo-font";
+import SHDNAText from "@/src/Components/SHDNAText";
 
 export default function Index() {
   return (
@@ -6,10 +10,11 @@ export default function Index() {
       style={{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
+        backgroundColor: Colors.Background,
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <SHDNAText>Hello</SHDNAText>
     </View>
   );
 }

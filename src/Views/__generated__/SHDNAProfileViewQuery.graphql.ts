@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<77a0f0c5321497828a02b472f45f9d99>>
+ * @generated SignedSource<<50a641a15c8a3e8de993d9315483a91f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -43,6 +43,13 @@ v2 = {
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
   "storageKey": null
 };
 return {
@@ -130,13 +137,7 @@ return {
             "name": "user",
             "plural": false,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "name",
-                "storageKey": null
-              },
+              (v3/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -158,6 +159,19 @@ return {
                 "name": "bio",
                 "storageKey": null
               },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "Community",
+                "kind": "LinkedField",
+                "name": "community",
+                "plural": false,
+                "selections": [
+                  (v3/*: any*/),
+                  (v2/*: any*/)
+                ],
+                "storageKey": null
+              },
               (v2/*: any*/)
             ],
             "storageKey": null
@@ -168,12 +182,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "225e123b0676ba214301f12874342f6f",
+    "cacheID": "69dee94f09926cc3592c7d3dda7fb3bc",
     "id": null,
     "metadata": {},
     "name": "SHDNAProfileViewQuery",
     "operationKind": "query",
-    "text": "query SHDNAProfileViewQuery(\n  $userId: ID!\n) {\n  userPosts(userId: $userId) {\n    ...SHDNAPostBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAPostBlock_Fragment on Post {\n  id\n  likes\n  isLikedByUser\n  text\n  media\n  isOwner\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n}\n"
+    "text": "query SHDNAProfileViewQuery(\n  $userId: ID!\n) {\n  userPosts(userId: $userId) {\n    ...SHDNAPostBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAPostBlock_Fragment on Post {\n  id\n  likes\n  isLikedByUser\n  text\n  media\n  isOwner\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n}\n\nfragment SHDNAProfileView_Fragment on User {\n  name\n  lastName\n  community {\n    name\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n  ...SHDNAProfileView_Fragment\n}\n"
   }
 };
 })();
