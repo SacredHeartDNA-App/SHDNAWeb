@@ -45,7 +45,11 @@ export default function SHDNAHomeView() {
           <View style={styles.grid}>
             {news.map((newsItem, index) => {
               return (
-                <SHDNANewsBlock key={index} SHDNANewsBlockKey={newsItem} />
+                <SHDNANewsBlock
+                  key={index}
+                  SHDNANewsBlockKey={newsItem}
+                  refetch={refetch}
+                />
               );
             })}
           </View>
