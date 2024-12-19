@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<aa35e7ecaa1253f367f6dddc2a73bead>>
+ * @generated SignedSource<<dd1c9394e40f85f21e84df430ab6c70f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -24,14 +24,14 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "id",
   "storageKey": null
 },
 v1 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
+  "name": "name",
   "storageKey": null
 };
 return {
@@ -85,6 +85,14 @@ return {
             "name": "text",
             "storageKey": null
           },
+          (v0/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "extLinks",
+            "storageKey": null
+          },
           {
             "alias": null,
             "args": null,
@@ -93,7 +101,7 @@ return {
             "name": "user",
             "plural": false,
             "selections": [
-              (v0/*: any*/),
+              (v1/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -123,12 +131,12 @@ return {
                 "name": "community",
                 "plural": false,
                 "selections": [
-                  (v0/*: any*/),
-                  (v1/*: any*/)
+                  (v1/*: any*/),
+                  (v0/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v1/*: any*/)
+              (v0/*: any*/)
             ],
             "storageKey": null
           },
@@ -139,19 +147,11 @@ return {
             "name": "likes",
             "storageKey": null
           },
-          (v1/*: any*/),
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
             "name": "gallery",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "extLinks",
             "storageKey": null
           }
         ],
@@ -160,12 +160,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "65226a9db4b7c30cd3528b0ba2945b22",
+    "cacheID": "42a0251fde21c1a977ef9b7801e217f8",
     "id": null,
     "metadata": {},
     "name": "useSHDNANewsListRefetchQuery",
     "operationKind": "query",
-    "text": "query useSHDNANewsListRefetchQuery {\n  ...useSHDNANewsList_RefetchableFragment\n}\n\nfragment SHDNANewsBlockFragment on News {\n  cover\n  title\n  text\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n  ...SHDNANewsView\n}\n\nfragment SHDNANewsView on News {\n  likes\n  text\n  id\n  gallery\n  extLinks\n}\n\nfragment SHDNAProfileView_Fragment on User {\n  name\n  lastName\n  community {\n    name\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n  ...SHDNAProfileView_Fragment\n}\n\nfragment useSHDNANewsList_RefetchableFragment on Query {\n  news {\n    title\n    ...SHDNANewsBlockFragment\n    id\n  }\n}\n"
+    "text": "query useSHDNANewsListRefetchQuery {\n  ...useSHDNANewsList_RefetchableFragment\n}\n\nfragment SHDNANewsBlockFragment on News {\n  cover\n  title\n  text\n  id\n  extLinks\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n  ...SHDNANewsView\n}\n\nfragment SHDNANewsView on News {\n  likes\n  text\n  id\n  gallery\n  extLinks\n}\n\nfragment SHDNAProfileView_Fragment on User {\n  name\n  lastName\n  community {\n    name\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n  ...SHDNAProfileView_Fragment\n}\n\nfragment useSHDNANewsList_RefetchableFragment on Query {\n  news {\n    title\n    ...SHDNANewsBlockFragment\n    id\n  }\n}\n"
   }
 };
 })();
