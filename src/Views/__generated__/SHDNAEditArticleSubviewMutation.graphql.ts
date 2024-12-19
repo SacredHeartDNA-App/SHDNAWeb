@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a63091b83399899e4db0dbadb61c9e48>>
+ * @generated SignedSource<<8e0f2ca20bc2901f7eddd05fab48cd7e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,12 +9,12 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from 'relay-runtime';
-export type CreateNewsInput = {
+export type EditNewsInput = {
   cover?: MediaInput | null | undefined;
   extLinks?: ReadonlyArray<string | null | undefined> | null | undefined;
   media?: ReadonlyArray<MediaInput | null | undefined> | null | undefined;
-  text: string;
-  title: string;
+  text?: string | null | undefined;
+  title?: string | null | undefined;
 };
 export type MediaInput = {
   base64: string;
@@ -23,10 +23,11 @@ export type MediaInput = {
   uri: string;
 };
 export type SHDNAEditArticleSubviewMutation$variables = {
-  input: CreateNewsInput;
+  id: string;
+  input: EditNewsInput;
 };
 export type SHDNAEditArticleSubviewMutation$data = {
-  readonly createArticle: number | null | undefined;
+  readonly updateArticle: number | null | undefined;
 };
 export type SHDNAEditArticleSubviewMutation = {
   response: SHDNAEditArticleSubviewMutation$data;
@@ -34,17 +35,25 @@ export type SHDNAEditArticleSubviewMutation = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "id"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "input"
+},
+v2 = [
   {
     "alias": null,
     "args": [
+      {
+        "kind": "Variable",
+        "name": "id",
+        "variableName": "id"
+      },
       {
         "kind": "Variable",
         "name": "input",
@@ -52,38 +61,44 @@ v1 = [
       }
     ],
     "kind": "ScalarField",
-    "name": "createArticle",
+    "name": "updateArticle",
     "storageKey": null
   }
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "SHDNAEditArticleSubviewMutation",
-    "selections": (v1/*: any*/),
+    "selections": (v2/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v1/*: any*/),
+      (v0/*: any*/)
+    ],
     "kind": "Operation",
     "name": "SHDNAEditArticleSubviewMutation",
-    "selections": (v1/*: any*/)
+    "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "637d3810c992f4d872fb86b1fe913a5e",
+    "cacheID": "834fb03d7bcc763192ee5ae98f1c2194",
     "id": null,
     "metadata": {},
     "name": "SHDNAEditArticleSubviewMutation",
     "operationKind": "mutation",
-    "text": "mutation SHDNAEditArticleSubviewMutation(\n  $input: CreateNewsInput!\n) {\n  createArticle(input: $input)\n}\n"
+    "text": "mutation SHDNAEditArticleSubviewMutation(\n  $input: EditNewsInput!\n  $id: ID!\n) {\n  updateArticle(input: $input, id: $id)\n}\n"
   }
 };
 })();
 
-(node as any).hash = "1547263c98316dd720392328e509a86b";
+(node as any).hash = "01a86b74b793d123e1d903de9c4725e2";
 
 export default node;
