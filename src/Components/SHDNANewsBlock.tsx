@@ -9,9 +9,13 @@ import { Colors } from "../../assets/SHDNAColors";
 import { SHDNANewsBlockFragment$key } from "./__generated__/SHDNANewsBlockFragment.graphql";
 import SHDNAText from "./SHDNAText";
 import { useSheet } from "./Sheet/SHDNASheetContext";
+import SHDNAButton, { ButtonStates } from "./SHDNAButton";
+import EditSVG from "@/assets/RNSvgs/EditSVG";
+import SHDNAEditArticleSubview from "../Views/SHDNAEditArticleSubview";
 
 type SHDNANewsBlockProps = {
   SHDNANewsBlockKey: SHDNANewsBlockFragment$key;
+  refetch: () => void;
 };
 
 const newsBlockBody = graphql`
@@ -19,6 +23,8 @@ const newsBlockBody = graphql`
     cover
     title
     text
+    id
+    extLinks
     user {
       ...SHDNAUserRow_Fragment
     }
@@ -26,13 +32,37 @@ const newsBlockBody = graphql`
   }
 `;
 
-const SHDNANewsBlock = ({ SHDNANewsBlockKey }: SHDNANewsBlockProps) => {
+const SHDNANewsBlock = ({
+  SHDNANewsBlockKey,
+  refetch,
+}: SHDNANewsBlockProps) => {
   const { openSheet } = useSheet();
 
   let newsBlockData = useFragment<SHDNANewsBlockFragment$key>(
     newsBlockBody,
     SHDNANewsBlockKey
   );
+
+  const EditProfileButton = () => {
+    return (
+      <SHDNAButton
+        Icon={EditSVG}
+        iconSize={20}
+        onClick={() =>
+          openSheet({
+            title: "Edit News",
+            content: (
+              <SHDNAEditArticleSubview
+                refetch={refetch}
+                articleInfo={newsBlockData}
+              />
+            ),
+          })
+        }
+        state={ButtonStates.TRANSPARENT}
+      />
+    );
+  };
 
   return (
     <SHDNABlock
@@ -60,9 +90,18 @@ const SHDNANewsBlock = ({ SHDNANewsBlockKey }: SHDNANewsBlockProps) => {
           }
         />
         <View style={styles.bodyContainer}>
-          <SHDNAText style={styles.title} fontWeight="SemiBold">
-            {newsBlockData.title}
-          </SHDNAText>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+            }}
+          >
+            <SHDNAText style={styles.title} fontWeight="SemiBold">
+              {newsBlockData.title}
+            </SHDNAText>
+            <EditProfileButton />
+          </View>
           <View style={styles.footer}>
             <SHDNAUserRow userKey={newsBlockData.user} />
             <SHDNATag title="SHDNA" backgroundColor={Colors.Red1} />
@@ -82,6 +121,7 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     padding: 15,
+    paddingTop: 10,
   },
   title: {
     fontSize: 18,

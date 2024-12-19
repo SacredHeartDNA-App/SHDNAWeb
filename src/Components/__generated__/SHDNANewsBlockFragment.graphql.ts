@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d06dc0e043cd9a56672efda655f67328>>
+ * @generated SignedSource<<d3b45fce2b60ffdf6de093f95892c2b8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,7 +11,9 @@
 import { ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type SHDNANewsBlockFragment$data = {
-  readonly cover: string | null | undefined;
+  readonly cover: string;
+  readonly extLinks: ReadonlyArray<string> | null | undefined;
+  readonly id: string;
   readonly text: string;
   readonly title: string;
   readonly user: {
@@ -55,6 +57,20 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "extLinks",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "User",
       "kind": "LinkedField",
       "name": "user",
@@ -78,6 +94,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "c55e85c0095cc45c0c899a7cca8e9a68";
+(node as any).hash = "a42cf0c57bd10e5a45250a52458e709f";
 
 export default node;
