@@ -20,6 +20,8 @@ type Mutation {
   updateProfile(input: UpdateUserInput!): Int
   addFriend(user: String!, friend: String!): [User!]
   createArticle(input: CreateNewsInput!): Int
+  updateArticle(input: EditNewsInput!, id: ID!): Int
+  deleteArticle(id: ID!): Int
   createComment(
     text: String!
     content_id: ID!
@@ -69,6 +71,14 @@ input UpdateUserInput {
 input CreateNewsInput {
   title: String!
   text: String!
+  cover: MediaInput
+  media: [MediaInput]
+  extLinks: [String]
+}
+
+input EditNewsInput {
+  title: String
+  text: String
   cover: MediaInput
   media: [MediaInput]
   extLinks: [String]
@@ -142,7 +152,7 @@ type News implements Node {
   likes: Int!
   isLikedByUser: Boolean!
   comments: [Comment!]
-  cover: String
+  cover: String!
   extLinks: [String!]
   gallery: [String!]
 }
