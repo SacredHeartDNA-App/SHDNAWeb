@@ -35,7 +35,8 @@ export default function SHDNAButton({
 
   return (
     <Pressable
-      onPointerDown={() => {
+      onPointerDown={(e) => {
+        e.stopPropagation();
         setIsHoldingDown(false);
         onClick();
       }}
@@ -46,6 +47,7 @@ export default function SHDNAButton({
           opacity: isHoldingDown ? 0.8 : isDisabled ? 0.6 : 1,
           paddingVertical: !Icon ? 10 : 0,
         },
+        state !== ButtonStates.TRANSPARENT && { flex: 1 },
       ]}
     >
       <View style={styles.row}>
