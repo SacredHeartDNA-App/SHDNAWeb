@@ -15,7 +15,7 @@ export default function SHDNASideBar() {
 
   return (
     <View style={styles.body}>
-      <Link href="/">
+      <Link href="/news">
         <View style={styles.slots} onPointerDown={() => setOptionSelected(0)}>
           <HomeSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
