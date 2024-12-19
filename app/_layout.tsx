@@ -2,6 +2,8 @@ import { Colors } from "@/assets/SHDNAColors";
 import RelayEnvironment from "@/Enviroment";
 import { FloatingViewProvider } from "@/src/Components/FloatingView/SHDNAFloatingViewContext";
 import SHDNAFloatingViewManager from "@/src/Components/FloatingView/SHDNAFloatingViewManager";
+import SHDNAModal from "@/src/Components/Modal/SHDNAModal";
+import { ModalProvider } from "@/src/Components/Modal/SHDNAModalContext";
 import SHDNASideBar from "@/src/Components/SHDNASideBar";
 import SHDNASheetManager from "@/src/Components/Sheet/SHDNASheet";
 import { SheetProvider } from "@/src/Components/Sheet/SHDNASheetContext";
@@ -24,20 +26,23 @@ export default function RootLayout() {
   return (
     <RelayEnvironment>
       <FloatingViewProvider>
-        <SheetProvider>
-          <SHDNAFloatingViewManager />
-          <SHDNASheetManager />
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              backgroundColor: Colors.Background,
-            }}
-          >
-            <SHDNASideBar />
-            <Stack screenOptions={{ headerShown: false }} />
-          </View>
-        </SheetProvider>
+        <ModalProvider>
+          <SheetProvider>
+            <SHDNAFloatingViewManager />
+            <SHDNAModal />
+            <SHDNASheetManager />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                backgroundColor: Colors.Background,
+              }}
+            >
+              <SHDNASideBar />
+              <Stack screenOptions={{ headerShown: false }} />
+            </View>
+          </SheetProvider>
+        </ModalProvider>
       </FloatingViewProvider>
     </RelayEnvironment>
   );
