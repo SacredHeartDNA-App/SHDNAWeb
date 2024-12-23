@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5497f489b269721db210d243e4565ef5>>
+ * @generated SignedSource<<37dc2d707bd00bdde321675aa4d016b4>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -153,12 +153,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "30f68e8068fc45c477391639612dfea1",
+    "cacheID": "80ed3fe280488d415f8d56664f79c200",
     "id": null,
     "metadata": {},
     "name": "useSHDNAPostListQuery",
     "operationKind": "query",
-    "text": "query useSHDNAPostListQuery {\n  ...useSHDNAPostList_RefetchableFragment\n}\n\nfragment SHDNAPostBlock_Fragment on Post {\n  id\n  likes\n  isLikedByUser\n  text\n  media\n  isOwner\n  user {\n    ...SHDNAUserRow_Fragment\n    id\n  }\n}\n\nfragment SHDNAProfileView_Fragment on User {\n  name\n  lastName\n  community {\n    name\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n  ...SHDNAProfileView_Fragment\n}\n\nfragment useSHDNAPostList_RefetchableFragment on Query {\n  posts {\n    ...SHDNAPostBlock_Fragment\n    id\n  }\n}\n"
+    "text": "query useSHDNAPostListQuery {\n  ...useSHDNAPostList_RefetchableFragment\n}\n\nfragment SHDNAPostBlock_Fragment on Post {\n  id\n  likes\n  isLikedByUser\n  text\n  media\n  isOwner\n  user {\n    name\n    lastName\n    ...SHDNAUserRow_Fragment\n    id\n  }\n}\n\nfragment SHDNAProfileView_Fragment on User {\n  name\n  lastName\n  community {\n    name\n    id\n  }\n}\n\nfragment SHDNAUserRow_Fragment on User {\n  name\n  lastName\n  profilePic\n  bio\n  ...SHDNAProfileView_Fragment\n}\n\nfragment useSHDNAPostList_RefetchableFragment on Query {\n  posts {\n    ...SHDNAPostBlock_Fragment\n    id\n  }\n}\n"
   }
 };
 })();

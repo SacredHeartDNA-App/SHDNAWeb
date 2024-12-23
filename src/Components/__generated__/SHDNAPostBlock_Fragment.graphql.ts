@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<426a123234974d0ec89e6ed88cb2a6c8>>
+ * @generated SignedSource<<f309d0738dc54280a89a52eefc3d1c2f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,6 +18,8 @@ export type SHDNAPostBlock_Fragment$data = {
   readonly media: ReadonlyArray<string> | null | undefined;
   readonly text: string | null | undefined;
   readonly user: {
+    readonly lastName: string;
+    readonly name: string;
     readonly " $fragmentSpreads": FragmentRefs<"SHDNAUserRow_Fragment">;
   };
   readonly " $fragmentType": "SHDNAPostBlock_Fragment";
@@ -84,6 +86,20 @@ const node: ReaderFragment = {
       "plural": false,
       "selections": [
         {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "name",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "lastName",
+          "storageKey": null
+        },
+        {
           "args": null,
           "kind": "FragmentSpread",
           "name": "SHDNAUserRow_Fragment"
@@ -96,6 +112,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "df1b17d816c12ba12c04ba2a487f20ea";
+(node as any).hash = "583940aada85c82e84426220aee0cede";
 
 export default node;
