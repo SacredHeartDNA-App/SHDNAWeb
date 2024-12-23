@@ -8,11 +8,11 @@ const SearchSVG = (props: SVGType & SvgProps) => (
       cx={12.5}
       cy={12.5}
       r={10.5}
-      stroke={props.iconColor}
+      stroke={props.iconcolor}
       strokeWidth={4}
     />
     <Path
-      stroke={props.iconColor}
+      stroke={props.iconcolor}
       strokeLinecap="round"
       strokeWidth={4}
       d="m28.174 31.887-9.287-10.061"

@@ -7,7 +7,7 @@ export default function AddSVG(props: SVGType & SvgProps) {
     <Svg width={40} height={40} viewBox="0 0 40 40" fill="none" {...props}>
       <Path
         d="M20 37V3M3 20h34"
-        stroke={props.iconColor}
+        stroke={props.iconcolor}
         strokeWidth={5}
         strokeLinecap="round"
       />

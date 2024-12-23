@@ -26,9 +26,9 @@ const LoadingSVG = (props: SVGType & SvgProps) => (
         gradientTransform="rotate(-6.843 886.323 -786.323) scale(100.717)"
         gradientUnits="userSpaceOnUse"
       >
-        <Stop offset={0.115} stopColor={props.iconColor} stopOpacity={0} />
-        <Stop offset={0.78} stopColor={props.iconColor} />
-        <Stop offset={0.96} stopColor={props.iconColor} stopOpacity={0} />
+        <Stop offset={0.115} stopColor={props.iconcolor} stopOpacity={0} />
+        <Stop offset={0.78} stopColor={props.iconcolor} />
+        <Stop offset={0.96} stopColor={props.iconcolor} stopOpacity={0} />
       </RadialGradient>
     </Defs>
   </Svg>

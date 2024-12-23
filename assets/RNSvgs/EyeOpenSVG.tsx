@@ -7,11 +7,11 @@ export default function EyeOpenSVG(props: SVGType & SvgProps) {
     <Svg width={40} height={19} viewBox="0 0 40 19" fill="none" {...props}>
       <Path
         d="M38 11.6C38 6.298 29.941 2 20 2S2 6.298 2 11.6"
-        stroke={props.iconColor}
+        stroke={props.iconcolor}
         strokeWidth={3}
         strokeLinecap="round"
       />
-      <Circle cx={20} cy={13} r={6} fill={props.iconColor} />
+      <Circle cx={20} cy={13} r={6} fill={props.iconcolor} />
     </Svg>
   );
 }

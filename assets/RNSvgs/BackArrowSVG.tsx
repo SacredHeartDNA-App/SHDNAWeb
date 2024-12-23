@@ -5,7 +5,7 @@ import { SVGType } from "./HomeSVG";
 const BackArrowSVG = (props: SVGType & SvgProps) => (
   <Svg width={22} height={36} fill="none" {...props}>
     <Path
-      stroke={props.iconColor}
+      stroke={props.iconcolor}
       strokeLinecap="round"
       strokeWidth={5}
       d="M18.8 33.2 4.4 18 18.8 2.8"

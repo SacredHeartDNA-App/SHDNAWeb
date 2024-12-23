@@ -7,7 +7,7 @@ export default function Cross(props: SVGType & SvgProps) {
     <Svg width={31} height={31} viewBox="0 0 31 31" fill="none" {...props}>
       <Path
         d="M3 3l25.456 25.456M3 28L28.456 2.544"
-        stroke={props.iconColor}
+        stroke={props.iconcolor}
         strokeWidth={5}
         strokeLinecap="round"
       />
