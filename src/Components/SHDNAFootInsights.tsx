@@ -81,7 +81,7 @@ export default function SHDNAFootInsights({
     }
   };
 
-  const HeartFillRed = () => <HeartFill iconColor={Colors.Red1} width={15} />;
+  const HeartFillRed = () => <HeartFill iconcolor={Colors.Red1} width={15} />;
 
   return (
     <View style={styles.insights}>
@@ -92,7 +92,7 @@ export default function SHDNAFootInsights({
         state={ButtonStates.TRANSPARENT}
       />
       <View style={styles.element}>
-        <MessageSVG iconColor={"#000"} width={15} />
+        <MessageSVG iconcolor={"#000"} width={15} />
         <SHDNAText>0</SHDNAText>
       </View>
     </View>

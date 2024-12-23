@@ -54,7 +54,7 @@ const SHDNAGroup = ({
             transform: [{ scale: -1 }, { rotate: spin }],
           }}
         >
-          <DirectionalSVG iconColor={Colors.Gray3} width={12} />
+          <DirectionalSVG iconcolor={Colors.Gray3} width={12} />
         </Animated.View>
         <SHDNAText style={styles.subtitle} fontWeight="Bold">
           {text}

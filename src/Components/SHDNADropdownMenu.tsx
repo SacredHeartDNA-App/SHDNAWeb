@@ -51,7 +51,7 @@ export default function SHDNADropdownMenu({
           {options.find((item) => item.value === value)?.label || placeholder}
         </SHDNAText>
         <DirectionalSVG
-          iconColor={Colors.Gray3}
+          iconcolor={Colors.Gray3}
           width={10}
           style={{ transform: [{ rotate: "90deg" }] }}
         />
