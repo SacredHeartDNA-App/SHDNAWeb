@@ -54,7 +54,7 @@ export default function SHDNAButton({
         {Icon && (
           <Icon
             width={iconSize}
-            iconColor={state === ButtonStates.TRANSPARENT ? "black" : "white"}
+            iconcolor={state === ButtonStates.TRANSPARENT ? "black" : "white"}
           />
         )}
         {text && (
