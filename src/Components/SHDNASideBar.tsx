@@ -6,56 +6,59 @@ import EspacioSVG from "../../assets/RNSvgs/EspacioSVG";
 import UserSVG from "../../assets/RNSvgs/UserSVG";
 import { Colors } from "../../assets/SHDNAColors";
 import SHDNAText from "./SHDNAText";
-import { Link } from "expo-router";
+import { Link, useSegments } from "expo-router";
 
 const ICON_SCALE = 0.9;
 
 export default function SHDNASideBar() {
-  const [optionSelected, setOptionSelected] = useState(0);
+  const segments = useSegments();
+  const activeSection = segments[0];
 
   return (
     <View style={styles.body}>
       <Link href="/news">
-        <View style={styles.slots} onPointerDown={() => setOptionSelected(0)}>
+        <View style={styles.slots}>
           <HomeSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconColor={optionSelected === 0 ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={activeSection === "news" ? Colors.Gray2 : Colors.Gray1}
           />
           <SHDNAText style={styles.selectionColor}>News</SHDNAText>
         </View>
       </Link>
-      <Link href="/signin">
-        <View style={styles.slots} onPointerDown={() => setOptionSelected(1)}>
+      <Link href="/community">
+        <View style={styles.slots}>
           <CommunitySVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconColor={optionSelected === 1 ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={
+              activeSection === "community" ? Colors.Gray2 : Colors.Gray1
+            }
           />
           <SHDNAText style={styles.selectionColor}>Community</SHDNAText>
         </View>
       </Link>
       <Link href="/">
-        <View style={styles.slots} onPointerDown={() => setOptionSelected(2)}>
+        <View style={styles.slots}>
           <EspacioSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconColor={optionSelected === 2 ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={false ? Colors.Gray2 : Colors.Gray1}
           />
           <SHDNAText style={styles.selectionColor}>Discover</SHDNAText>
         </View>
       </Link>
       <Link href="/">
-        <View style={styles.slots} onPointerDown={() => setOptionSelected(3)}>
+        <View style={styles.slots}>
           <EspacioSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconColor={optionSelected === 3 ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={false ? Colors.Gray2 : Colors.Gray1}
           />
           <SHDNAText style={styles.selectionColor}>Espacio</SHDNAText>
         </View>
       </Link>
       <Link href="/">
-        <View style={styles.slots} onPointerDown={() => setOptionSelected(4)}>
+        <View style={styles.slots}>
           <UserSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconColor={optionSelected === 4 ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={false ? Colors.Gray2 : Colors.Gray1}
           />
           <SHDNAText style={styles.selectionColor}>Me</SHDNAText>
         </View>
