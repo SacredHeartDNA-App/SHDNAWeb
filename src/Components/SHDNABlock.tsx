@@ -27,24 +27,26 @@ export default function SHDNABlock({
   onClick,
   showShadow = true,
 }: SHDNABlock) {
-  const [isBeingPressed, setIsBeingPressed] = useState(false);
   const buttonHover = useRef(new Animated.Value(1)).current;
 
-  useEffect(() => {
-    if (!onClick) return;
+  const handleHover = (isEnter: boolean) => {
     Animated.timing(buttonHover, {
-      toValue: isBeingPressed ? 0.95 : 1,
+      toValue: isEnter ? 0.95 : 1,
       duration: 200,
       easing: Easing.out(Easing.quad),
       useNativeDriver: false,
     }).start();
-  }, [isBeingPressed]);
-
+  };
   return (
     <Animated.View
       onPointerDown={() => {
         onClick && onClick();
-        setIsBeingPressed(false);
+      }}
+      onPointerEnter={() => {
+        handleHover(true);
+      }}
+      onPointerLeave={() => {
+        handleHover(false);
       }}
       style={{
         ...styles.block,
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: Colors.Background,
     borderRadius: 20,
+    cursor: "pointer",
   },
   blockShadow: {
     shadowColor: "#000",
