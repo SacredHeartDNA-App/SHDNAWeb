@@ -76,7 +76,7 @@ function SHDNASheet() {
                 style={{ transform: [{ scale: 0.7 }] }}
                 width={25}
                 height={40}
-                iconColor="black"
+                iconcolor="black"
               />
             )}
             onClick={() => closeAnimationSheet()}
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 100,
+    zIndex: 150,
   },
   background: {
     backgroundColor: "black",

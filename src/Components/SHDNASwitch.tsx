@@ -56,7 +56,7 @@ export default function SHDNASwitch({
                 const Icon = option;
                 return (
                   <Icon
-                    iconColor="black"
+                    iconcolor="black"
                     style={{ transform: [{ scale: 0.7 }] }}
                   />
                 );

@@ -63,7 +63,7 @@ export default function SHDNAChallengeBlock({
     >
       {challenge.isLocked ? (
         <View style={styles.lockChallenge}>
-          <LockSVG iconColor={Colors.Gray3} width={30} />
+          <LockSVG iconcolor={Colors.Gray3} width={30} />
           <SHDNAText style={styles.lockText} fontWeight="SemiBold">
             Unlock this card by completing Week ?
           </SHDNAText>

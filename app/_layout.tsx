@@ -1,5 +1,6 @@
 import { Colors } from "@/assets/SHDNAColors";
 import RelayEnvironment from "@/Enviroment";
+import { FloatingMenuProvider } from "@/src/Components/FloatingMenu/SHDNAFloatingMenuContext";
 import { FloatingViewProvider } from "@/src/Components/FloatingView/SHDNAFloatingViewContext";
 import SHDNAFloatingViewManager from "@/src/Components/FloatingView/SHDNAFloatingViewManager";
 import SHDNAModal from "@/src/Components/Modal/SHDNAModal";
@@ -10,6 +11,7 @@ import { SheetProvider } from "@/src/Components/Sheet/SHDNASheetContext";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { View } from "react-native";
+import SHDNAFloatingMenuManager from "@/src/Components/FloatingMenu/SHDNAFloatingMenuManager";
 
 export default function RootLayout() {
   const [] = useFonts({
@@ -27,21 +29,24 @@ export default function RootLayout() {
     <RelayEnvironment>
       <FloatingViewProvider>
         <ModalProvider>
-          <SheetProvider>
-            <SHDNAFloatingViewManager />
-            <SHDNAModal />
-            <SHDNASheetManager />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                backgroundColor: Colors.Background,
-              }}
-            >
-              <SHDNASideBar />
-              <Stack screenOptions={{ headerShown: false }} />
-            </View>
-          </SheetProvider>
+          <FloatingMenuProvider>
+            <SheetProvider>
+              <SHDNAFloatingViewManager />
+              <SHDNAModal />
+              <SHDNASheetManager />
+              <SHDNAFloatingMenuManager />
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  backgroundColor: Colors.Background,
+                }}
+              >
+                <SHDNASideBar />
+                <Stack screenOptions={{ headerShown: false }} />
+              </View>
+            </SheetProvider>
+          </FloatingMenuProvider>
         </ModalProvider>
       </FloatingViewProvider>
     </RelayEnvironment>

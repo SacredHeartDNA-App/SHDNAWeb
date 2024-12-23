@@ -47,8 +47,8 @@ export default function SHDNATextInput({
             onClick={() => setIsHidden(!isHidden)}
             Icon={
               isHidden
-                ? () => <EyeOpenSVG iconColor={Colors.Gray3} width={20} />
-                : () => <EyeClosedSVG iconColor={Colors.Gray3} width={20} />
+                ? () => <EyeOpenSVG iconcolor={Colors.Gray3} width={20} />
+                : () => <EyeClosedSVG iconcolor={Colors.Gray3} width={20} />
             }
             state={ButtonStates.TRANSPARENT}
           />

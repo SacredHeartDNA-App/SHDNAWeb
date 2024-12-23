@@ -39,9 +39,7 @@ export const SheetProvider = ({ children }: any) => {
   const openSheet = (view: SheetView, heightWrappContent?: boolean) => {
     setSheetDisplayed(true);
     setView(view);
-    {
-      heightWrappContent && setHeightWrappContent(heightWrappContent);
-    }
+    heightWrappContent && setHeightWrappContent(heightWrappContent);
   };
 
   const closeSheet = () => {

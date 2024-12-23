@@ -29,7 +29,7 @@ export default function SHDNAHomeView() {
         }}
       >
         <AddSVG
-          iconColor={isBeingPressed ? Colors.Gray2 : "#000"}
+          iconcolor={isBeingPressed ? Colors.Gray2 : "#000"}
           style={{ transform: [{ scale: 0.75 }] }}
         />
       </Pressable>

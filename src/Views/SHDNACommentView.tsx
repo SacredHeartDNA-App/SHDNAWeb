@@ -69,9 +69,9 @@ export default function SHDNACommentView({
         <View style={styles.insights}>
           <View style={styles.element} onTouchEnd={() => handleLikeButton()}>
             {isLiked ? (
-              <HeartFill iconColor={Colors.Red1} width={15} />
+              <HeartFill iconcolor={Colors.Red1} width={15} />
             ) : (
-              <HeartStroke iconColor={"#000"} width={15} />
+              <HeartStroke iconcolor={"#000"} width={15} />
             )}
             <SHDNAText>{likes}</SHDNAText>
           </View>

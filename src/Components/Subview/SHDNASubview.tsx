@@ -154,7 +154,7 @@ export default function SHDNASubview({
   };
 
   const BackIcon = () => (
-    <BackArrowSVG style={{ transform: [{ scale: 0.75 }] }} iconColor="black" />
+    <BackArrowSVG style={{ transform: [{ scale: 0.75 }] }} iconcolor="black" />
   );
 
   const TopBar = (

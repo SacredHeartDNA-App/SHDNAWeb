@@ -1,19 +1,14 @@
 import { View, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import SHDNAFootInsignts from "./SHDNAFootInsights";
 import SHDNABlock from "./SHDNABlock";
-import { useSubview } from "./Subview/SHDNASubviewContext";
 import SHDNAPostView from "../Views/SHDNAPostView";
 import { Colors } from "../../assets/SHDNAColors";
-import { graphql, useFragment, useMutation } from "react-relay";
+import { graphql, useFragment } from "react-relay";
 import { SHDNAPostBlock_Fragment$key } from "./__generated__/SHDNAPostBlock_Fragment.graphql";
 import SHDNAUserRow from "./SHDNAUserRow";
-import MoreSVG from "../../assets/RNSvgs/MoreSVG";
 import { useSheet } from "./Sheet/SHDNASheetContext";
-import SHDNAButton, { ButtonStates } from "./SHDNAButton";
-import { SHDNAPostBlockMutation } from "./__generated__/SHDNAPostBlockMutation.graphql";
 import { useFloatingView } from "./FloatingView/SHDNAFloatingViewContext";
-import SHDNALoadingBlackView from "../Views/SHDNALoadingBlackView";
 import SHDNAImage from "./SHDNAImage";
 import SHDNAText from "./SHDNAText";
 
@@ -26,9 +21,9 @@ export default function SHDNAPostBlock({
   postKey,
   refetch,
 }: SHDNAPostBlocksProps) {
-  const { openSubview } = useSubview();
-  const { openSheet, triggerCloseSheet } = useSheet();
   const { openFloatingView, closeFloatingView } = useFloatingView();
+  const [displayMenu, setDisplayMenu] = useState(false);
+  const { openSheet, triggerCloseSheet } = useSheet();
 
   const postData = useFragment<SHDNAPostBlock_Fragment$key>(
     graphql`
@@ -40,6 +35,8 @@ export default function SHDNAPostBlock({
         media
         isOwner
         user {
+          name
+          lastName
           ...SHDNAUserRow_Fragment
         }
       }
@@ -47,65 +44,40 @@ export default function SHDNAPostBlock({
     postKey
   );
 
-  const [commitDeletePost] = useMutation<SHDNAPostBlockMutation>(graphql`
-    mutation SHDNAPostBlockMutation($postId: ID!) {
-      deletePost(postId: $postId)
-    }
-  `);
-
-  const handleDeletePost = () => {
-    openFloatingView(<SHDNALoadingBlackView />, true);
-    commitDeletePost({
-      variables: { postId: postData.id },
-      onCompleted: () => {
-        triggerCloseSheet();
-        closeFloatingView();
-        refetch && refetch();
-      },
-      onError: () => {
-        closeFloatingView();
-      },
-    });
-  };
-
-  const MoreMenu = () => {
-    return (
-      <View>
-        <SHDNAButton
-          text="Delete Post"
-          state={ButtonStates.ALERT}
-          onClick={() => handleDeletePost()}
-        />
-      </View>
-    );
-  };
-
   return (
     <SHDNABlock
-      style={{ marginBottom: 30 }}
+      style={{ marginBottom: 30, width: "25%", height: "auto" }}
       onClick={() =>
-        openSubview(
-          <SHDNAUserRow userKey={postData.user} />,
-          <SHDNAPostView postData={postData} />
-        )
+        openSheet({
+          title: postData.user.name + " " + postData.user.lastName,
+          content: <SHDNAPostView postData={postData} refetch={refetch} />,
+        })
       }
     >
       <View style={[styles.header, { paddingTop: postData.isOwner ? 10 : 15 }]}>
         <SHDNAUserRow userKey={postData.user} />
-        {postData.isOwner && (
-          <View style={{ transform: [{ rotate: "90deg" }], opacity: 0.4 }}>
-            <SHDNAButton
-              onClick={() =>
-                openSheet({
-                  content: <MoreMenu />,
-                })
-              }
-              iconSize={20}
-              Icon={MoreSVG}
-              state={ButtonStates.TRANSPARENT}
-            />
+        {/* {postData.isOwner && (
+          <View>
+            {displayMenu && (
+              <SHDNAFloatingMenu
+                options={[
+                  {
+                    label: "Delete Post",
+                    onClick: () => handleDeletePost(),
+                  },
+                ]}
+              />
+            )}
+            <View style={{ transform: [{ rotate: "90deg" }], opacity: 0.4 }}>
+              <SHDNAButton
+                onClick={() => setDisplayMenu(!displayMenu)}
+                iconSize={20}
+                Icon={MoreSVG}
+                state={ButtonStates.TRANSPARENT}
+              />
+            </View>
           </View>
-        )}
+        )} */}
       </View>
       <View style={styles.bodyContainer}>
         <SHDNAText>{postData.text}</SHDNAText>
@@ -132,6 +104,7 @@ const ImageGrid = ({ media }: { media: readonly string[] }) => {
         source={{ uri: media[0] }}
         key={media[0]}
         style={styles.image}
+        flex={1}
       />
       {media[1] && (
         <View style={{ flex: 1, flexDirection: "column", height: "auto" }}>
@@ -139,6 +112,7 @@ const ImageGrid = ({ media }: { media: readonly string[] }) => {
             source={{ uri: media[1] }}
             key={media[1]}
             style={styles.image}
+            flex={1}
           />
           {media[2] && (
             <View style={styles.thirdImageContainer}>
@@ -146,6 +120,7 @@ const ImageGrid = ({ media }: { media: readonly string[] }) => {
                 source={{ uri: media[2] }}
                 key={media[2]}
                 style={styles.image}
+                flex={1}
               />
               {media.length > 3 && (
                 <>
@@ -190,7 +165,6 @@ const styles = StyleSheet.create({
   imageGrid: {
     overflow: "hidden",
     borderRadius: 20,
-    flex: 1,
     flexDirection: "row",
     height: 250,
   },

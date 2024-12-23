@@ -89,7 +89,7 @@ export default function SHDNASearchView() {
                 }).start(() => closeFloatingView());
               }}
             >
-              <Cross iconColor={"#000"} width={20} />
+              <Cross iconcolor={"#000"} width={20} />
             </View>
           </Animated.View>
           <SHDNAText style={styles.resultsText} fontWeight="SemiBold">

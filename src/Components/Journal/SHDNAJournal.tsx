@@ -51,7 +51,7 @@ const AddJournal = () => {
         openSubview("Create new Journal", <SHDNACreateJournalSubview />)
       }
     >
-      <AddSVG width={30} iconColor={Colors.Purple1} />
+      <AddSVG width={30} iconcolor={Colors.Purple1} />
     </SHDNABlock>
   );
 };
