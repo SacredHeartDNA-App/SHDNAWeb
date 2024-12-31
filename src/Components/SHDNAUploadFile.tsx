@@ -10,13 +10,17 @@ import SHDNAText from "./SHDNAText";
 type SHDNAUploadFileProps = {
   selectedFiles: MediaType[];
   onSelectFiles: (files: MediaType[]) => void;
+  allowMultiple?: boolean;
+  type?: string | string[];
 };
 
 export default function SHDNAUploadFile({
   selectedFiles,
   onSelectFiles,
+  allowMultiple = true,
+  type,
 }: SHDNAUploadFileProps) {
-  const selectFile = useSHDNAFilePicker(onSelectFiles);
+  const selectFile = useSHDNAFilePicker(onSelectFiles, allowMultiple, type);
 
   return (
     <View>
