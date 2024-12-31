@@ -18,6 +18,7 @@ type SHDNADropdownMenuProps = {
   onChange: (value: any) => void;
   maxHeight?: number;
   onClick?: () => {};
+  alignment?: "flex-start" | "flex-end";
 };
 
 export default function SHDNADropdownMenu({
@@ -27,9 +28,9 @@ export default function SHDNADropdownMenu({
   onChange,
   maxHeight,
   onClick,
+  alignment = "flex-start",
 }: SHDNADropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
 
   const [isLoading, startTransition] = useTransition();
 
@@ -57,12 +58,18 @@ export default function SHDNADropdownMenu({
         />
       </View>
       {isLoading ? (
-        <View>
+        <View style={styles.menu}>
           <SHDNALoading />
         </View>
       ) : (
         isOpen && (
-          <SHDNABlock style={styles.menu}>
+          <SHDNABlock
+            playAnimation={false}
+            style={{
+              ...(alignment === "flex-end" ? { right: 0 } : { left: 0 }),
+              ...styles.menu,
+            }}
+          >
             <ScrollView
               style={[{ maxHeight }]}
               showsVerticalScrollIndicator={false}
@@ -94,8 +101,6 @@ type DropdownItemsProps = {
   onClick: (value: any) => void;
 };
 const DropdownItem = ({ item, isSelected, onClick }: DropdownItemsProps) => {
-  const [isScrolling, setIsScrolling] = useState(false);
-
   return (
     <View
       style={styles.item}
@@ -121,6 +126,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
+    gap: 10,
   },
   menu: {
     width: "auto",
