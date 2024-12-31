@@ -36,11 +36,13 @@ export default function SHDNASideBar() {
           <SHDNAText style={styles.selectionColor}>Community</SHDNAText>
         </View>
       </Link>
-      <Link href="/">
+      <Link href="/discover">
         <View style={styles.slots}>
           <EspacioSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconcolor={false ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={
+              activeSection === "discover" ? Colors.Gray2 : Colors.Gray1
+            }
           />
           <SHDNAText style={styles.selectionColor}>Discover</SHDNAText>
         </View>
