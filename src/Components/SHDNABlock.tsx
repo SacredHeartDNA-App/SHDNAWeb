@@ -19,6 +19,7 @@ type SHDNABlock = {
     | RecursiveArray<ViewStyle | Falsy | RegisteredStyle<ViewStyle>>;
   onClick?: () => void;
   showShadow?: boolean;
+  playAnimation?: boolean;
 };
 
 export default function SHDNABlock({
@@ -26,10 +27,12 @@ export default function SHDNABlock({
   style,
   onClick,
   showShadow = true,
+  playAnimation,
 }: SHDNABlock) {
   const buttonHover = useRef(new Animated.Value(1)).current;
 
   const handleHover = (isEnter: boolean) => {
+    if (!playAnimation) return;
     Animated.timing(buttonHover, {
       toValue: isEnter ? 0.95 : 1,
       duration: 200,
@@ -63,7 +66,7 @@ export default function SHDNABlock({
 const styles = StyleSheet.create({
   block: {
     width: "100%",
-    backgroundColor: Colors.Background,
+    backgroundColor: "white",
     borderRadius: 20,
     cursor: "pointer",
   },
