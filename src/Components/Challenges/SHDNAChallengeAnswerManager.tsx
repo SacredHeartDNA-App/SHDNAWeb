@@ -1,15 +1,9 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React, { useState } from "react";
-import { graphql, useMutation } from "react-relay";
-import { SHDNAChallengeAnswerManager_Fragment$key } from "../__generated__/SHDNAChallengeAnswerManager_Fragment.graphql";
 import SHDNATextArea from "../SHDNATextArea";
 import SHDNAUploadFile from "../SHDNAUploadFile";
 import SHDNAVideoPlayer from "../SHDNAVideoPlayer";
 import { MediaType } from "../../Views/SHDNACreatePostView";
-import SHDNAButton from "../SHDNAButton";
-import { useFloatingView } from "../FloatingView/SHDNAFloatingViewContext";
-import SHDNALoadingBlackView from "../../Views/SHDNALoadingBlackView";
-import { SHDNAChallengeAnswerManagerMutation } from "../__generated__/SHDNAChallengeAnswerManagerMutation.graphql";
 import SHDNAChallengeAnswerClose from "./SHDNAChallengeAnswerClose";
 import { SHDNAChallengeAnswerClose_Fragment$key } from "../__generated__/SHDNAChallengeAnswerClose_Fragment.graphql";
 
