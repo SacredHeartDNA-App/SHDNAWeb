@@ -1,9 +1,7 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React, { Suspense, useEffect, useState } from "react";
-import { graphql, useMutation } from "react-relay";
+import { graphql } from "react-relay";
 import SHDNATextArea from "./SHDNATextArea";
-import SHDNAButton from "./SHDNAButton";
-import { SHDNACommentListMutation } from "../Views/__generated__/SHDNACommentListMutation.graphql";
 import { useSHDNACommentList } from "../hooks/useSHDNACommentList";
 import SHDNAComment from "./SHDNAComment";
 import SHDNALoading from "./SHDNALoading";
@@ -49,11 +47,11 @@ export default function SHDNACommentList({
 
   return (
     <View style={styles.commentBox}>
-      <SHDNACommentBox
+      {/* <SHDNACommentBox
         contentId={contentId}
         createCommentTrigger={handlerCommentTrigger}
         ContentType={ContentType}
-      />
+      /> */}
       <Suspense
         fallback={
           <View style={styles.loadingComments}>
@@ -79,27 +77,27 @@ function SHDNACommentBox({
   const [newComment, setNewComment] = useState("");
   const [isCreatingComment, setIsCreatingComment] = useState(false);
 
-  const [commitMutation] = useMutation<SHDNACommentListMutation>(
-    SEND_NEW_COMMENT_MUTATION
-  );
+  // const [commitMutation] = useMutation<SHDNACommentListMutation>(
+  //   SEND_NEW_COMMENT_MUTATION
+  // );
 
-  const handleCreateComment = () => {
-    if (newComment == "") return;
+  // const handleCreateComment = () => {
+  //   if (newComment == "") return;
 
-    setIsCreatingComment(true);
-    commitMutation({
-      variables: {
-        text: newComment,
-        content_id: contentId,
-        relationship: ContentType,
-      },
-      onCompleted(response, errors) {
-        setIsCreatingComment(false);
-        setNewComment("");
-        createCommentTrigger();
-      },
-    });
-  };
+  //   setIsCreatingComment(true);
+  //   commitMutation({
+  //     variables: {
+  //       text: newComment,
+  //       content_id: contentId,
+  //       relationship: ContentType,
+  //     },
+  //     onCompleted(response, errors) {
+  //       setIsCreatingComment(false);
+  //       setNewComment("");
+  //       createCommentTrigger();
+  //     },
+  //   });
+  // };
 
   return (
     <View style={styles.commentBox}>
@@ -108,11 +106,11 @@ function SHDNACommentBox({
         value={newComment}
         isDisabled={isCreatingComment}
       />
-      <SHDNAButton
+      {/* <SHDNAButton
         onClick={() => handleCreateComment()}
         text="Send"
         isDisabled={isCreatingComment || newComment === ""}
-      />
+      /> */}
     </View>
   );
 }
