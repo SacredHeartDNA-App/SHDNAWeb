@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     borderWidth: 1,
+    zIndex: 40,
     borderColor: Colors.Gray2,
     fontFamily: "LibreFamily-Regular",
   },
