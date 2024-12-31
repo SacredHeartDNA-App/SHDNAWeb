@@ -1,26 +1,9 @@
-import { View, Text } from "react-native";
-import React, { Suspense } from "react";
+import { View } from "react-native";
+import React from "react";
 import SHDNAChallengeBlock from "../../Components/Challenges/SHDNAChallengeBlock";
-import SHDNAGroup from "../../Components/SHDNAGroup";
-import {
-  graphql,
-  PreloadedQuery,
-  useLazyLoadQuery,
-  usePreloadedQuery,
-  useQueryLoader,
-} from "react-relay";
+import { graphql, useLazyLoadQuery } from "react-relay";
 import { SHDNAChallengesSubViewQuery } from "./__generated__/SHDNAChallengesSubViewQuery.graphql";
-import { SHDNAChallengesSubViewCompletedQuery } from "./__generated__/SHDNAChallengesSubViewCompletedQuery.graphql";
-import SHDNALoading from "../../Components/SHDNALoading";
 import SHDNAText from "../../Components/SHDNAText";
-
-const COMPLETED_CHALLENGES = graphql`
-  query SHDNAChallengesSubViewCompletedQuery($type: ChallengeType!) {
-    getCompletedChallenges(type: $type) {
-      ...SHDNAChallengeBlock_Fragment
-    }
-  }
-`;
 
 export type ChallengesType =
   | "PERSONAL_INTEGRITY"
@@ -37,7 +20,7 @@ export default function SHDNAChallengesSubView({
   const data = useLazyLoadQuery<SHDNAChallengesSubViewQuery>(
     graphql`
       query SHDNAChallengesSubViewQuery($type: ChallengeType!) {
-        getMissingChallenges(type: $type) {
+        getAllChallenges(type: $type) {
           ...SHDNAChallengeBlock_Fragment
         }
       }
@@ -45,62 +28,27 @@ export default function SHDNAChallengesSubView({
     { type }
   );
 
-  const [queryReference, loadQuery] =
-    useQueryLoader<SHDNAChallengesSubViewCompletedQuery>(COMPLETED_CHALLENGES);
-
-  const challenges = data.getMissingChallenges ?? [];
+  const challenges = data.getAllChallenges ?? [];
 
   return (
-    <View style={{ marginBottom: 30 }}>
-      <SHDNAGroup text="Completed" gap={20} onClick={() => loadQuery({ type })}>
-        {queryReference ? (
-          <Suspense fallback={<SHDNALoading />}>
-            <CompletedChallenges queryReference={queryReference} />
-          </Suspense>
-        ) : (
-          <SHDNALoading />
-        )}
-      </SHDNAGroup>
-      <View style={{ gap: 20 }}>
+    <View style={{ marginBottom: 30, flex: 1 }}>
+      <View style={{ gap: 20, flex: 1, paddingTop: 10, paddingRight: 10 }}>
         {challenges.length > 0 ? (
           challenges.map((challenge) => {
             return <SHDNAChallengeBlock challengeKey={challenge} />;
           })
         ) : (
-          <View style={{ alignItems: "center", marginTop: 20 }}>
-            <SHDNAText>No Challenges Pending</SHDNAText>
+          <View
+            style={{
+              alignItems: "center",
+              flex: 1,
+              justifyContent: "center",
+            }}
+          >
+            <SHDNAText>No Challenges</SHDNAText>
           </View>
         )}
       </View>
     </View>
   );
 }
-
-const CompletedChallenges = ({
-  queryReference,
-}: {
-  queryReference: PreloadedQuery<SHDNAChallengesSubViewCompletedQuery>;
-}) => {
-  const data = usePreloadedQuery<SHDNAChallengesSubViewCompletedQuery>(
-    COMPLETED_CHALLENGES,
-    queryReference
-  );
-
-  const challenges = data.getCompletedChallenges ?? [];
-
-  return (
-    <>
-      {challenges.length > 0 ? (
-        challenges.map((challenge) => {
-          return (
-            <SHDNAChallengeBlock challengeKey={challenge} isCompleted={true} />
-          );
-        })
-      ) : (
-        <View style={{ alignItems: "center" }}>
-          <SHDNAText>No Challenges Completed</SHDNAText>
-        </View>
-      )}
-    </>
-  );
-};

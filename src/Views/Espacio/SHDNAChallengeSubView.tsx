@@ -1,18 +1,20 @@
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import React, { useState } from "react";
-import SHDNAButton, { ButtonStates } from "../../Components/SHDNAButton";
 import { graphql, useFragment, useMutation } from "react-relay";
 import { SHDNAChallengeSubView_Fragment$key } from "./__generated__/SHDNAChallengeSubView_Fragment.graphql";
 import SHDNAChallengeAnswerManager, {
   AnswerType,
 } from "../../Components/Challenges/SHDNAChallengeAnswerManager";
-import SHDNALoadingBlackView from "../SHDNALoadingBlackView";
-import { useFloatingView } from "../../Components/FloatingView/SHDNAFloatingViewContext";
 import { MediaType } from "../SHDNACreatePostView";
-import { SHDNAChallengeSubViewMutation } from "./__generated__/SHDNAChallengeSubViewMutation.graphql";
-import { useSubview } from "../../Components/Subview/SHDNASubviewContext";
 import { ChallengeType } from "../../Components/Challenges/SHDNAChallengeBlock";
 import SHDNAText from "../../Components/SHDNAText";
+import SHDNAButton, { ButtonStates } from "@/src/Components/SHDNAButton";
+import SHDNATextArea from "@/src/Components/SHDNATextArea";
+import SHDNATextInput from "@/src/Components/SHDNATextInput";
+import { SHDNAChallengeSubViewMutation } from "./__generated__/SHDNAChallengeSubViewMutation.graphql";
+import { useSheet } from "@/src/Components/Sheet/SHDNASheetContext";
+import { useFloatingView } from "@/src/Components/FloatingView/SHDNAFloatingViewContext";
+import SHDNALoadingBlackView from "../SHDNALoadingBlackView";
 
 type SHDNAChallengeSubViewProps = {
   challengeKey: SHDNAChallengeSubView_Fragment$key;
@@ -21,22 +23,14 @@ type SHDNAChallengeSubViewProps = {
   isCompleted?: boolean;
 };
 
-const SUBMIT_ANSWER_MUTATION = graphql`
-  mutation SHDNAChallengeSubViewMutation($input: AnswerInput!) {
-    createAnswerChallenge(input: $input)
-  }
-`;
-
 export default function SHDNAChallengeSubView({
   challengeKey,
   logo,
   challengeType,
-  isCompleted = false,
 }: SHDNAChallengeSubViewProps) {
   const [files, setFiles] = useState<MediaType[]>([]);
   const [answer, setAnswer] = useState("");
-
-  const { popSubviewStack } = useSubview();
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const data = useFragment<SHDNAChallengeSubView_Fragment$key>(
     graphql`
@@ -52,30 +46,42 @@ export default function SHDNAChallengeSubView({
     challengeKey
   );
 
-  const [commitMutation] = useMutation<SHDNAChallengeSubViewMutation>(
-    SUBMIT_ANSWER_MUTATION
-  );
+  const [text, setText] = useState(data.question);
+  const [title, setTitle] = useState(data.title);
+
+  const { triggerCloseSheet } = useSheet();
+  const { openFloatingView, closeFloatingView } = useFloatingView();
 
   const answerType = AnswerType[data.answerType as keyof typeof AnswerType];
 
-  const { openFloatingView, closeFloatingView } = useFloatingView();
+  const [commitMutation] = useMutation<SHDNAChallengeSubViewMutation>(graphql`
+    mutation SHDNAChallengeSubViewMutation(
+      $challengeId: ID!
+      $title: String
+      $question: String
+    ) {
+      updateChallenge(id: $challengeId, title: $title, question: $question)
+    }
+  `);
 
-  const manageSubmitAnswer = () => {
-    openFloatingView(<SHDNALoadingBlackView />, true);
+  const handleEditChallenge = () => {
+    openFloatingView(<SHDNALoadingBlackView />);
+
+    const variables = {
+      challengeId: data.id,
+      title: title,
+      question: text,
+    };
     commitMutation({
-      variables: {
-        input: {
-          answer,
-          media: files,
-          challengeId: data.id,
-        },
-      },
+      variables,
       onCompleted: () => {
+        triggerCloseSheet();
         closeFloatingView();
-        popSubviewStack();
       },
     });
   };
+
+  const isDifferent = title !== data.title || text !== data.question;
 
   return (
     <View style={styles.body}>
@@ -83,31 +89,69 @@ export default function SHDNAChallengeSubView({
         <View style={styles.header}>
           <Image source={logo} style={styles.image} />
           <View style={{ flex: 1 }}>
-            <SHDNAText style={styles.title} fontWeight="SemiBold">
-              {data.title}
-            </SHDNAText>
+            {isEditMode ? (
+              <View style={(styles.title, { height: 30, marginBottom: 5 })}>
+                <SHDNATextInput value={title} onChange={setTitle} />
+              </View>
+            ) : (
+              <SHDNAText style={styles.title} fontWeight="SemiBold">
+                {data.title}
+              </SHDNAText>
+            )}
             <SHDNAText style={styles.subtitle}>{challengeType}</SHDNAText>
           </View>
         </View>
-        <SHDNAText style={styles.text}>{data.question}</SHDNAText>
-        <SHDNAChallengeAnswerManager
-          onChange={(input: string | MediaType[]) => {
-            if (typeof input === "string") {
-              setAnswer(input);
+        {isEditMode ? (
+          <View style={{ marginVertical: 15 }}>
+            <SHDNATextArea value={text} onChange={setText} />
+          </View>
+        ) : (
+          <SHDNAText style={styles.text}>{data.question}</SHDNAText>
+        )}
+        {!isEditMode && (
+          <SHDNAChallengeAnswerManager
+            onChange={(input: string | MediaType[]) => {
+              if (typeof input === "string") {
+                setAnswer(input);
+              } else {
+                setFiles(input);
+              }
+            }}
+            challengeKey={data}
+            type={answerType}
+          />
+        )}
+      </View>
+      <View style={styles.buttonsWrapper}>
+        <SHDNAButton
+          text={isEditMode ? (isDifferent ? "Save" : "Exit") : "Edit Text"}
+          onClick={() => {
+            if (isEditMode) {
+              if (isDifferent) {
+                handleEditChallenge();
+              } else {
+                setIsEditMode(!isEditMode);
+              }
             } else {
-              setFiles(input);
+              setIsEditMode(!isEditMode);
             }
           }}
-          challengeKey={data}
-          type={answerType}
+          state={
+            isEditMode
+              ? isDifferent
+                ? ButtonStates.ACTIVE
+                : ButtonStates.DEFAULT
+              : ButtonStates.SECONDARY
+          }
         />
+        {!isEditMode && (
+          <SHDNAButton
+            text="Delete Challenge"
+            onClick={() => {}}
+            state={ButtonStates.ALERT}
+          />
+        )}
       </View>
-      <SHDNAButton
-        onClick={() => manageSubmitAnswer()}
-        text={isCompleted ? "Completed" : "Complete"}
-        isDisabled={(answer === "" && files.length === 0) || isCompleted}
-        state={ButtonStates.ACTIVE}
-      />
     </View>
   );
 }
@@ -120,7 +164,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    height: Dimensions.get("screen").height - 175,
+    marginTop: 15,
   },
   text: {
     fontSize: 18,
@@ -141,5 +185,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
+  },
+  buttonsWrapper: {
+    gap: 15,
+    marginTop: 25,
   },
 });

@@ -1,13 +1,16 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import React, { Suspense } from "react";
+import { View, Image, StyleSheet, Pressable, Dimensions } from "react-native";
+import React, { Suspense, useState } from "react";
 import SHDNABlock from "../../Components/SHDNABlock";
-import { useSubview } from "../../Components/Subview/SHDNASubviewContext";
 import SHDNAChallengesSubView, {
   ChallengesType,
 } from "./SHDNAChallengesSubView";
 import SHDNALoading from "../../Components/SHDNALoading";
 import SHDNAView from "../../Components/SHDNAView";
 import SHDNAText from "../../Components/SHDNAText";
+import { useSheet } from "@/src/Components/Sheet/SHDNASheetContext";
+import AddSVG from "@/assets/RNSvgs/AddSVG";
+import { Colors } from "@/assets/SHDNAColors";
+import SHDNACreateChallengeSubView from "./SHDNACreateChallengeSubView";
 
 export const CHALLENGE_SECTIONS = [
   {
@@ -38,44 +41,71 @@ export const CHALLENGE_SECTIONS = [
 ];
 
 export default function SHDNAPassportView() {
-  const { openSubview } = useSubview();
+  const { openSheet } = useSheet();
+  const [section, setSection] = useState<ChallengesType>();
+
+  const AddButton = () => {
+    return (
+      <Pressable
+        onPress={() =>
+          openSheet({
+            title: "Create new Challenge",
+            content: <SHDNACreateChallengeSubView />,
+          })
+        }
+      >
+        <AddSVG style={{ transform: [{ scale: 0.75 }] }} iconcolor="#000" />
+      </Pressable>
+    );
+  };
 
   return (
-    <SHDNAView title="Discover">
-      {CHALLENGE_SECTIONS.map((section) => {
-        return (
-          <SHDNABlock
-            style={styles.row}
-            key={section.title}
-            onClick={() =>
-              openSubview(
-                section.title,
-                <Suspense
-                  fallback={
-                    <View style={{ marginTop: 100 }}>
-                      <SHDNALoading />
-                    </View>
-                  }
-                >
-                  <SHDNAChallengesSubView
-                    type={section.type as ChallengesType}
-                  />
-                </Suspense>
-              )
-            }
-          >
-            <Image source={section.logo} style={styles.image} />
-            <SHDNAText style={styles.title} fontWeight="SemiBold">
-              {section.title}
-            </SHDNAText>
-          </SHDNABlock>
-        );
-      })}
+    <SHDNAView
+      title="Discover"
+      secondaryButtons={<AddButton />}
+      scrollEnabled={false}
+    >
+      <View style={{ flexDirection: "row" }}>
+        <View style={[{ padding: 10 }, styles.subview]}>
+          {CHALLENGE_SECTIONS.map((section) => {
+            return (
+              <SHDNABlock
+                style={styles.row}
+                key={section.title}
+                onClick={() => setSection(section.type as ChallengesType)}
+              >
+                <Image source={section.logo} style={styles.image} />
+                <SHDNAText style={styles.title} fontWeight="SemiBold">
+                  {section.title}
+                </SHDNAText>
+              </SHDNABlock>
+            );
+          })}
+        </View>
+        <View style={styles.middleBar} />
+        <View style={styles.subview}>
+          {section ? (
+            <Suspense fallback={<SHDNALoading />}>
+              <SHDNAChallengesSubView type={section as ChallengesType} />
+            </Suspense>
+          ) : (
+            <View style={styles.selectSection}>
+              <SHDNAText fontWeight="Bold" style={{ color: Colors.Gray3 }}>
+                Select a section
+              </SHDNAText>
+            </View>
+          )}
+        </View>
+      </View>
     </SHDNAView>
   );
 }
 
 const styles = StyleSheet.create({
+  subview: {
+    flex: 1,
+    height: Dimensions.get("window").height - 100,
+  },
   image: {
     width: 75,
     height: 75,
@@ -91,5 +121,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "600",
     marginLeft: 5,
+  },
+  middleBar: {
+    width: 2,
+    height: "100%",
+    backgroundColor: Colors.Gray2,
+    marginHorizontal: 15,
+  },
+  selectSection: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

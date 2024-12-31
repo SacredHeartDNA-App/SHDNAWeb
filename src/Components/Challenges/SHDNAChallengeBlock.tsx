@@ -1,14 +1,13 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import React from "react";
 import SHDNABlock from "../SHDNABlock";
-import LockSVG from "../../../assets/RNSvgs/LockSVG";
 import { Colors } from "../../../assets/SHDNAColors";
-import { useSubview } from "../Subview/SHDNASubviewContext";
 import SHDNAChallengeSubView from "../../Views/Espacio/SHDNAChallengeSubView";
 import { graphql, useFragment } from "react-relay";
 import { SHDNAChallengeBlock_Fragment$key } from "../__generated__/SHDNAChallengeBlock_Fragment.graphql";
 import useSHDNAChallengeLogo from "../../hooks/useSHDNAChallengeLogo";
 import SHDNAText from "../SHDNAText";
+import { useSheet } from "../Sheet/SHDNASheetContext";
 
 type SHDNAChallengeBlockProps = {
   challengeKey: SHDNAChallengeBlock_Fragment$key;
@@ -27,13 +26,12 @@ export default function SHDNAChallengeBlock({
   challengeKey,
   isCompleted = false,
 }: SHDNAChallengeBlockProps) {
-  const { openSubview } = useSubview();
+  const { openSheet } = useSheet();
 
   const challenge = useFragment<SHDNAChallengeBlock_Fragment$key>(
     graphql`
       fragment SHDNAChallengeBlock_Fragment on Challenge {
         title
-        isLocked
         challengeType
         ...SHDNAChallengeSubView_Fragment
       }
@@ -50,47 +48,25 @@ export default function SHDNAChallengeBlock({
     <SHDNABlock
       style={styles.wrapper}
       onClick={() =>
-        openSubview(
-          "Challenges",
-          <SHDNAChallengeSubView
-            logo={logo}
-            challengeKey={challenge}
-            challengeType={challengeType}
-            isCompleted={isCompleted}
-          />
-        )
+        openSheet({
+          title: "Challenges",
+          content: (
+            <SHDNAChallengeSubView
+              logo={logo}
+              challengeKey={challenge}
+              challengeType={challengeType}
+            />
+          ),
+        })
       }
     >
-      {challenge.isLocked ? (
-        <View style={styles.lockChallenge}>
-          <LockSVG iconcolor={Colors.Gray3} width={30} />
-          <SHDNAText style={styles.lockText} fontWeight="SemiBold">
-            Unlock this card by completing Week ?
-          </SHDNAText>
-        </View>
-      ) : (
-        <>
-          <Image source={logo} style={styles.image} />
-          <View>
-            <SHDNAText style={styles.title} fontWeight="SemiBold">
-              {challenge.title}
-            </SHDNAText>
-            <SHDNAText style={styles.subtitle}>{challengeType}</SHDNAText>
-          </View>
-          {isCompleted && (
-            <View style={styles.completedBannerWrapper}>
-              <View style={styles.completedBanner}>
-                <SHDNAText
-                  style={styles.completedBannerText}
-                  fontWeight="SemiBold"
-                >
-                  Completed
-                </SHDNAText>
-              </View>
-            </View>
-          )}
-        </>
-      )}
+      <Image source={logo} style={styles.image} />
+      <View>
+        <SHDNAText style={styles.title} fontWeight="SemiBold">
+          {challenge.title}
+        </SHDNAText>
+        <SHDNAText style={styles.subtitle}>{challengeType}</SHDNAText>
+      </View>
     </SHDNABlock>
   );
 }
