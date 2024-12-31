@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7e89946eeb86737433166622dddcdb90>>
+ * @generated SignedSource<<2597555d692d56bcbdb5ef2ff9d15b3b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -91,13 +91,6 @@ return {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "isLocked",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
             "name": "challengeType",
             "storageKey": null
           },
@@ -135,12 +128,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6d22ceb08146b1ed1f1ce738f560c764",
+    "cacheID": "9173caf2bbe6d15ad36c7ff588834697",
     "id": null,
     "metadata": {},
     "name": "SHDNAChallengesSubViewCompletedQuery",
     "operationKind": "query",
-    "text": "query SHDNAChallengesSubViewCompletedQuery(\n  $type: ChallengeType!\n) {\n  getCompletedChallenges(type: $type) {\n    ...SHDNAChallengeBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAChallengeAnswerClose_Fragment on Challenge {\n  options\n}\n\nfragment SHDNAChallengeBlock_Fragment on Challenge {\n  title\n  isLocked\n  challengeType\n  ...SHDNAChallengeSubView_Fragment\n}\n\nfragment SHDNAChallengeSubView_Fragment on Challenge {\n  id\n  title\n  challengeType\n  question\n  answerType\n  ...SHDNAChallengeAnswerClose_Fragment\n}\n"
+    "text": "query SHDNAChallengesSubViewCompletedQuery(\n  $type: ChallengeType!\n) {\n  getCompletedChallenges(type: $type) {\n    ...SHDNAChallengeBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAChallengeAnswerClose_Fragment on Challenge {\n  options\n}\n\nfragment SHDNAChallengeBlock_Fragment on Challenge {\n  title\n  challengeType\n  ...SHDNAChallengeSubView_Fragment\n}\n\nfragment SHDNAChallengeSubView_Fragment on Challenge {\n  id\n  title\n  challengeType\n  question\n  answerType\n  ...SHDNAChallengeAnswerClose_Fragment\n}\n"
   }
 };
 })();

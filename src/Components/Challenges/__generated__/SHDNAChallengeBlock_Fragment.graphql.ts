@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<769c0c99dc6d93f31f86f843d64fc318>>
+ * @generated SignedSource<<3f7a5448dd937ac545dfbb2ddb3d30fc>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,6 @@ export type ChallengeType = "ACTIVE_CITIZENSHIP" | "BELONGING_COMMUNITY" | "PERS
 import { FragmentRefs } from "relay-runtime";
 export type SHDNAChallengeBlock_Fragment$data = {
   readonly challengeType: ChallengeType;
-  readonly isLocked: boolean;
   readonly title: string;
   readonly " $fragmentSpreads": FragmentRefs<"SHDNAChallengeSubView_Fragment">;
   readonly " $fragmentType": "SHDNAChallengeBlock_Fragment";
@@ -40,13 +39,6 @@ const node: ReaderFragment = {
       "alias": null,
       "args": null,
       "kind": "ScalarField",
-      "name": "isLocked",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
       "name": "challengeType",
       "storageKey": null
     },
@@ -60,6 +52,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "409099116942bead69bb09d84546062c";
+(node as any).hash = "ddf8c613c0bce96ccdfc5767e8c4698e";
 
 export default node;

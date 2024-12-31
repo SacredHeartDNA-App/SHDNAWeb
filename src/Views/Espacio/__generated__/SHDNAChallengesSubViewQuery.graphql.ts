@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ecac39768eabfa5db3d7dbd25eea94d6>>
+ * @generated SignedSource<<52c5d2d9171e0ba32e209c8b668aee0f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,7 +15,7 @@ export type SHDNAChallengesSubViewQuery$variables = {
   type: ChallengeType;
 };
 export type SHDNAChallengesSubViewQuery$data = {
-  readonly getMissingChallenges: ReadonlyArray<{
+  readonly getAllChallenges: ReadonlyArray<{
     readonly " $fragmentSpreads": FragmentRefs<"SHDNAChallengeBlock_Fragment">;
   }> | null | undefined;
 };
@@ -51,7 +51,7 @@ return {
         "args": (v1/*: any*/),
         "concreteType": "Challenge",
         "kind": "LinkedField",
-        "name": "getMissingChallenges",
+        "name": "getAllChallenges",
         "plural": true,
         "selections": [
           {
@@ -77,7 +77,7 @@ return {
         "args": (v1/*: any*/),
         "concreteType": "Challenge",
         "kind": "LinkedField",
-        "name": "getMissingChallenges",
+        "name": "getAllChallenges",
         "plural": true,
         "selections": [
           {
@@ -85,13 +85,6 @@ return {
             "args": null,
             "kind": "ScalarField",
             "name": "title",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "isLocked",
             "storageKey": null
           },
           {
@@ -135,16 +128,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "0b6d8ff9ff92a66a72d1c1f31f7d966f",
+    "cacheID": "920c5cb3ec30b0c2c7892ffb5706267b",
     "id": null,
     "metadata": {},
     "name": "SHDNAChallengesSubViewQuery",
     "operationKind": "query",
-    "text": "query SHDNAChallengesSubViewQuery(\n  $type: ChallengeType!\n) {\n  getMissingChallenges(type: $type) {\n    ...SHDNAChallengeBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAChallengeAnswerClose_Fragment on Challenge {\n  options\n}\n\nfragment SHDNAChallengeBlock_Fragment on Challenge {\n  title\n  isLocked\n  challengeType\n  ...SHDNAChallengeSubView_Fragment\n}\n\nfragment SHDNAChallengeSubView_Fragment on Challenge {\n  id\n  title\n  challengeType\n  question\n  answerType\n  ...SHDNAChallengeAnswerClose_Fragment\n}\n"
+    "text": "query SHDNAChallengesSubViewQuery(\n  $type: ChallengeType!\n) {\n  getAllChallenges(type: $type) {\n    ...SHDNAChallengeBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAChallengeAnswerClose_Fragment on Challenge {\n  options\n}\n\nfragment SHDNAChallengeBlock_Fragment on Challenge {\n  title\n  challengeType\n  ...SHDNAChallengeSubView_Fragment\n}\n\nfragment SHDNAChallengeSubView_Fragment on Challenge {\n  id\n  title\n  challengeType\n  question\n  answerType\n  ...SHDNAChallengeAnswerClose_Fragment\n}\n"
   }
 };
 })();
 
-(node as any).hash = "2c66d453a98cdddc600df29486261229";
+(node as any).hash = "148e5ed9315999ae1b6de13660dfcccc";
 
 export default node;

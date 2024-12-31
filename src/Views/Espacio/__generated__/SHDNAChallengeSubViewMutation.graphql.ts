@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e423ec0e1803d282d3ee2fd4c93cebab>>
+ * @generated SignedSource<<2c9186e2519209b68a4ad9840fa1420c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,22 +9,13 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from 'relay-runtime';
-export type AnswerInput = {
-  answer?: string | null | undefined;
-  challengeId: string;
-  media?: ReadonlyArray<MediaInput | null | undefined> | null | undefined;
-};
-export type MediaInput = {
-  base64: string;
-  fileName: string;
-  type: string;
-  uri: string;
-};
 export type SHDNAChallengeSubViewMutation$variables = {
-  input: AnswerInput;
+  challengeId: string;
+  question?: string | null | undefined;
+  title?: string | null | undefined;
 };
 export type SHDNAChallengeSubViewMutation$data = {
-  readonly createAnswerChallenge: number | null | undefined;
+  readonly updateChallenge: number | null | undefined;
 };
 export type SHDNAChallengeSubViewMutation = {
   response: SHDNAChallengeSubViewMutation$data;
@@ -32,56 +23,82 @@ export type SHDNAChallengeSubViewMutation = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "challengeId"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "question"
+},
+v2 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "title"
+},
+v3 = [
   {
     "alias": null,
     "args": [
       {
         "kind": "Variable",
-        "name": "input",
-        "variableName": "input"
+        "name": "id",
+        "variableName": "challengeId"
+      },
+      {
+        "kind": "Variable",
+        "name": "question",
+        "variableName": "question"
+      },
+      {
+        "kind": "Variable",
+        "name": "title",
+        "variableName": "title"
       }
     ],
     "kind": "ScalarField",
-    "name": "createAnswerChallenge",
+    "name": "updateChallenge",
     "storageKey": null
   }
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/),
+      (v2/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "SHDNAChallengeSubViewMutation",
-    "selections": (v1/*: any*/),
+    "selections": (v3/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v2/*: any*/),
+      (v1/*: any*/)
+    ],
     "kind": "Operation",
     "name": "SHDNAChallengeSubViewMutation",
-    "selections": (v1/*: any*/)
+    "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "2300349189c0a887929f761500ed944a",
+    "cacheID": "9723d624ea21fc8bfcf6fe3da27bf7cf",
     "id": null,
     "metadata": {},
     "name": "SHDNAChallengeSubViewMutation",
     "operationKind": "mutation",
-    "text": "mutation SHDNAChallengeSubViewMutation(\n  $input: AnswerInput!\n) {\n  createAnswerChallenge(input: $input)\n}\n"
+    "text": "mutation SHDNAChallengeSubViewMutation(\n  $challengeId: ID!\n  $title: String\n  $question: String\n) {\n  updateChallenge(id: $challengeId, title: $title, question: $question)\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c4ec62ed54fa0706fe49cd9f2ea8b5b7";
+(node as any).hash = "9a7cd322d66113634200482c260e1309";
 
 export default node;
