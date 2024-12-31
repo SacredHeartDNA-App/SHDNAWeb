@@ -9,6 +9,7 @@ type Query {
   getContentComments(contentId: ID!, relationship: ContentEnum!): [Comment!]
   getMissingChallenges(type: ChallengeType!): [Challenge!]
   getCompletedChallenges(type: ChallengeType!): [Challenge!]
+  getAllChallenges(type: ChallengeType!): [Challenge!]
   getJournals: [Journal!]
   getCommunities: [Community!]
 }
@@ -31,7 +32,8 @@ type Mutation {
   unlikeContent(contentId: ID!, contentType: ContentEnum!): Int
   createPost(input: PostInput!): Post
   deletePost(postId: ID!): Int
-  createChallenge(input: ChallengeInput!): Challenge
+  createChallenge(input: ChallengeInput!): Int
+  updateChallenge(id: ID!, title: String, question: String): Int
   createAnswerChallenge(input: AnswerInput!): Int
   createJournal(title: String!, text: String!, value: ChallengeType!): Int
   updateJournal(id: ID!, title: String, text: String, value: ChallengeType): Int
@@ -203,11 +205,10 @@ type Challenge implements Node {
 }
 
 input ChallengeInput {
-  id: ID!
   title: String!
   question: String!
-  isLocked: Boolean!
+  media: MediaInput
+  options: [String]
   challengeType: ChallengeType!
-  answer: String!
   answerType: AnswerType!
 }
