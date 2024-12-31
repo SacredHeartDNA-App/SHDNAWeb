@@ -19,12 +19,14 @@ type SHDNAViewProps = {
   style?:
     | ViewStyle
     | RecursiveArray<ViewStyle | Falsy | RegisteredStyle<ViewStyle>>;
+  scrollEnabled?: boolean;
 };
 
 export default function SHDNAView({
   title,
   children,
   secondaryButtons,
+  scrollEnabled = true,
 }: SHDNAViewProps) {
   return (
     <>
@@ -37,7 +39,11 @@ export default function SHDNAView({
             {secondaryButtons}
           </View>
         </View>
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.scroll}
+          scrollEnabled={scrollEnabled}
+        >
           {children}
         </ScrollView>
       </View>
