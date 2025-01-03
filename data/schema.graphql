@@ -12,6 +12,9 @@ type Query {
   getAllChallenges(type: ChallengeType!): [Challenge!]
   getJournals: [Journal!]
   getCommunities: [Community!]
+  downloadTranslations: [Translation!]
+  getUntranslatedTexts: [Translation!]
+  getPastTranslations: [Translation!]
 }
 
 type Mutation {
@@ -38,6 +41,8 @@ type Mutation {
   createJournal(title: String!, text: String!, value: ChallengeType!): Int
   updateJournal(id: ID!, title: String, text: String, value: ChallengeType): Int
   deleteJournal(journalId: ID!): Int
+  sendTranslations(texts: [TranslationInput!]): Int
+  updateTranslation(text: UpdateTranslationInput!): Int
 }
 
 scalar Date
@@ -211,4 +216,23 @@ input ChallengeInput {
   options: [String]
   challengeType: ChallengeType!
   answerType: AnswerType!
+}
+
+type Translation {
+  id: ID!
+  text: String!
+  description: String!
+  es_t: String
+  pl_t: String
+}
+
+input TranslationInput {
+  text: String!
+  description: String!
+}
+
+input UpdateTranslationInput {
+  id: ID!
+  es_t: String
+  pl_t: String
 }

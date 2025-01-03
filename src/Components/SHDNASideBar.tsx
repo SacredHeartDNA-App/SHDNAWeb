@@ -1,12 +1,12 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import HomeSVG from "../../assets/RNSvgs/HomeSVG";
 import CommunitySVG from "../../assets/RNSvgs/CommunitySVG";
 import EspacioSVG from "../../assets/RNSvgs/EspacioSVG";
-import UserSVG from "../../assets/RNSvgs/UserSVG";
 import { Colors } from "../../assets/SHDNAColors";
 import SHDNAText from "./SHDNAText";
 import { Link, useSegments } from "expo-router";
+import TranslateGraySVG from "@/assets/RNSvgs/TranslateGraySVG";
 
 const ICON_SCALE = 0.9;
 
@@ -56,13 +56,15 @@ export default function SHDNASideBar() {
           <SHDNAText style={styles.selectionColor}>Espacio</SHDNAText>
         </View>
       </Link>
-      <Link href="/">
+      <Link href="/translations">
         <View style={styles.slots}>
-          <UserSVG
+          <TranslateGraySVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
-            iconcolor={false ? Colors.Gray2 : Colors.Gray1}
+            iconcolor={
+              activeSection === "translations" ? Colors.Gray2 : Colors.Gray1
+            }
           />
-          <SHDNAText style={styles.selectionColor}>Me</SHDNAText>
+          <SHDNAText style={styles.selectionColor}>Translations</SHDNAText>
         </View>
       </Link>
     </View>

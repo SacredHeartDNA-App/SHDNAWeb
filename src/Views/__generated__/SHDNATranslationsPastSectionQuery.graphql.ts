@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<73401bc85a75b38619904213871b7578>>
+ * @generated SignedSource<<42e7edba4a48f72b1cf61a517d244cf9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type SHDNATranslationsPastSectionQuery$variables = Record<PropertyKey, never>;
 export type SHDNATranslationsPastSectionQuery$data = {
   readonly getPastTranslations: ReadonlyArray<{
-    readonly " $fragmentSpreads": FragmentRefs<"SHDNATranslationSubview_fragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"SHDNATranslationSubview_fragment" | "SHDNAWordBlock_fragment">;
   }> | null | undefined;
 };
 export type SHDNATranslationsPastSectionQuery = {
@@ -36,6 +36,11 @@ const node: ConcreteRequest = {
         "name": "getPastTranslations",
         "plural": true,
         "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "SHDNAWordBlock_fragment"
+          },
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -66,6 +71,27 @@ const node: ConcreteRequest = {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
+            "name": "text",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "es_t",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "pl_t",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
             "name": "id",
             "storageKey": null
           },
@@ -82,15 +108,15 @@ const node: ConcreteRequest = {
     ]
   },
   "params": {
-    "cacheID": "eb5e98851a15d6cc5349b60d727403af",
+    "cacheID": "183a493e0a0bfafe80b9690db0ba63f3",
     "id": null,
     "metadata": {},
     "name": "SHDNATranslationsPastSectionQuery",
     "operationKind": "query",
-    "text": "query SHDNATranslationsPastSectionQuery {\n  getPastTranslations {\n    ...SHDNATranslationSubview_fragment\n    id\n  }\n}\n\nfragment SHDNATranslationSubview_fragment on Translation {\n  id\n  description\n}\n"
+    "text": "query SHDNATranslationsPastSectionQuery {\n  getPastTranslations {\n    ...SHDNAWordBlock_fragment\n    ...SHDNATranslationSubview_fragment\n    id\n  }\n}\n\nfragment SHDNATranslationSubview_fragment on Translation {\n  id\n  text\n  es_t\n  pl_t\n  description\n}\n\nfragment SHDNAWordBlock_fragment on Translation {\n  text\n  es_t\n  pl_t\n}\n"
   }
 };
 
-(node as any).hash = "f3b0003ed04cbbaa091c846551152e1c";
+(node as any).hash = "9cd313996a2767a0e7338d1877881c4d";
 
 export default node;

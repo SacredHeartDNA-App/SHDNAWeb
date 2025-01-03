@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1f50f85803df5867f0aea0a373d7437c>>
+ * @generated SignedSource<<c385f684c1cd2cbaa3ccd12ee10258df>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,10 +11,9 @@
 import { ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type SHDNAWordBlock_fragment$data = {
-  readonly description: string;
   readonly es_t: string | null | undefined;
-  readonly id: string;
   readonly pl_t: string | null | undefined;
+  readonly text: string;
   readonly " $fragmentType": "SHDNAWordBlock_fragment";
 };
 export type SHDNAWordBlock_fragment$key = {
@@ -32,14 +31,7 @@ const node: ReaderFragment = {
       "alias": null,
       "args": null,
       "kind": "ScalarField",
-      "name": "id",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "description",
+      "name": "text",
       "storageKey": null
     },
     {
@@ -61,6 +53,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "bf49c236da995a8912002fd3df545385";
+(node as any).hash = "af0a966f90199f33bd34f2d67a8c43c4";
 
 export default node;

@@ -60,9 +60,10 @@ export default function SHDNATextInput({
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    // flex: 1,
     height: 40,
-    backgroundColor: Colors.Background,
+    width: "100%",
+    backgroundColor: "white",
     paddingHorizontal: 15,
     borderRadius: 10,
     borderWidth: 1,

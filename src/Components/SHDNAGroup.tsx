@@ -61,11 +61,8 @@ const SHDNAGroup = ({
         </SHDNAText>
         <View style={styles.bar} />
       </View>
-      {showItems && <View style={{ gap }}>{children}</View>}
-      {!disableLastBorder && showItems && (
-        <View style={[styles.wrapper, { marginVertical: 30 }]}>
-          <View style={styles.bar} />
-        </View>
+      {showItems && (
+        <View style={{ gap, justifyContent: "center" }}>{children}</View>
       )}
     </>
   );
