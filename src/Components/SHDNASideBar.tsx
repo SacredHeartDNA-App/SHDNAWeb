@@ -7,6 +7,7 @@ import { Colors } from "../../assets/SHDNAColors";
 import SHDNAText from "./SHDNAText";
 import { Link, useSegments } from "expo-router";
 import TranslateGraySVG from "@/assets/RNSvgs/TranslateGraySVG";
+import DiscoverSVG from "@/assets/RNSvgs/DiscoverSVG";
 
 const ICON_SCALE = 0.9;
 
@@ -38,7 +39,7 @@ export default function SHDNASideBar() {
       </Link>
       <Link href="/discover">
         <View style={styles.slots}>
-          <EspacioSVG
+          <DiscoverSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}
             iconcolor={
               activeSection === "discover" ? Colors.Gray2 : Colors.Gray1
@@ -47,7 +48,7 @@ export default function SHDNASideBar() {
           <SHDNAText style={styles.selectionColor}>Discover</SHDNAText>
         </View>
       </Link>
-      <Link href="/">
+      <Link href="/espacio">
         <View style={styles.slots}>
           <EspacioSVG
             style={{ transform: [{ scale: ICON_SCALE }] }}

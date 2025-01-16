@@ -67,7 +67,10 @@ export default function SHDNACreateChallengeSubView() {
           return {
             ...item,
             uri: "./" + item.fileName,
-            base64: item.base64.replace(/^data:image\/\w+;base64,/, ""),
+            base64: item.base64.replace(
+              /^data:(audio|video|image)\/\w+;base64,/,
+              ""
+            ),
           };
         }),
       };

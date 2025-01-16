@@ -1,31 +1,40 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import SHDNABlock from "./SHDNABlock";
 import SHDNAImage from "./SHDNAImage";
 import { Colors } from "../../assets/SHDNAColors";
 import { useSubview } from "./Subview/SHDNASubviewContext";
-import SHDNAMeditationSubview from "../Views/Espacio/SHDNAMeditationSubview";
 import SHDNAText from "./SHDNAText";
+import { graphql, useFragment } from "react-relay";
+import { SHDNAMediaBlock_fragmment$key } from "./__generated__/SHDNAMediaBlock_fragmment.graphql";
+import { SHDNAMeditationSubview_fragmment$key } from "../Views/Espacio/__generated__/SHDNAMeditationSubview_fragmment.graphql";
 
 type SHDNAMediaBlockProps = {
-  isNew?: boolean;
+  meditationKey: SHDNAMediaBlock_fragmment$key;
+  onClick: (data: SHDNAMeditationSubview_fragmment$key) => void;
 };
 
 export default function SHDNAMediaBlock({
-  isNew = false,
+  meditationKey,
+  onClick,
 }: SHDNAMediaBlockProps) {
-  const { openSubview } = useSubview();
+  const data = useFragment<SHDNAMediaBlock_fragmment$key>(
+    graphql`
+      fragment SHDNAMediaBlock_fragmment on Meditation {
+        created_at
+        title
+        cover
+        isSeen
+        ...SHDNAMeditationSubview_fragmment
+      }
+    `,
+    meditationKey
+  );
 
   return (
-    <SHDNABlock
-      style={styles.wrapper}
-      onClick={() => openSubview("Meditation", <SHDNAMeditationSubview />)}
-    >
-      <SHDNAImage
-        style={styles.image}
-        source={{ uri: "../../assets/PostPic.png" }}
-      />
-      {isNew && (
+    <SHDNABlock style={styles.wrapper} onClick={() => onClick(data)}>
+      <SHDNAImage style={styles.image} source={{ uri: data.cover }} />
+      {true && (
         <View style={styles.bandWrapper}>
           <View style={styles.newBand}>
             <SHDNAText fontWeight="SemiBold" style={styles.newText}>
@@ -34,7 +43,7 @@ export default function SHDNAMediaBlock({
           </View>
         </View>
       )}
-      <SHDNAText style={styles.title}>SHDNAMediaBlock</SHDNAText>
+      <SHDNAText style={styles.title}>{data.title}</SHDNAText>
     </SHDNABlock>
   );
 }
@@ -48,7 +57,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    flex: 1,
     width: 175,
     height: 120,
     borderRadius: 20,

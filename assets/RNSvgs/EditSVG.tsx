@@ -4,7 +4,7 @@ import { SVGType } from "./HomeSVG";
 
 export default function EditSVG(props: SVGType & SvgProps) {
   return (
-    <Svg width={36} height={41} viewBox="0 0 36 41" fill="none" {...props}>
+    <Svg width={36} height={30} viewBox="0 0 36 40" fill="none" {...props}>
       <Path
         d="M18 9H6.003A4.002 4.002 0 002 13v22a4 4 0 004 4h17a4 4 0 004-4V19"
         stroke={props.iconcolor}

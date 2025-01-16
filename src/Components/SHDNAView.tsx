@@ -8,9 +8,10 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import React, { ReactNode, useRef, useState } from "react";
+import React, { ReactNode, Suspense, useRef, useState } from "react";
 import { Colors } from "../../assets/SHDNAColors";
 import SHDNAText from "./SHDNAText";
+import SHDNALoading from "./SHDNALoading";
 
 type SHDNAViewProps = {
   title: string;
@@ -44,7 +45,7 @@ export default function SHDNAView({
           style={styles.scroll}
           scrollEnabled={scrollEnabled}
         >
-          {children}
+          <Suspense fallback={<SHDNALoading />}>{children}</Suspense>
         </ScrollView>
       </View>
     </>

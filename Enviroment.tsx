@@ -29,7 +29,6 @@ const fetchQuery = (operation: RequestParameters, variables: Variables) => {
     })
       .then(async (response) => {
         const resData = await response.json();
-
         if (resData.errors) {
           throw new SHDNAError("GraphQL error", resData.errors[0].message);
         }

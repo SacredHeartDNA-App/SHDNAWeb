@@ -49,14 +49,16 @@ export default function SHDNAComment({ commentKey }: SHDNACommentProps) {
         )
       }
     >
-      <SHDNAUserRow userKey={data.author} />
-      <SHDNAText style={styles.body}>{data.text}</SHDNAText>
-      <SHDNAFootInsignts
-        content_id={data.id}
-        noLikes={data.likes}
-        contentType="COMMENTS"
-        isLikedByUser={data.isLikedByUser}
-      />
+      <View style={{ padding: 15, paddingBottom: 5 }}>
+        <SHDNAUserRow userKey={data.author} />
+        <SHDNAText style={styles.body}>{data.text}</SHDNAText>
+        <SHDNAFootInsignts
+          content_id={data.id}
+          noLikes={data.likes}
+          contentType="COMMENTS"
+          isLikedByUser={data.isLikedByUser}
+        />
+      </View>
     </SHDNABlock>
   );
 }

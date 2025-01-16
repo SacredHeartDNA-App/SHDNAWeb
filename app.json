@@ -20,8 +20,9 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png",
-      "showStatusBar": false
+      "favicon": "./assets/Loading1.png",
+      "showStatusBar": false,
+      "bundlerOverlay": false
     },
     "plugins": [
       "expo-router",

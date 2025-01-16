@@ -12,6 +12,8 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { View } from "react-native";
 import SHDNAFloatingMenuManager from "@/src/Components/FloatingMenu/SHDNAFloatingMenuManager";
+import { Suspense } from "react";
+import SHDNALoading from "@/src/Components/SHDNALoading";
 
 export default function RootLayout() {
   const [] = useFonts({
@@ -43,7 +45,9 @@ export default function RootLayout() {
                 }}
               >
                 <SHDNASideBar />
-                <Stack screenOptions={{ headerShown: false }} />
+                <Suspense fallback={<LoadingView />}>
+                  <Stack screenOptions={{ headerShown: false }} />
+                </Suspense>
               </View>
             </SheetProvider>
           </FloatingMenuProvider>
@@ -52,3 +56,17 @@ export default function RootLayout() {
     </RelayEnvironment>
   );
 }
+
+const LoadingView = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <SHDNALoading />
+    </View>
+  );
+};

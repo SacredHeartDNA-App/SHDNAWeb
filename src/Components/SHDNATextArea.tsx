@@ -42,7 +42,7 @@ export default function SHDNATextArea({
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: Colors.Background,
+    backgroundColor: "white",
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 10,

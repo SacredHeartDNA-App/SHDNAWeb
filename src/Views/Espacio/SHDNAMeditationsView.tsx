@@ -1,13 +1,33 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import React from "react";
 import SHDNAMediaBlock from "../../Components/SHDNAMediaBlock";
-import SHDNAJournal from "../../Components/Journal/SHDNAJournal";
 import SHDNAText from "../../Components/SHDNAText";
+import { graphql, useLazyLoadQuery } from "react-relay";
+import { SHDNAMeditationsViewQuery } from "./__generated__/SHDNAMeditationsViewQuery.graphql";
+import { SHDNAMeditationSubview_fragmment$key } from "./__generated__/SHDNAMeditationSubview_fragmment.graphql";
 
-export default function SHDNAMeditationsView() {
+type SHDNAMeditationsViewProps = {
+  setSelectedMeditation: (data: SHDNAMeditationSubview_fragmment$key) => void;
+};
+
+export default function SHDNAMeditationsView({
+  setSelectedMeditation,
+}: SHDNAMeditationsViewProps) {
+  const data = useLazyLoadQuery<SHDNAMeditationsViewQuery>(
+    graphql`
+      query SHDNAMeditationsViewQuery {
+        getMeditations {
+          ...SHDNAMediaBlock_fragmment
+        }
+      }
+    `,
+    {}
+  );
+
+  const meditations = data.getMeditations ?? [];
+
   return (
     <View>
-      <SHDNAJournal />
       <SHDNAText style={styles.subtitle} fontWeight="SemiBold">
         New!
       </SHDNAText>
@@ -16,8 +36,14 @@ export default function SHDNAMeditationsView() {
         showsHorizontalScrollIndicator={false}
         style={styles.mediaList}
       >
-        {[0, 1, 2, 3].map((i) => {
-          return <SHDNAMediaBlock key={i} isNew={(i + 1) % 2 == 0} />;
+        {meditations.map((meditation, index) => {
+          return (
+            <SHDNAMediaBlock
+              key={index + "NewMeditation"}
+              meditationKey={meditation}
+              onClick={setSelectedMeditation}
+            />
+          );
         })}
       </ScrollView>
     </View>
