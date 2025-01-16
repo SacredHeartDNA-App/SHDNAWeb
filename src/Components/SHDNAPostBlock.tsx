@@ -44,8 +44,6 @@ export default function SHDNAPostBlock({
     postKey
   );
 
-  console.log(postData.media);
-
   return (
     <SHDNABlock
       style={{ marginBottom: 30, width: "25%", height: "auto" }}

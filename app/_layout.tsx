@@ -1,19 +1,17 @@
-import { Colors } from "@/assets/SHDNAColors";
 import RelayEnvironment from "@/Enviroment";
 import { FloatingMenuProvider } from "@/src/Components/FloatingMenu/SHDNAFloatingMenuContext";
 import { FloatingViewProvider } from "@/src/Components/FloatingView/SHDNAFloatingViewContext";
 import SHDNAFloatingViewManager from "@/src/Components/FloatingView/SHDNAFloatingViewManager";
 import SHDNAModal from "@/src/Components/Modal/SHDNAModal";
 import { ModalProvider } from "@/src/Components/Modal/SHDNAModalContext";
-import SHDNASideBar from "@/src/Components/SHDNASideBar";
 import SHDNASheetManager from "@/src/Components/Sheet/SHDNASheet";
 import { SheetProvider } from "@/src/Components/Sheet/SHDNASheetContext";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import { View } from "react-native";
 import SHDNAFloatingMenuManager from "@/src/Components/FloatingMenu/SHDNAFloatingMenuManager";
-import { Suspense } from "react";
 import SHDNALoading from "@/src/Components/SHDNALoading";
+import SHDNACurrenView from "@/src/Views/SHDNACurrenView";
+import { UserProvider } from "@/src/Context/SHDNAUserContext";
 
 export default function RootLayout() {
   const [] = useFonts({
@@ -29,30 +27,21 @@ export default function RootLayout() {
 
   return (
     <RelayEnvironment>
-      <FloatingViewProvider>
-        <ModalProvider>
-          <FloatingMenuProvider>
-            <SheetProvider>
-              <SHDNAFloatingViewManager />
-              <SHDNAModal />
-              <SHDNASheetManager />
-              <SHDNAFloatingMenuManager />
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  backgroundColor: Colors.Background,
-                }}
-              >
-                <SHDNASideBar />
-                <Suspense fallback={<LoadingView />}>
-                  <Stack screenOptions={{ headerShown: false }} />
-                </Suspense>
-              </View>
-            </SheetProvider>
-          </FloatingMenuProvider>
-        </ModalProvider>
-      </FloatingViewProvider>
+      <UserProvider>
+        <FloatingViewProvider>
+          <ModalProvider>
+            <FloatingMenuProvider>
+              <SheetProvider>
+                <SHDNAFloatingViewManager />
+                <SHDNAModal />
+                <SHDNASheetManager />
+                <SHDNAFloatingMenuManager />
+                <SHDNACurrenView />
+              </SheetProvider>
+            </FloatingMenuProvider>
+          </ModalProvider>
+        </FloatingViewProvider>
+      </UserProvider>
     </RelayEnvironment>
   );
 }

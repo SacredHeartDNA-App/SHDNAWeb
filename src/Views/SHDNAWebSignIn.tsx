@@ -11,13 +11,13 @@ import { useFloatingView } from "../Components/FloatingView/SHDNAFloatingViewCon
 import { useUserData } from "../Context/SHDNAUserContext";
 import useSHDNAKeychain from "../hooks/useSHDNAKeychain";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
+import { router } from "expo-router";
 
 export default function SHDNAWebSignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { setUserId } = useUserData();
-  const { saveSessionToken } = useSHDNAKeychain();
   const { openFloatingView, closeFloatingView } = useFloatingView();
 
   const [commitMutation] = useMutation<SHDNAWebSignInMutation>(graphql`
@@ -35,6 +35,7 @@ export default function SHDNAWebSignIn() {
     const variables = {
       email,
       password,
+      adminOnly: true,
     };
     openFloatingView(<SHDNALoadingBlackView />);
     commitMutation({
@@ -42,12 +43,12 @@ export default function SHDNAWebSignIn() {
       onCompleted(response) {
         if (response) {
           setUserId(response.signIn.user.id);
-          saveSessionToken(response.signIn.authToken);
           closeFloatingView();
           return;
         }
       },
       onError(error) {
+        console.log(error);
         closeFloatingView();
       },
     });
@@ -55,7 +56,7 @@ export default function SHDNAWebSignIn() {
 
   return (
     <View style={styles.container}>
-      <SHDNABlock style={{ width: "35%" }}>
+      <SHDNABlock style={{ width: "30%" }}>
         <View style={styles.wrapper}>
           <SHDNAText style={[styles.title]} fontWeight="SemiBold">
             Welcome!

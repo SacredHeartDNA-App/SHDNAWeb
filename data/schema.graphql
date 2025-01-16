@@ -20,7 +20,7 @@ type Query {
 
 type Mutation {
   signUp(input: SignUpInput!): Int!
-  signIn(email: String!, password: String, adminOnly: Boolean): AuthUser!
+  signIn(email: String!, password: String!, adminOnly: Boolean): AuthUser!
   logOut: Int
   updateProfile(input: UpdateUserInput!): Int
   addFriend(user: String!, friend: String!): [User!]
