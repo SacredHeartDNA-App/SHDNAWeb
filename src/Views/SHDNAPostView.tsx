@@ -14,6 +14,7 @@ import { useSheet } from "../Components/Sheet/SHDNASheetContext";
 import { SHDNAPostViewMutation } from "./__generated__/SHDNAPostViewMutation.graphql";
 import SHDNAButton, { ButtonStates } from "../Components/SHDNAButton";
 import { useModal } from "../Components/Modal/SHDNAModalContext";
+import SHDNAGallery from "../Components/SHDNAGallery";
 
 type SHDNAPostViewProps = {
   postData: SHDNAPostBlock_Fragment$data;
@@ -90,20 +91,7 @@ export default function SHDNAPostView({
   return (
     <View>
       <SHDNAText style={styles.content}>{postData.text}</SHDNAText>
-      {postData.media && (
-        <View style={[styles.imageEffect]}>
-          {postData.media.map((image) => {
-            return (
-              <SHDNAImage
-                source={{ uri: image }}
-                style={[styles.coverImage]}
-                isInteractive={true}
-                key={image}
-              />
-            );
-          })}
-        </View>
-      )}
+      {postData.media && <SHDNAGallery images={postData.media} />}
       <SHDNAFootInsignts
         contentType="POSTS"
         isLikedByUser={postData.isLikedByUser}
