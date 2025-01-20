@@ -14,6 +14,7 @@ import { useSheet } from "../Components/Sheet/SHDNASheetContext";
 import { SHDNAPostViewMutation } from "./__generated__/SHDNAPostViewMutation.graphql";
 import SHDNAButton, { ButtonStates } from "../Components/SHDNAButton";
 import { useModal } from "../Components/Modal/SHDNAModalContext";
+import { SHEET_WIDTH } from "../Components/Sheet/SHDNASheet";
 
 type SHDNAPostViewProps = {
   postData: SHDNAPostBlock_Fragment$data;
@@ -91,21 +92,17 @@ export default function SHDNAPostView({
     <View>
       <SHDNAText style={styles.content}>{postData.text}</SHDNAText>
       {postData.media && (
-        <View
-          style={[styles.imageEffect, { height: 275 * postData.media.length }]}
-        >
-          <View style={styles.stackImages}>
-            {postData.media.map((image) => {
-              return (
-                <SHDNAImage
-                  source={{ uri: image }}
-                  style={[styles.coverImage]}
-                  isInteractive={true}
-                  key={image}
-                />
-              );
-            })}
-          </View>
+        <View style={[styles.imageEffect]}>
+          {postData.media.map((image) => {
+            return (
+              <SHDNAImage
+                source={{ uri: image }}
+                style={[styles.coverImage]}
+                isInteractive={true}
+                key={image}
+              />
+            );
+          })}
         </View>
       )}
       <SHDNAFootInsignts
@@ -132,27 +129,21 @@ export default function SHDNAPostView({
 const styles = StyleSheet.create({
   coverImage: {
     height: 275,
-    flex: 1,
+    width: 275,
     backgroundColor: Colors.Gray2,
-  },
-  stackImages: {
-    width: "auto",
-    position: "absolute",
-    borderRadius: 20,
-    left: -20,
-    right: -20,
-    overflow: "hidden",
   },
   imageEffect: {
     backgroundColor: Colors.Background,
     flex: 1,
+    overflow: "hidden",
+    flexWrap: "wrap",
+    flexDirection: "row",
     borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.2,
     shadowRadius: 7,
     elevation: 1,
-    position: "relative",
   },
   footer: {
     flexDirection: "row",
