@@ -97,7 +97,6 @@ export default function SHDNASideBar() {
       </View>
       <View style={styles.mainSection}>
         <Pressable
-          // href="/"
           onPress={() => {
             handleLogOut();
           }}
@@ -105,9 +104,7 @@ export default function SHDNASideBar() {
           <View style={styles.slots}>
             <LogOutSVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
-              iconcolor={
-                activeSection === "translations" ? Colors.Gray2 : Colors.Gray1
-              }
+              iconcolor={Colors.Gray1}
             />
             <SHDNAText style={styles.selectionColor}>Log Out</SHDNAText>
           </View>
