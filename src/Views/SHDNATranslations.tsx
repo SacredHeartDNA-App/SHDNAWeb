@@ -41,7 +41,7 @@ export default function SHDNATranslations() {
     <SHDNAView title="Translations" scrollEnabled={false}>
       <View style={styles.window}>
         <ScrollView
-          style={{ flex: 1, height: "102%", padding: 10, paddingBottom: 100 }}
+          style={{ flex: 1, padding: 10, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
         >
           <View style={{ paddingBottom: 20 }}>
@@ -75,7 +75,7 @@ export default function SHDNATranslations() {
           </SHDNAGroup>
         </ScrollView>
         <View style={styles.middleBar} />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, paddingBottom: 25 }}>
           {wordSelected ? (
             <SHDNATransaltionSubview translationKey={wordSelected} />
           ) : (
@@ -94,14 +94,16 @@ export default function SHDNATranslations() {
 const styles = StyleSheet.create({
   middleBar: {
     width: 2,
-    height: "100%",
+    height: "95%",
+    alignSelf: "center",
     backgroundColor: Colors.Gray2,
     marginHorizontal: 15,
   },
   window: {
     flexDirection: "row",
-    flex: 1,
-    height: Dimensions.get("screen").height - 200,
+    overflowY: "scroll",
+    paddingBottom: 20,
+    height: Dimensions.get("window").height - 60,
   },
   noSelected: {
     flex: 1,
