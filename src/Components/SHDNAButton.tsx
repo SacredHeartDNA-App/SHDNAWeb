@@ -37,6 +37,7 @@ export default function SHDNAButton({
     <Pressable
       onPointerDown={(e) => {
         e.stopPropagation();
+        if (isDisabled) return;
         setIsHoldingDown(false);
         onClick();
       }}
