@@ -14,7 +14,6 @@ import { useSheet } from "../Components/Sheet/SHDNASheetContext";
 import { SHDNAPostViewMutation } from "./__generated__/SHDNAPostViewMutation.graphql";
 import SHDNAButton, { ButtonStates } from "../Components/SHDNAButton";
 import { useModal } from "../Components/Modal/SHDNAModalContext";
-import { SHEET_WIDTH } from "../Components/Sheet/SHDNASheet";
 
 type SHDNAPostViewProps = {
   postData: SHDNAPostBlock_Fragment$data;
