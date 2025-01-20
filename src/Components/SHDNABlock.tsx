@@ -56,6 +56,7 @@ export default function SHDNABlock({
         ...(showShadow && styles.blockShadow),
         transform: [{ scale: buttonHover }],
         ...style,
+        ...{ cursor: onClick ? "pointer" : undefined },
       }}
     >
       {children}
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     borderRadius: 20,
-    cursor: "pointer",
   },
   blockShadow: {
     shadowColor: "#000",
