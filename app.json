@@ -20,7 +20,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/Loading1.png",
+      "favicon": "./assets/imgs/sacredheartDNA_logo.png",
       "showStatusBar": false,
       "bundlerOverlay": false
     },
