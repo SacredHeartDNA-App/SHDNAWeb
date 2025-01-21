@@ -118,7 +118,7 @@ const DropdownItem = ({ item, isSelected, onClick }: DropdownItemsProps) => {
 const styles = StyleSheet.create({
   button: {
     height: 40,
-    backgroundColor: Colors.Background,
+    backgroundColor: "white",
     paddingHorizontal: 15,
     borderRadius: 10,
     borderWidth: 1,
