@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<88697c95da2a09b1e81919f16ae68795>>
+ * @generated SignedSource<<89ca0d1ed01e6576d60775ad0099ce3e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,6 +17,7 @@ export type SHDNAChallengeSubView_Fragment$data = {
   readonly challengeType: ChallengeType;
   readonly id: string;
   readonly question: string;
+  readonly suggestedMeditations: ReadonlyArray<string> | null | undefined;
   readonly title: string;
   readonly " $fragmentSpreads": FragmentRefs<"SHDNAChallengeAnswerClose_Fragment">;
   readonly " $fragmentType": "SHDNAChallengeSubView_Fragment";
@@ -68,6 +69,13 @@ const node: ReaderFragment = {
       "storageKey": null
     },
     {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "suggestedMeditations",
+      "storageKey": null
+    },
+    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "SHDNAChallengeAnswerClose_Fragment"
@@ -77,6 +85,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "f9b14fa42437cb9d13bb5caf9f4eaf5f";
+(node as any).hash = "282547f17a49649356b578be8d898750";
 
 export default node;

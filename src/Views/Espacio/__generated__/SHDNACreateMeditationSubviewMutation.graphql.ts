@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<de5c9a35f9f8e041037886a109f8761e>>
+ * @generated SignedSource<<c0143bdb8cd550b12fa8162d95d458f7>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ export type CreateMeditationInput = {
   cover: MediaInput;
   description: string;
   media: MediaInput;
+  suggestedMeditations?: ReadonlyArray<string> | null | undefined;
   title: string;
 };
 export type MediaInput = {

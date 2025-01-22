@@ -11,7 +11,7 @@ import { SHDNAMeditationSubview_fragmment$key } from "../Views/Espacio/__generat
 
 type SHDNAMediaBlockProps = {
   meditationKey: SHDNAMediaBlock_fragmment$key;
-  onClick: (data: SHDNAMeditationSubview_fragmment$key) => void;
+  onClick?: (data: SHDNAMeditationSubview_fragmment$key) => void;
 };
 
 export default function SHDNAMediaBlock({
@@ -32,7 +32,7 @@ export default function SHDNAMediaBlock({
   );
 
   return (
-    <SHDNABlock style={styles.wrapper} onClick={() => onClick(data)}>
+    <SHDNABlock style={styles.wrapper} onClick={() => onClick && onClick(data)}>
       <SHDNAImage style={styles.image} source={{ uri: data.cover }} />
       {true && (
         <View style={styles.bandWrapper}>
@@ -50,10 +50,10 @@ export default function SHDNAMediaBlock({
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    height: 150,
+    width: 175,
     marginVertical: 15,
     marginRight: 30,
-    width: "auto",
     alignItems: "center",
   },
   image: {

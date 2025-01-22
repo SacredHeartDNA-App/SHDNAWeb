@@ -15,6 +15,7 @@ import { SHDNAChallengeSubViewMutation } from "./__generated__/SHDNAChallengeSub
 import { useSheet } from "@/src/Components/Sheet/SHDNASheetContext";
 import { useFloatingView } from "@/src/Components/FloatingView/SHDNAFloatingViewContext";
 import SHDNALoadingBlackView from "../SHDNALoadingBlackView";
+import SHDNAMeditationsRow from "./SHDNAMeditationsRow";
 
 type SHDNAChallengeSubViewProps = {
   challengeKey: SHDNAChallengeSubView_Fragment$key;
@@ -40,6 +41,7 @@ export default function SHDNAChallengeSubView({
         challengeType
         question
         answerType
+        suggestedMeditations
         ...SHDNAChallengeAnswerClose_Fragment
       }
     `,
@@ -121,6 +123,16 @@ export default function SHDNAChallengeSubView({
             type={answerType}
           />
         )}
+        {data.suggestedMeditations &&
+          data.suggestedMeditations.length > 0 &&
+          !isEditMode && (
+            <View style={{ marginTop: 15 }}>
+              <SHDNAText fontWeight="SemiBold" style={{ fontSize: 16 }}>
+                Suggested Meditations
+              </SHDNAText>
+              <SHDNAMeditationsRow ids={data.suggestedMeditations} />
+            </View>
+          )}
       </View>
       <View style={styles.buttonsWrapper}>
         <SHDNAButton

@@ -16,6 +16,9 @@ type Query {
   getUntranslatedTexts: [Translation!]
   getPastTranslations: [Translation!]
   getMeditations: [Meditation!]
+  getMeditationsById(ids: [String!]): [Meditation!]
+  # Search Algorithms
+  searchMeditation(query: String!): [Meditation!]
 }
 
 type Mutation {
@@ -211,6 +214,7 @@ type Challenge implements Node {
   answer: String!
   answerType: AnswerType!
   options: [String]
+  suggestedMeditations: [String!]
 }
 
 input ChallengeInput {
@@ -263,6 +267,7 @@ input CreateMeditationInput {
   description: String!
   cover: MediaInput!
   media: MediaInput!
+  suggestedMeditations: [String!]
 }
 
 input UpdateMeditationInput {

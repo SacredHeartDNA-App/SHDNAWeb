@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<dc08b632c49c39a92439479a75cf78be>>
+ * @generated SignedSource<<32ac27e0a11743dd7849a755bb897091>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,18 +10,17 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type ChallengeType = "ACTIVE_CITIZENSHIP" | "BELONGING_COMMUNITY" | "PERSONAL_INTEGRITY" | "SPIRITUALITY" | "TRANSFORMATIVE_ACTION" | "%future added value";
-export type SHDNAChallengesSubViewQuery$variables = {
-  type: ChallengeType;
+export type SHDNAMeditationsRowQuery$variables = {
+  ids?: ReadonlyArray<string> | null | undefined;
 };
-export type SHDNAChallengesSubViewQuery$data = {
-  readonly getAllChallenges: ReadonlyArray<{
-    readonly " $fragmentSpreads": FragmentRefs<"SHDNAChallengeBlock_Fragment">;
+export type SHDNAMeditationsRowQuery$data = {
+  readonly getMeditationsById: ReadonlyArray<{
+    readonly " $fragmentSpreads": FragmentRefs<"SHDNAMediaBlock_fragmment">;
   }> | null | undefined;
 };
-export type SHDNAChallengesSubViewQuery = {
-  response: SHDNAChallengesSubViewQuery$data;
-  variables: SHDNAChallengesSubViewQuery$variables;
+export type SHDNAMeditationsRowQuery = {
+  response: SHDNAMeditationsRowQuery$data;
+  variables: SHDNAMeditationsRowQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -29,14 +28,14 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "type"
+    "name": "ids"
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "type",
-    "variableName": "type"
+    "name": "ids",
+    "variableName": "ids"
   }
 ];
 return {
@@ -44,20 +43,20 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "SHDNAChallengesSubViewQuery",
+    "name": "SHDNAMeditationsRowQuery",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
-        "concreteType": "Challenge",
+        "concreteType": "Meditation",
         "kind": "LinkedField",
-        "name": "getAllChallenges",
+        "name": "getMeditationsById",
         "plural": true,
         "selections": [
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "SHDNAChallengeBlock_Fragment"
+            "name": "SHDNAMediaBlock_fragmment"
           }
         ],
         "storageKey": null
@@ -70,16 +69,23 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "SHDNAChallengesSubViewQuery",
+    "name": "SHDNAMeditationsRowQuery",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
-        "concreteType": "Challenge",
+        "concreteType": "Meditation",
         "kind": "LinkedField",
-        "name": "getAllChallenges",
+        "name": "getMeditationsById",
         "plural": true,
         "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "created_at",
+            "storageKey": null
+          },
           {
             "alias": null,
             "args": null,
@@ -91,7 +97,14 @@ return {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "challengeType",
+            "name": "cover",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "isSeen",
             "storageKey": null
           },
           {
@@ -105,28 +118,21 @@ return {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "question",
+            "name": "description",
             "storageKey": null
           },
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "answerType",
+            "name": "media",
             "storageKey": null
           },
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "suggestedMeditations",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "options",
+            "name": "mediaType",
             "storageKey": null
           }
         ],
@@ -135,16 +141,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "99c341cc3dca44bbae42934034c6144e",
+    "cacheID": "e96e0298abc79c2ca29e90655e178859",
     "id": null,
     "metadata": {},
-    "name": "SHDNAChallengesSubViewQuery",
+    "name": "SHDNAMeditationsRowQuery",
     "operationKind": "query",
-    "text": "query SHDNAChallengesSubViewQuery(\n  $type: ChallengeType!\n) {\n  getAllChallenges(type: $type) {\n    ...SHDNAChallengeBlock_Fragment\n    id\n  }\n}\n\nfragment SHDNAChallengeAnswerClose_Fragment on Challenge {\n  options\n}\n\nfragment SHDNAChallengeBlock_Fragment on Challenge {\n  title\n  challengeType\n  ...SHDNAChallengeSubView_Fragment\n}\n\nfragment SHDNAChallengeSubView_Fragment on Challenge {\n  id\n  title\n  challengeType\n  question\n  answerType\n  suggestedMeditations\n  ...SHDNAChallengeAnswerClose_Fragment\n}\n"
+    "text": "query SHDNAMeditationsRowQuery(\n  $ids: [String!]\n) {\n  getMeditationsById(ids: $ids) {\n    ...SHDNAMediaBlock_fragmment\n    id\n  }\n}\n\nfragment SHDNAMediaBlock_fragmment on Meditation {\n  created_at\n  title\n  cover\n  isSeen\n  ...SHDNAMeditationSubview_fragmment\n}\n\nfragment SHDNAMeditationSubview_fragmment on Meditation {\n  id\n  title\n  description\n  media\n  mediaType\n}\n"
   }
 };
 })();
 
-(node as any).hash = "148e5ed9315999ae1b6de13660dfcccc";
+(node as any).hash = "f5b65f05c8ab00cfb6b9b369827ad147";
 
 export default node;
