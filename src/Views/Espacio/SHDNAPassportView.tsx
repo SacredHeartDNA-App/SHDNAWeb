@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet, Pressable, Dimensions } from "react-native";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useTransition } from "react";
 import SHDNABlock from "../../Components/SHDNABlock";
 import SHDNAChallengesSubView, {
   ChallengesType,
@@ -43,14 +43,17 @@ export const CHALLENGE_SECTIONS = [
 export default function SHDNAPassportView() {
   const { openSheet } = useSheet();
   const [section, setSection] = useState<ChallengesType>();
+  const [_, startTransition] = useTransition();
 
   const AddButton = () => {
     return (
       <Pressable
         onPress={() =>
-          openSheet({
-            title: "Create new Challenge",
-            content: <SHDNACreateChallengeSubView />,
+          startTransition(() => {
+            openSheet({
+              title: "Create new Challenge",
+              content: <SHDNACreateChallengeSubView />,
+            });
           })
         }
       >
