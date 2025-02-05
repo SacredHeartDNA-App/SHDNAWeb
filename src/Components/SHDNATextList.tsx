@@ -12,7 +12,7 @@ type SHDNATextListProps = {
 
 export default function SHDNATextList({ items, setItems }: SHDNATextListProps) {
   const handleOnChange = (value: string, index: number) => {
-    const itemsCopy = items;
+    const itemsCopy = [...items];
     itemsCopy[index] = value;
     setItems([...itemsCopy]);
   };
@@ -49,7 +49,7 @@ export default function SHDNATextList({ items, setItems }: SHDNATextListProps) {
       {items.map((item, index) => {
         if (index === 0) return;
         return (
-          <View style={styles.item} key={item}>
+          <View style={styles.item} key={"textList" + index}>
             <View style={{ width: 40, height: 40 }}>
               <SHDNAButton
                 onClick={() => handleOnDelete(index)}
