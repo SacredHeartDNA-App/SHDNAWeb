@@ -2,6 +2,7 @@ type Query {
   viewer: User!
   user(id: ID!): User
   verifyToken(token: String!): User
+  verifyTokenWeb: User
   userPosts(userId: ID!): [Post!]
   posts: [Post!]
   news: [News!]
@@ -215,6 +216,7 @@ type Challenge implements Node {
   answerType: AnswerType!
   options: [String]
   suggestedMeditations: [String!]
+  scheduledTime: Date
 }
 
 input ChallengeInput {
@@ -224,6 +226,7 @@ input ChallengeInput {
   options: [String]
   challengeType: ChallengeType!
   answerType: AnswerType!
+  scheduledTime: Date
 }
 
 type Translation {
