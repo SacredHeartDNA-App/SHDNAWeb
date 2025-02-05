@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     padding: 11,
     zIndex: 10,
     borderWidth: 0,
-    outline: "none",
   },
   wrapper: {
     backgroundColor: "white",
