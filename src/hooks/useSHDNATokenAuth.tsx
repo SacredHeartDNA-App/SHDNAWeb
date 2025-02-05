@@ -1,27 +1,25 @@
 import { graphql, useLazyLoadQuery } from "react-relay";
-import { useMemo } from "react";
 import { useSHDNATokenAuthQuery } from "./__generated__/useSHDNATokenAuthQuery.graphql";
+import { useMemo } from "react";
 
-const useSHDNATokenAuth = (token: string) => {
-  const queryVariables = useMemo(() => ({ token }), [token]);
-
+const useSHDNATokenAuth = () => {
   const data = useLazyLoadQuery<useSHDNATokenAuthQuery>(
     graphql`
-      query useSHDNATokenAuthQuery($token: String!) {
-        verifyToken(token: $token) {
+      query useSHDNATokenAuthQuery {
+        verifyTokenWeb {
           id
         }
       }
     `,
-    queryVariables,
-    { fetchPolicy: "store-or-network" }
+    {},
+    { fetchPolicy: "network-only" }
   );
 
   const userId = useMemo(() => {
-    data?.verifyToken?.id;
+    data?.verifyTokenWeb?.id;
   }, [data]);
 
-  return data.verifyToken == null ? null : data?.verifyToken?.id;
+  return data.verifyTokenWeb == null ? null : data?.verifyTokenWeb?.id;
 };
 
 export default useSHDNATokenAuth;

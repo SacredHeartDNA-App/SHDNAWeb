@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<70cece76c1b4d7d6ad5595c74e7b2cf5>>
+ * @generated SignedSource<<b531513e70a2dbf0b31047121347a02d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,11 +9,9 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from 'relay-runtime';
-export type useSHDNATokenAuthQuery$variables = {
-  token: string;
-};
+export type useSHDNATokenAuthQuery$variables = Record<PropertyKey, never>;
 export type useSHDNATokenAuthQuery$data = {
-  readonly verifyToken: {
+  readonly verifyTokenWeb: {
     readonly id: string;
   } | null | undefined;
 };
@@ -25,24 +23,11 @@ export type useSHDNATokenAuthQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "token"
-  }
-],
-v1 = [
-  {
     "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "token",
-        "variableName": "token"
-      }
-    ],
+    "args": null,
     "concreteType": "User",
     "kind": "LinkedField",
-    "name": "verifyToken",
+    "name": "verifyTokenWeb",
     "plural": false,
     "selections": [
       {
@@ -58,32 +43,32 @@ v1 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
     "name": "useSHDNATokenAuthQuery",
-    "selections": (v1/*: any*/),
+    "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "useSHDNATokenAuthQuery",
-    "selections": (v1/*: any*/)
+    "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "13859540f4051288bbfb5cfb54e52ca0",
+    "cacheID": "a4160b6771d4b181cadf55982d4ac02e",
     "id": null,
     "metadata": {},
     "name": "useSHDNATokenAuthQuery",
     "operationKind": "query",
-    "text": "query useSHDNATokenAuthQuery(\n  $token: String!\n) {\n  verifyToken(token: $token) {\n    id\n  }\n}\n"
+    "text": "query useSHDNATokenAuthQuery {\n  verifyTokenWeb {\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "6bd4014533ed59e75eec640330770296";
+(node as any).hash = "2d85f4cd47cd895e742ab995b0246c2c";
 
 export default node;

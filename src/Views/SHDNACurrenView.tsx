@@ -1,22 +1,37 @@
 import { View, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
-import SHDNAHomeView from "./SHDNAHomeView";
-import SHDNACommunityView from "./SHDNACommunityView";
-import SHDNAPassportView from "./Espacio/SHDNAPassportView";
-import SHDNAEspacioView from "./Espacio/SHDNAEspacioView";
-import { SHDNAMeView } from "./SHDNAMeView";
+import React, { Suspense, useEffect } from "react";
 import { Colors } from "../../assets/SHDNAColors";
 import useSHDNATokenAuth from "../hooks/useSHDNATokenAuth";
-import useSHDNAKeychain from "../hooks/useSHDNAKeychain";
 import { useUserData } from "../Context/SHDNAUserContext";
 import SHDNASideBar from "../Components/SHDNASideBar";
 import { Stack } from "expo-router";
 import SHDNAWebSignIn from "./SHDNAWebSignIn";
+import SHDNALoading from "../Components/SHDNALoading";
 
 export default function SHDNACurrenView() {
   const { userId } = useUserData();
 
-  if (!userId) {
+  if (userId === null) {
+    return (
+      <Suspense
+        fallback={
+          <View
+            style={{
+              height: "100%",
+              alignSelf: "center",
+              justifyContent: "center",
+            }}
+          >
+            <SHDNALoading />
+          </View>
+        }
+      >
+        <TokenAuthWrapper />
+      </Suspense>
+    );
+  }
+
+  if (userId === "none") {
     return (
       <View style={styles.content}>
         <SHDNAWebSignIn />
@@ -38,8 +53,8 @@ export default function SHDNACurrenView() {
   );
 }
 
-const TokenAuthWrapper = ({ token, handleToken }: any) => {
-  const sessionId = useSHDNATokenAuth(token);
+const TokenAuthWrapper = () => {
+  const sessionId = useSHDNATokenAuth();
   const { setUserId } = useUserData();
 
   useEffect(() => {

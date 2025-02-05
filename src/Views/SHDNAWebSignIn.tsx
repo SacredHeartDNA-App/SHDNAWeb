@@ -9,9 +9,7 @@ import { graphql, useMutation } from "react-relay";
 import { SHDNAWebSignInMutation } from "./__generated__/SHDNAWebSignInMutation.graphql";
 import { useFloatingView } from "../Components/FloatingView/SHDNAFloatingViewContext";
 import { useUserData } from "../Context/SHDNAUserContext";
-import useSHDNAKeychain from "../hooks/useSHDNAKeychain";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
-import { router } from "expo-router";
 
 export default function SHDNAWebSignIn() {
   const [email, setEmail] = useState("");

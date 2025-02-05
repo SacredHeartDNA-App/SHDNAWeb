@@ -26,6 +26,7 @@ const fetchQuery = (operation: RequestParameters, variables: Variables) => {
         query: operation.text,
         variables,
       }),
+      credentials: "include",
     })
       .then(async (response) => {
         const resData = await response.json();
