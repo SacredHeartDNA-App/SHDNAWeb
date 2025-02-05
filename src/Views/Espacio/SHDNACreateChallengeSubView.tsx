@@ -26,6 +26,8 @@ import SHDNAMediaBlock from "@/src/Components/SHDNAMediaBlock";
 import { useSHDNADebounce } from "@/src/hooks/useSHDNADebounce";
 import SHDNALoading from "@/src/Components/SHDNALoading";
 import { Colors } from "@/assets/SHDNAColors";
+import SHDNADatePicker from "@/src/Components/SHDNADatePicker.web";
+import SHDNACheckBox from "@/src/Components/SHDNACheckBox";
 
 export default function SHDNACreateChallengeSubView() {
   const [value, setValue] = useState(null);
@@ -35,6 +37,9 @@ export default function SHDNACreateChallengeSubView() {
 
   const [answerClose, setAnswerClose] = useState<string[]>([]);
   const [media, setMedia] = useState<MediaType[]>([]);
+
+  const [isScheduled, setIsScheduled] = useState(false);
+  const [schedule, setSchedule] = useState("");
 
   const [query, setQuery] = useState("");
   const [selectedMeditations, setSelectedMeditations] = useState<any[]>([]);
@@ -75,6 +80,7 @@ export default function SHDNACreateChallengeSubView() {
       question,
       challengeType: value,
       answerType,
+      scheduleTime: isScheduled ? schedule : null,
       suggestedMeditations: selectedMeditations.map((meditation) => {
         return meditation.id;
       }),
@@ -172,7 +178,29 @@ export default function SHDNACreateChallengeSubView() {
 
   return (
     <View style={styles.body}>
-      <View style={[styles.labels, { zIndex: 50 }]}>
+      <View style={{ gap: 15 }}>
+        <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
+          Title:
+        </SHDNAText>
+        <View style={{ flex: 1 }}>
+          <SHDNATextInput
+            value={title}
+            placeholder="Type Title"
+            onChange={setTitle}
+          />
+        </View>
+      </View>
+      <View style={{ gap: 15 }}>
+        <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
+          Question:
+        </SHDNAText>
+        <SHDNATextArea
+          placeholder="Type the question"
+          onChange={setQuestion}
+          value={question}
+        />
+      </View>
+      <View style={[styles.labels, { zIndex: 51 }]}>
         <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
           Value:
         </SHDNAText>
@@ -186,26 +214,6 @@ export default function SHDNACreateChallengeSubView() {
           />
         </View>
       </View>
-      <View style={styles.labels}>
-        <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
-          Title:
-        </SHDNAText>
-        <View>
-          <SHDNATextInput
-            value={title}
-            placeholder="Type Title"
-            onChange={setTitle}
-          />
-        </View>
-      </View>
-      <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
-        Question:
-      </SHDNAText>
-      <SHDNATextArea
-        placeholder="Type the question"
-        onChange={setQuestion}
-        value={question}
-      />
       <View style={[styles.labels, { zIndex: 50 }]}>
         <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
           Answer Type:
@@ -231,9 +239,33 @@ export default function SHDNACreateChallengeSubView() {
           type={["image/jpeg", "image/png", "video/mp4"]}
         />
       )}
+      <View style={[styles.labels]}>
+        <View style={[styles.labels, { gap: 15 }]}>
+          <SHDNAText
+            fontWeight="SemiBold"
+            style={{ fontSize: 18, color: Colors.Gray3 }}
+          >
+            {"Schedule Challenge (optional):"}
+          </SHDNAText>
+          <SHDNACheckBox
+            value={isScheduled}
+            onClick={() => setIsScheduled(!isScheduled)}
+          />
+        </View>
+        <View>
+          <SHDNADatePicker
+            onChange={(value: string) => setSchedule(value)}
+            value={schedule}
+            isDisabled={!isScheduled}
+          />
+        </View>
+      </View>
       <View>
         <View style={styles.labels}>
-          <SHDNAText fontWeight="SemiBold" style={{ fontSize: 20 }}>
+          <SHDNAText
+            fontWeight="SemiBold"
+            style={{ fontSize: 18, color: Colors.Gray3 }}
+          >
             {"Add suggested meditations (optional):"}
           </SHDNAText>
           <View style={{ width: 250 }}>
@@ -318,7 +350,7 @@ export default function SHDNACreateChallengeSubView() {
 
 const styles = StyleSheet.create({
   body: {
-    gap: 25,
+    gap: 30,
     paddingTop: 20,
   },
   loadingMeditations: {
@@ -329,6 +361,7 @@ const styles = StyleSheet.create({
   labels: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   middleBar: {
     height: 150,

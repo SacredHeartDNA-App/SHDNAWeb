@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e4920498880cfa7315686864b22b702f>>
+ * @generated SignedSource<<2815172e504e58743413a9b945e9810f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,6 +17,7 @@ export type ChallengeInput = {
   media?: MediaInput | null | undefined;
   options?: ReadonlyArray<string | null | undefined> | null | undefined;
   question: string;
+  scheduledTime?: any | null | undefined;
   title: string;
 };
 export type MediaInput = {
