@@ -17,7 +17,7 @@ type ChildrenProps = {
 
 const fetchQuery = (operation: RequestParameters, variables: Variables) => {
   return Observable.create((sink) => {
-    fetch("http://localhost:4000/graphql", {
+    fetch("https://shdna-project-api.vercel.app", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
