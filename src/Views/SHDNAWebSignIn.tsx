@@ -10,6 +10,7 @@ import { SHDNAWebSignInMutation } from "./__generated__/SHDNAWebSignInMutation.g
 import { useFloatingView } from "../Components/FloatingView/SHDNAFloatingViewContext";
 import { useUserData } from "../Context/SHDNAUserContext";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
+import { useModal } from "../Components/Modal/SHDNAModalContext";
 
 export default function SHDNAWebSignIn() {
   const [email, setEmail] = useState("");
@@ -17,10 +18,15 @@ export default function SHDNAWebSignIn() {
 
   const { setUserId } = useUserData();
   const { openFloatingView, closeFloatingView } = useFloatingView();
+  const { openModal } = useModal();
 
   const [commitMutation] = useMutation<SHDNAWebSignInMutation>(graphql`
-    mutation SHDNAWebSignInMutation($email: String!, $password: String!) {
-      signIn(email: $email, password: $password) {
+    mutation SHDNAWebSignInMutation(
+      $email: String!
+      $password: String!
+      $adminOnly: Boolean
+    ) {
+      signIn(email: $email, password: $password, adminOnly: $adminOnly) {
         user {
           id
         }
@@ -46,7 +52,27 @@ export default function SHDNAWebSignIn() {
         }
       },
       onError(error) {
-        console.log(error);
+        console.log(error.cause);
+        if (error.cause == "invalid_credentials") {
+          openModal(
+            <SHDNAText
+              style={{ textAlign: "center", marginVertical: 20, fontSize: 16 }}
+            >
+              {"Incorrect Email or Passowrd\n\nPlease try again!"}
+            </SHDNAText>,
+            true
+          );
+        } else if (error.cause == "authorizaton_denied") {
+          openModal(
+            <SHDNAText
+              style={{ textAlign: "center", marginVertical: 20, fontSize: 16 }}
+            >
+              {"ACCESS DENIED!"}
+            </SHDNAText>,
+            true
+          );
+        }
+
         closeFloatingView();
       },
     });

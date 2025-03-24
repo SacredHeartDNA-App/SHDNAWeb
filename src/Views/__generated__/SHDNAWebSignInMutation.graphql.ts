@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c1fa8d43e7683f53b58fd87c7e422b35>>
+ * @generated SignedSource<<cf5ca67df76cc49c69be6e9817de3227>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,6 +10,7 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 export type SHDNAWebSignInMutation$variables = {
+  adminOnly?: boolean | null | undefined;
   email: string;
   password: string;
 };
@@ -27,22 +28,30 @@ export type SHDNAWebSignInMutation = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "email"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "password"
-  }
-],
-v1 = [
+var v0 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "adminOnly"
+},
+v1 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "email"
+},
+v2 = {
+  "defaultValue": null,
+  "kind": "LocalArgument",
+  "name": "password"
+},
+v3 = [
   {
     "alias": null,
     "args": [
+      {
+        "kind": "Variable",
+        "name": "adminOnly",
+        "variableName": "adminOnly"
+      },
       {
         "kind": "Variable",
         "name": "email",
@@ -90,32 +99,40 @@ v1 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v0/*: any*/),
+      (v1/*: any*/),
+      (v2/*: any*/)
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "SHDNAWebSignInMutation",
-    "selections": (v1/*: any*/),
+    "selections": (v3/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [
+      (v1/*: any*/),
+      (v2/*: any*/),
+      (v0/*: any*/)
+    ],
     "kind": "Operation",
     "name": "SHDNAWebSignInMutation",
-    "selections": (v1/*: any*/)
+    "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "4f44da0f45956d60e3f16ef8f96047d0",
+    "cacheID": "5a794d1a19a623d6817ed7b2c4f730e9",
     "id": null,
     "metadata": {},
     "name": "SHDNAWebSignInMutation",
     "operationKind": "mutation",
-    "text": "mutation SHDNAWebSignInMutation(\n  $email: String!\n  $password: String!\n) {\n  signIn(email: $email, password: $password) {\n    user {\n      id\n    }\n    authToken\n  }\n}\n"
+    "text": "mutation SHDNAWebSignInMutation(\n  $email: String!\n  $password: String!\n  $adminOnly: Boolean\n) {\n  signIn(email: $email, password: $password, adminOnly: $adminOnly) {\n    user {\n      id\n    }\n    authToken\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "095ec96449ee5a63ed5d78422ff05958";
+(node as any).hash = "1c1faccb1cd29c769dbcf08f61b1f68b";
 
 export default node;

@@ -18,7 +18,7 @@ export default function SHDNAModal() {
           ]}
         >
           <View>{content}</View>
-          <View>
+          <View style={{ width: "100%", marginTop: 15 }}>
             {showCloseButton && (
               <SHDNAButton
                 text="Close"
