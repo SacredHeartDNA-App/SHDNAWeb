@@ -1,5 +1,5 @@
 import { View, StyleSheet, Pressable } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import HomeSVG from "../../assets/RNSvgs/HomeSVG";
 import CommunitySVG from "../../assets/RNSvgs/CommunitySVG";
 import EspacioSVG from "../../assets/RNSvgs/EspacioSVG";
@@ -21,6 +21,7 @@ export default function SHDNASideBar() {
   const { setUserId } = useUserData();
   const activeSection = segments[0];
   const { openFloatingView, closeFloatingView } = useFloatingView();
+  const [optionHovered, setOptionHovered] = useState(0);
 
   const [commitMutation] = useMutation(graphql`
     mutation SHDNASideBarMutation {
@@ -44,46 +45,82 @@ export default function SHDNASideBar() {
     <View style={styles.body}>
       <View style={styles.mainSection}>
         <Link href="/news">
-          <View style={styles.slots}>
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(1)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
             <HomeSVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
-              iconcolor={activeSection === "news" ? Colors.Gray2 : Colors.Gray1}
+              iconcolor={
+                activeSection === "news"
+                  ? Colors.Gray3
+                  : optionHovered === 1
+                  ? Colors.Gray2
+                  : Colors.Gray1
+              }
             />
             <SHDNAText style={styles.selectionColor}>News</SHDNAText>
           </View>
         </Link>
         <Link href="/community">
-          <View style={styles.slots}>
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(2)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
             <CommunitySVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
               iconcolor={
-                activeSection === "community" ? Colors.Gray2 : Colors.Gray1
+                activeSection === "community"
+                  ? Colors.Gray3
+                  : optionHovered === 2
+                  ? Colors.Gray2
+                  : Colors.Gray1
               }
             />
             <SHDNAText style={styles.selectionColor}>Community</SHDNAText>
           </View>
         </Link>
         <Link href="/discover">
-          <View style={styles.slots}>
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(3)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
             <DiscoverSVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
               iconcolor={
-                activeSection === "discover" ? Colors.Gray2 : Colors.Gray1
+                activeSection === "discover"
+                  ? Colors.Gray3
+                  : optionHovered === 3
+                  ? Colors.Gray2
+                  : Colors.Gray1
               }
             />
             <SHDNAText style={styles.selectionColor}>Discover</SHDNAText>
           </View>
         </Link>
         <Link href="/espacio">
-          <View style={styles.slots}>
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(4)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
             <EspacioSVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
-              iconcolor={false ? Colors.Gray2 : Colors.Gray1}
+              iconcolor={
+                activeSection === "espacio"
+                  ? Colors.Gray3
+                  : optionHovered === 4
+                  ? Colors.Gray2
+                  : Colors.Gray1
+              }
             />
             <SHDNAText style={styles.selectionColor}>Espacio</SHDNAText>
           </View>
         </Link>
-        <Link href="/translations">
+        {/* <Link href="/translations">
           <View style={styles.slots}>
             <TranslateGraySVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
@@ -93,7 +130,7 @@ export default function SHDNASideBar() {
             />
             <SHDNAText style={styles.selectionColor}>Translations</SHDNAText>
           </View>
-        </Link>
+        </Link> */}
       </View>
       <View style={styles.mainSection}>
         <Pressable
@@ -101,10 +138,14 @@ export default function SHDNASideBar() {
             handleLogOut();
           }}
         >
-          <View style={styles.slots}>
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(5)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
             <LogOutSVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
-              iconcolor={Colors.Gray1}
+              iconcolor={optionHovered === 5 ? Colors.Gray2 : Colors.Gray1}
             />
             <SHDNAText style={styles.selectionColor}>Log Out</SHDNAText>
           </View>
@@ -117,7 +158,6 @@ export default function SHDNASideBar() {
 const styles = StyleSheet.create({
   body: {
     width: 125,
-    height: "100%",
     flexDirection: "column",
     borderRightColor: Colors.Gray2,
     borderRightWidth: 0.75,
@@ -126,9 +166,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   mainSection: {
-    flex: 1,
     padding: 20,
-    gap: 20,
+    gap: 25,
     alignItems: "center",
   },
   selectionColor: {
