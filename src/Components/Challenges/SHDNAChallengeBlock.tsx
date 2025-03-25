@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, { Suspense, useTransition } from "react";
 import SHDNABlock from "../SHDNABlock";
 import { Colors } from "../../../assets/SHDNAColors";
 import SHDNAChallengeSubView from "../../Views/Espacio/SHDNAChallengeSubView";
@@ -8,6 +8,7 @@ import { SHDNAChallengeBlock_Fragment$key } from "../__generated__/SHDNAChalleng
 import useSHDNAChallengeLogo from "../../hooks/useSHDNAChallengeLogo";
 import SHDNAText from "../SHDNAText";
 import { useSheet } from "../Sheet/SHDNASheetContext";
+import SHDNALoading from "../SHDNALoading";
 
 type SHDNAChallengeBlockProps = {
   challengeKey: SHDNAChallengeBlock_Fragment$key;
@@ -51,11 +52,19 @@ export default function SHDNAChallengeBlock({
         openSheet({
           title: "Challenges",
           content: (
-            <SHDNAChallengeSubView
-              logo={logo}
-              challengeKey={challenge}
-              challengeType={challengeType}
-            />
+            <Suspense
+              fallback={
+                <View style={{ marginTop: 150 }}>
+                  <SHDNALoading />
+                </View>
+              }
+            >
+              <SHDNAChallengeSubView
+                logo={logo}
+                challengeKey={challenge}
+                challengeType={challengeType}
+              />
+            </Suspense>
           ),
         })
       }
