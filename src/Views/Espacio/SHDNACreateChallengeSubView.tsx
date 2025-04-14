@@ -80,10 +80,10 @@ export default function SHDNACreateChallengeSubView() {
       question,
       challengeType: value,
       answerType,
-      scheduleTime: isScheduled ? schedule : null,
-      suggestedMeditations: selectedMeditations.map((meditation) => {
-        return meditation.id;
-      }),
+      scheduledTime: isScheduled ? schedule : null,
+      // suggestedMeditations: selectedMeditations.map((meditation) => {
+      //   return meditation.id;
+      // }),
     };
 
     if (answerType === AnswerType.ANSWER_CLOSE && answerClose) {
@@ -260,7 +260,7 @@ export default function SHDNACreateChallengeSubView() {
           />
         </View>
       </View>
-      <View>
+      {/* <View>
         <View style={styles.labels}>
           <SHDNAText
             fontWeight="SemiBold"
@@ -335,7 +335,7 @@ export default function SHDNACreateChallengeSubView() {
             </View>
           )}
         </ScrollView>
-      </View>
+      </View> */}
       <View style={{ paddingTop: 10, paddingBottom: 25 }}>
         <SHDNAButton
           state={ButtonStates.ACTIVE}

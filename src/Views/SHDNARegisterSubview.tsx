@@ -125,7 +125,7 @@ export default function SHDNARegisterSubview() {
           }}
         />
       </View>
-      <View style={[styles.field]}>
+      {/* <View style={[styles.field]}>
         <SHDNAText fontWeight="SemiBold" style={styles.labels}>
           Community:
         </SHDNAText>
@@ -136,7 +136,7 @@ export default function SHDNARegisterSubview() {
           maxHeight={100}
           placeholder="Select a Community"
         />
-      </View>
+      </View> */}
       <View style={[styles.field]}>
         <SHDNAText fontWeight="SemiBold" style={styles.labels}>
           {"Biography (optional):"}
