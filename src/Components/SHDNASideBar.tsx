@@ -101,7 +101,7 @@ export default function SHDNASideBar() {
             <SHDNAText style={styles.selectionColor}>Discover</SHDNAText>
           </View>
         </Link>
-        <Link href="/espacio">
+        {/* <Link href="/espacio">
           <View
             style={styles.slots}
             onPointerEnter={() => setOptionHovered(4)}
@@ -119,7 +119,7 @@ export default function SHDNASideBar() {
             />
             <SHDNAText style={styles.selectionColor}>Espacio</SHDNAText>
           </View>
-        </Link>
+        </Link> */}
         {/* <Link href="/translations">
           <View style={styles.slots}>
             <TranslateGraySVG

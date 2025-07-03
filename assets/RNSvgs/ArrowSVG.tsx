@@ -2,7 +2,7 @@ import * as React from "react";
 import Svg, { Path, SvgProps } from "react-native-svg";
 import { SVGType } from "./HomeSVG";
 
-const ArrowSVG = (props: SVGType) => (
+const ArrowSVG = (props: SVGType & SvgProps) => (
   <Svg width={40} height={40} fill="none" {...props}>
     <Path
       fill={props.iconcolor}
