@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0703b84b2f2e430e27dd3e3e71bb3478>>
+ * @generated SignedSource<<c34fe5a0767b9149b3a99f9d334106fc>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,7 +11,9 @@
 import { ConcreteRequest } from 'relay-runtime';
 export type UpdateUserInput = {
   bio?: string | null | undefined;
+  lastName?: string | null | undefined;
   media?: MediaInput | null | undefined;
+  name?: string | null | undefined;
 };
 export type MediaInput = {
   base64: string;

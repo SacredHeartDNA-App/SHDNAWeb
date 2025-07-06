@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d368cc32f7652255e7d31115d568d52e>>
+ * @generated SignedSource<<b6fd273bc71ad1d1f689bebc4291e909>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,9 +16,7 @@ export type SHDNACommentListMutation$variables = {
   text: string;
 };
 export type SHDNACommentListMutation$data = {
-  readonly createComment: {
-    readonly id: string;
-  } | null | undefined;
+  readonly createComment: number | null | undefined;
 };
 export type SHDNACommentListMutation = {
   response: SHDNACommentListMutation$data;
@@ -61,19 +59,8 @@ v3 = [
         "variableName": "text"
       }
     ],
-    "concreteType": "Comment",
-    "kind": "LinkedField",
+    "kind": "ScalarField",
     "name": "createComment",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "id",
-        "storageKey": null
-      }
-    ],
     "storageKey": null
   }
 ];
@@ -103,16 +90,16 @@ return {
     "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "11d6db77e7b007c1d1e066dfd0828362",
+    "cacheID": "333c8609162cd6ba0f1815a17e45df92",
     "id": null,
     "metadata": {},
     "name": "SHDNACommentListMutation",
     "operationKind": "mutation",
-    "text": "mutation SHDNACommentListMutation(\n  $text: String!\n  $content_id: ID!\n  $relationship: ContentEnum!\n) {\n  createComment(text: $text, content_id: $content_id, relationship: $relationship) {\n    id\n  }\n}\n"
+    "text": "mutation SHDNACommentListMutation(\n  $text: String!\n  $content_id: ID!\n  $relationship: ContentEnum!\n) {\n  createComment(text: $text, content_id: $content_id, relationship: $relationship)\n}\n"
   }
 };
 })();
 
-(node as any).hash = "6583e785cd9aecaf7a839def89a8cdf9";
+(node as any).hash = "0b1912a66c9c59040677f5c7a3d5b795";
 
 export default node;
