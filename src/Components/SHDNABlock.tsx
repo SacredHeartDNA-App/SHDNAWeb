@@ -1,6 +1,4 @@
 import {
-  View,
-  Text,
   StyleSheet,
   ViewStyle,
   RecursiveArray,
@@ -9,7 +7,7 @@ import {
   Animated,
   Easing,
 } from "react-native";
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useRef } from "react";
 import { Colors } from "../../assets/SHDNAColors";
 
 type SHDNABlock = {
@@ -18,16 +16,16 @@ type SHDNABlock = {
     | ViewStyle
     | RecursiveArray<ViewStyle | Falsy | RegisteredStyle<ViewStyle>>;
   onClick?: () => void;
-  showShadow?: boolean;
   playAnimation?: boolean;
+  borderColor?: string;
 };
 
 export default function SHDNABlock({
   children,
   style,
   onClick,
-  showShadow = true,
   playAnimation,
+  borderColor = Colors.Background,
 }: SHDNABlock) {
   const buttonHover = useRef(new Animated.Value(1)).current;
 
@@ -40,6 +38,7 @@ export default function SHDNABlock({
       useNativeDriver: false,
     }).start();
   };
+
   return (
     <Animated.View
       onPointerDown={() => {
@@ -53,10 +52,10 @@ export default function SHDNABlock({
       }}
       style={{
         ...styles.block,
-        ...(showShadow && styles.blockShadow),
         transform: [{ scale: buttonHover }],
         ...style,
         ...{ cursor: onClick ? "pointer" : undefined },
+        borderColor,
       }}
     >
       {children}
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     borderRadius: 20,
+    borderWidth: 1.5,
   },
   blockShadow: {
     shadowColor: "#000",
