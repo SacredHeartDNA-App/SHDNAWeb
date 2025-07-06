@@ -18,6 +18,7 @@ type Query {
   getPastTranslations: [Translation!]
   getMeditations: [Meditation!]
   getMeditationsById(ids: [String!]): [Meditation!]
+  getPodcastEpisodes: [PodcastChapter!]
   # Search Algorithms
   searchMeditation(query: String!): [Meditation!]
 }
@@ -26,20 +27,19 @@ type Mutation {
   signUp(input: SignUpInput!): Int!
   signIn(email: String!, password: String!, adminOnly: Boolean): AuthUser!
   logOut: Int
+  desactivateAccount: Int
+  deleteAccount: Int
   updateProfile(input: UpdateUserInput!): Int
   addFriend(user: String!, friend: String!): [User!]
   createArticle(input: CreateNewsInput!): Int
   updateArticle(input: EditNewsInput!, id: ID!): Int
   deleteArticle(id: ID!): Int
-  createComment(
-    text: String!
-    content_id: ID!
-    relationship: ContentEnum!
-  ): Comment
+  createComment(text: String!, content_id: ID!, relationship: ContentEnum!): Int
   likeContent(contentId: ID!, contentType: ContentEnum!): Int
   unlikeContent(contentId: ID!, contentType: ContentEnum!): Int
   createPost(input: PostInput!): Post
   deletePost(postId: ID!): Int
+  deleteComment(commentId: ID!): Int
   createChallenge(input: ChallengeInput!): Int
   updateChallenge(id: ID!, title: String, question: String): Int
   createAnswerChallenge(input: AnswerInput!): Int
@@ -51,6 +51,9 @@ type Mutation {
   createNewMeditation(input: CreateMeditationInput!): Int
   updateMeditation(input: UpdateMeditationInput!): Int
   deleteMeditation(id: ID!): Int
+  reportPost(postId: ID!, reason: String!): Int
+  createEpisode(input: EpisodeInput!): Int
+  updateEpisode(input: UpdateEpisodeInput!): Int
 }
 
 scalar Date
@@ -81,6 +84,8 @@ input SignUpInput {
 input UpdateUserInput {
   bio: String
   media: MediaInput
+  name: String
+  lastName: String
 }
 
 input CreateNewsInput {
@@ -115,6 +120,17 @@ input MediaInput {
   type: String!
   fileName: String!
   base64: String!
+}
+
+input EpisodeInput {
+  title: String!
+  audio: MediaInput!
+}
+
+input UpdateEpisodeInput {
+  id: ID!
+  title: String
+  audio: MediaInput
 }
 
 interface Node {
@@ -157,6 +173,7 @@ type Post implements Node {
   media: [String!]
   comments: [Comment!]
   isOwner: Boolean
+  noComments: Int!
 }
 
 type News implements Node {
@@ -179,6 +196,7 @@ type Comment implements Node {
   isLikedByUser: Boolean!
   comments: [Comment!]
   text: String!
+  isOwner: Boolean!
 }
 
 type Journal implements Node {
@@ -212,7 +230,7 @@ type Challenge implements Node {
   title: String!
   isLocked: Boolean!
   challengeType: ChallengeType!
-  answer: String!
+  answer: String
   answerType: AnswerType!
   options: [String]
   suggestedMeditations: [String!]
@@ -256,6 +274,14 @@ type Meditation implements Node {
   media: String!
   mediaType: MediaType!
   isSeen: Boolean!
+  created_at: Date!
+}
+
+type PodcastChapter implements Node {
+  id: ID!
+  title: String!
+  description: String!
+  audio_url: String!
   created_at: Date!
 }
 
