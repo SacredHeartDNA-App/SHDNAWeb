@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<57244c617a1a709b7e135936a310181c>>
+ * @generated SignedSource<<80bbf6211dabb5def0c17a0d5313dec2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,15 +10,13 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type SHDNAPodcastListQuery$variables = Record<PropertyKey, never>;
-export type SHDNAPodcastListQuery$data = {
-  readonly getPodcastEpisodes: ReadonlyArray<{
-    readonly " $fragmentSpreads": FragmentRefs<"SHDNAPodcastBlockFragment">;
-  }> | null | undefined;
+export type useSHDNAPodcastListRefetchQuery$variables = Record<PropertyKey, never>;
+export type useSHDNAPodcastListRefetchQuery$data = {
+  readonly " $fragmentSpreads": FragmentRefs<"useSHDNAPodcastList_RefetchableFragment">;
 };
-export type SHDNAPodcastListQuery = {
-  response: SHDNAPodcastListQuery$data;
-  variables: SHDNAPodcastListQuery$variables;
+export type useSHDNAPodcastListRefetchQuery = {
+  response: useSHDNAPodcastListRefetchQuery$data;
+  variables: useSHDNAPodcastListRefetchQuery$variables;
 };
 
 const node: ConcreteRequest = {
@@ -26,23 +24,12 @@ const node: ConcreteRequest = {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "SHDNAPodcastListQuery",
+    "name": "useSHDNAPodcastListRefetchQuery",
     "selections": [
       {
-        "alias": null,
         "args": null,
-        "concreteType": "PodcastChapter",
-        "kind": "LinkedField",
-        "name": "getPodcastEpisodes",
-        "plural": true,
-        "selections": [
-          {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "SHDNAPodcastBlockFragment"
-          }
-        ],
-        "storageKey": null
+        "kind": "FragmentSpread",
+        "name": "useSHDNAPodcastList_RefetchableFragment"
       }
     ],
     "type": "Query",
@@ -52,7 +39,7 @@ const node: ConcreteRequest = {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "SHDNAPodcastListQuery",
+    "name": "useSHDNAPodcastListRefetchQuery",
     "selections": [
       {
         "alias": null,
@@ -96,15 +83,15 @@ const node: ConcreteRequest = {
     ]
   },
   "params": {
-    "cacheID": "e3e4e0f48190743cfe41ae063e02f06d",
+    "cacheID": "c462ef54c4268c926e6c58875609acb0",
     "id": null,
     "metadata": {},
-    "name": "SHDNAPodcastListQuery",
+    "name": "useSHDNAPodcastListRefetchQuery",
     "operationKind": "query",
-    "text": "query SHDNAPodcastListQuery {\n  getPodcastEpisodes {\n    ...SHDNAPodcastBlockFragment\n    id\n  }\n}\n\nfragment SHDNAPodcastBlockFragment on PodcastChapter {\n  id\n  title\n  description\n  audio_url\n}\n"
+    "text": "query useSHDNAPodcastListRefetchQuery {\n  ...useSHDNAPodcastList_RefetchableFragment\n}\n\nfragment SHDNAPodcastBlockFragment on PodcastChapter {\n  id\n  title\n  description\n  audio_url\n}\n\nfragment useSHDNAPodcastList_RefetchableFragment on Query {\n  getPodcastEpisodes {\n    ...SHDNAPodcastBlockFragment\n    id\n  }\n}\n"
   }
 };
 
-(node as any).hash = "f4ef7c0c11045a7f076979538f8d2bed";
+(node as any).hash = "654a62d917aed56caf2825ad3f602594";
 
 export default node;

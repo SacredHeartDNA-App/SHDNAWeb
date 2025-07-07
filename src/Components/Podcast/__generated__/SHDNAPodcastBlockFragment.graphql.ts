@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<273e2fc3513e8be30af87bd2beaac1ca>>
+ * @generated SignedSource<<e3bff4136011e839963ef01c4172365f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type SHDNAPodcastBlockFragment$data = {
   readonly audio_url: string;
   readonly description: string;
+  readonly id: string;
   readonly title: string;
   readonly " $fragmentType": "SHDNAPodcastBlockFragment";
 };
@@ -27,6 +28,13 @@ const node: ReaderFragment = {
   "metadata": null,
   "name": "SHDNAPodcastBlockFragment",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -53,6 +61,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "b4929830e936dac935dfcf7f2baa0f5c";
+(node as any).hash = "fd5f87a86978805a2bb6f2ba77eefd73";
 
 export default node;
