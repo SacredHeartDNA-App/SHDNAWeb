@@ -54,6 +54,7 @@ type Mutation {
   reportPost(postId: ID!, reason: String!): Int
   createEpisode(input: EpisodeInput!): Int
   updateEpisode(input: UpdateEpisodeInput!): Int
+  deleteEpisode(id: ID!): Int
 }
 
 scalar Date
