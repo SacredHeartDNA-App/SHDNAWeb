@@ -29,9 +29,7 @@ const SEND_NEW_COMMENT_MUTATION = graphql`
       text: $text
       content_id: $content_id
       relationship: $relationship
-    ) {
-      id
-    }
+    )
   }
 `;
 

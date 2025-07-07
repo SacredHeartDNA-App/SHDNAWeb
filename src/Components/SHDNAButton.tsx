@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
-import React, { ReactNode, useState } from "react";
+import { View, StyleSheet, Pressable } from "react-native";
+import React, { useState } from "react";
 import { Colors } from "../../assets/SHDNAColors";
 import { SVGType } from "../../assets/RNSvgs/HomeSVG";
 import { SvgProps } from "react-native-svg";
@@ -36,8 +36,15 @@ export default function SHDNAButton({
   return (
     <Pressable
       onPointerDown={(e) => {
-        e.stopPropagation();
         if (isDisabled) return;
+        e.stopPropagation();
+        setIsHoldingDown(true);
+      }}
+      onPointerMove={() => {
+        setIsHoldingDown(false);
+      }}
+      onPointerUp={() => {
+        if (isDisabled || !isHoldingDown) return;
         setIsHoldingDown(false);
         onClick();
       }}
@@ -45,10 +52,9 @@ export default function SHDNAButton({
         styles.button,
         {
           backgroundColor: getBackgroundColor(state),
-          opacity: isHoldingDown ? 0.8 : isDisabled ? 0.6 : 1,
+          opacity: isHoldingDown ? 0.8 : isDisabled ? 0.7 : 1,
           paddingVertical: !Icon ? 10 : 0,
         },
-        state !== ButtonStates.TRANSPARENT && { flex: 1 },
       ]}
     >
       <View style={styles.row}>
@@ -77,15 +83,15 @@ export default function SHDNAButton({
 const getBackgroundColor = (state: ButtonStates) => {
   switch (state) {
     case ButtonStates.DEFAULT:
-      return Colors.Blue1;
+      return Colors.Red2;
     case ButtonStates.ALERT:
-      return Colors.Red1;
+      return Colors.Pink1;
     case ButtonStates.ACTIVE:
-      return Colors.Green1;
+      return Colors.Cyan1;
     case ButtonStates.DISABLED:
       return Colors.Gray1;
     case ButtonStates.SECONDARY:
-      return Colors.CyanGray1;
+      return Colors.Blue1;
     case ButtonStates.TRANSPARENT:
       return "none";
     default:

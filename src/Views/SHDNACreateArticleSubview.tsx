@@ -9,7 +9,7 @@ import SHDNAUploadFile, {
 import SHDNATextList from "../Components/SHDNATextList";
 import SHDNAButton, { ButtonStates } from "../Components/SHDNAButton";
 import SHDNAImage from "../Components/SHDNAImage";
-import { MediaType, tranformImagesToMediaType } from "./SHDNACreatePostView";
+import { MediaType } from "./SHDNACreatePostView";
 import { Colors } from "@/assets/SHDNAColors";
 import { graphql, useMutation } from "react-relay";
 import { useFloatingView } from "../Components/FloatingView/SHDNAFloatingViewContext";

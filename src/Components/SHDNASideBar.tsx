@@ -13,6 +13,7 @@ import { useUserData } from "../Context/SHDNAUserContext";
 import { graphql, useMutation } from "react-relay";
 import SHDNALoadingBlackView from "../Views/SHDNALoadingBlackView";
 import { useFloatingView } from "./FloatingView/SHDNAFloatingViewContext";
+import MicrophoneSVG from "@/assets/RNSvgs/MicrophoneSVG";
 
 const ICON_SCALE = 0.9;
 
@@ -99,6 +100,25 @@ export default function SHDNASideBar() {
               }
             />
             <SHDNAText style={styles.selectionColor}>Discover</SHDNAText>
+          </View>
+        </Link>
+        <Link href="/podcast">
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(4)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
+            <MicrophoneSVG
+              style={{ transform: [{ scale: ICON_SCALE }] }}
+              iconcolor={
+                activeSection === "podcast"
+                  ? Colors.Gray3
+                  : optionHovered === 4
+                  ? Colors.Gray2
+                  : Colors.Gray1
+              }
+            />
+            <SHDNAText style={styles.selectionColor}>Podcast</SHDNAText>
           </View>
         </Link>
         {/* <Link href="/espacio">

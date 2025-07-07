@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
 import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system";
 import SHDNAButton, { ButtonStates } from "./SHDNAButton";
 import { Colors } from "../../assets/SHDNAColors";
 import { MediaType } from "../Views/SHDNACreatePostView";

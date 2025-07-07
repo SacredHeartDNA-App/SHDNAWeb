@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import { useVideoPlayer, VideoView } from "expo-video";
-import SHDNABlockGlimmer from "./SHDNABlockGlimmer";
 
 type SHDNAVideoPlayer = {
   videoSource: string;
@@ -37,7 +36,6 @@ export default function SHDNAVideoPlayer({
 const styles = StyleSheet.create({
   videoWindow: {
     width: "100%",
-    height: 250,
     borderRadius: 10,
     overflow: "hidden",
   },
