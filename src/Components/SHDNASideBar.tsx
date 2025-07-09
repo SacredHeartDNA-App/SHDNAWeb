@@ -14,6 +14,7 @@ import { graphql, useMutation } from "react-relay";
 import SHDNALoadingBlackView from "../Views/SHDNALoadingBlackView";
 import { useFloatingView } from "./FloatingView/SHDNAFloatingViewContext";
 import MicrophoneSVG from "@/assets/RNSvgs/MicrophoneSVG";
+import CheckUserSVG from "@/assets/RNSvgs/CheckUserSVG";
 
 const ICON_SCALE = 0.9;
 
@@ -121,6 +122,25 @@ export default function SHDNASideBar() {
             <SHDNAText style={styles.selectionColor}>Podcast</SHDNAText>
           </View>
         </Link>
+        <Link href="/users">
+          <View
+            style={styles.slots}
+            onPointerEnter={() => setOptionHovered(5)}
+            onPointerLeave={() => setOptionHovered(0)}
+          >
+            <CheckUserSVG
+              style={{ transform: [{ scale: ICON_SCALE }] }}
+              iconcolor={
+                activeSection === "users"
+                  ? Colors.Gray3
+                  : optionHovered === 5
+                  ? Colors.Gray2
+                  : Colors.Gray1
+              }
+            />
+            <SHDNAText style={styles.selectionColor}>Users</SHDNAText>
+          </View>
+        </Link>
         {/* <Link href="/espacio">
           <View
             style={styles.slots}
@@ -160,12 +180,12 @@ export default function SHDNASideBar() {
         >
           <View
             style={styles.slots}
-            onPointerEnter={() => setOptionHovered(5)}
+            onPointerEnter={() => setOptionHovered(6)}
             onPointerLeave={() => setOptionHovered(0)}
           >
             <LogOutSVG
               style={{ transform: [{ scale: ICON_SCALE }] }}
-              iconcolor={optionHovered === 5 ? Colors.Gray2 : Colors.Gray1}
+              iconcolor={optionHovered === 6 ? Colors.Gray2 : Colors.Gray1}
             />
             <SHDNAText style={styles.selectionColor}>Log Out</SHDNAText>
           </View>

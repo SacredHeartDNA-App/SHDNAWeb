@@ -59,7 +59,13 @@ export default function SHDNAUserRow({ userKey }: SHDNAUserRowProps) {
     >
       <Image
         style={styles.profilePic}
-        source={{ uri: userData.profilePic ?? "" }}
+        source={
+          userData.profilePic
+            ? {
+                uri: userData.profilePic,
+              }
+            : require("../../assets/imgs/DefaultProfilePic.jpg")
+        }
       />
       <SHDNAText fontWeight="SemiBold">
         {userData.name + " " + userData.lastName}
@@ -76,6 +82,7 @@ const styles = StyleSheet.create({
   },
   profilePic: {
     width: 30,
+    height: 30,
     aspectRatio: 1 / 1,
     backgroundColor: "#ccc",
     borderRadius: 30,
