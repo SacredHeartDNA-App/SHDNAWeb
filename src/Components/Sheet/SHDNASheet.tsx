@@ -143,5 +143,5 @@ const styles = StyleSheet.create({
     width: 600,
     paddingBottom: 0,
   },
-  content: { paddingHorizontal: 25 },
+  content: { paddingHorizontal: 25, paddingBottom: 25 },
 });

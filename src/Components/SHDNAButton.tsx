@@ -35,7 +35,7 @@ export default function SHDNAButton({
 
   return (
     <Pressable
-      onPointerDown={(e) => {
+      onPressIn={(e) => {
         if (isDisabled) return;
         e.stopPropagation();
         setIsHoldingDown(true);
@@ -43,7 +43,7 @@ export default function SHDNAButton({
       onPointerMove={() => {
         setIsHoldingDown(false);
       }}
-      onPointerUp={() => {
+      onPressOut={() => {
         if (isDisabled || !isHoldingDown) return;
         setIsHoldingDown(false);
         onClick();
