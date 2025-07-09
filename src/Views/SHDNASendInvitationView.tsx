@@ -10,6 +10,7 @@ import { useModal } from "../Components/Modal/SHDNAModalContext";
 import SHDNAText from "../Components/SHDNAText";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
 import emailjs from "@emailjs/browser";
+import "dotenv/config";
 
 export default function SHDNASendInvitationView() {
   const [emails, setEmails] = useState<string[]>([]);
@@ -31,17 +32,21 @@ export default function SHDNASendInvitationView() {
       variables: { sendTo: emails },
       onCompleted: (response) => {
         emailjs.init({
-          publicKey: "_TXqBbTuCas263VpA",
+          publicKey: process.env.EMAILJS_PUBLIC_KEY,
         });
 
         (async () => {
           try {
             await Promise.all(
               emails.map((email) => {
-                emailjs.send("service_4zmlkab", "template_tlmgm2l", {
-                  password: response.createInvitationCode,
-                  email: email,
-                });
+                emailjs.send(
+                  process.env.EMAILJS_SERVICE_ID ?? "",
+                  process.env.EMAILJS_TEMPLATE_ID ?? "",
+                  {
+                    password: response.createInvitationCode,
+                    email: email,
+                  }
+                );
               })
             );
             closeFloatingView();
