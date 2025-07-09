@@ -16,6 +16,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@expo/vector-icons": "^14.0.2",
     "@react-native-community/datetimepicker": "8.2.0",
     "@react-navigation/bottom-tabs": "^7.0.0",
@@ -28,6 +29,7 @@
     "expo-document-picker": "~13.0.2",
     "expo-font": "^13.0.2",
     "expo-haptics": "~14.0.1",
+    "expo-image-picker": "~16.0.4",
     "expo-linking": "~7.0.4",
     "expo-router": "~4.0.16",
     "expo-secure-store": "~14.0.1",
@@ -51,8 +53,7 @@
     "react-relay": "^18.2.0",
     "relay-compiler": "^18.0.0",
     "relay-config": "^12.0.1",
-    "relay-runtime": "^18.2.0",
-    "expo-image-picker": "~16.0.4"
+    "relay-runtime": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
