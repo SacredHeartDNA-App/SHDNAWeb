@@ -10,7 +10,6 @@ import { useModal } from "../Components/Modal/SHDNAModalContext";
 import SHDNAText from "../Components/SHDNAText";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
 import emailjs from "@emailjs/browser";
-import "dotenv/config";
 
 export default function SHDNASendInvitationView() {
   const [emails, setEmails] = useState<string[]>([]);
