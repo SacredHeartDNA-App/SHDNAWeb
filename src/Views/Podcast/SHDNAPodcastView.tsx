@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Pressable, Dimensions } from "react-native";
+import { View, Image, StyleSheet, Pressable, Dimensions, ScrollView } from "react-native";
 import React, { Suspense, useState } from "react";
 import SHDNAText from "../../Components/SHDNAText";
 import SHDNAVideoPlayer from "../../Components/SHDNAVideoPlayer";
@@ -80,6 +80,7 @@ export default function SHDNAPodcastView({}: SHDNAPodcastViewProps) {
       scrollEnabled={false}
     >
       <View style={{ flexDirection: "row" }}>
+        <ScrollView>
         <View style={styles.subview}>
           <Image
             source={require("../../../assets/imgs/Bar_background_horizontal.png")}
@@ -113,6 +114,7 @@ export default function SHDNAPodcastView({}: SHDNAPodcastViewProps) {
             />
           </Suspense>
         </View>
+        </ScrollView>
         <View style={styles.middleBar} />
         <View style={styles.subview}>
           {selectedEpisode ? (
