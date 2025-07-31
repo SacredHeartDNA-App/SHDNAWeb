@@ -27,6 +27,7 @@ type Query {
 type Mutation {
   signUp(input: SignUpInput!): Int!
   signIn(email: String!, password: String!, adminOnly: Boolean): AuthUser!
+  verifyToken(token: String!): User
   logOut: Int
   desactivateAccount: Int
   deleteAccount: Int

@@ -52,8 +52,8 @@ export default function SHDNAWebSignIn() {
         }
       },
       onError(error) {
-        console.log(error.cause);
-        if (error.cause == "invalid_credentials") {
+        console.log(error);
+        if (error.message == "invalid_credentials") {
           openModal(
             <SHDNAText
               style={{ textAlign: "center", marginVertical: 20, fontSize: 16 }}
@@ -62,7 +62,7 @@ export default function SHDNAWebSignIn() {
             </SHDNAText>,
             true
           );
-        } else if (error.cause == "authorizaton_denied") {
+        } else if (error.message == "authorizaton_denied") {
           openModal(
             <SHDNAText
               style={{ textAlign: "center", marginVertical: 20, fontSize: 16 }}

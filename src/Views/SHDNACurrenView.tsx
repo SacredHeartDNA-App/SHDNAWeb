@@ -7,31 +7,15 @@ import SHDNASideBar from "../Components/SHDNASideBar";
 import { Stack } from "expo-router";
 import SHDNAWebSignIn from "./SHDNAWebSignIn";
 import SHDNALoading from "../Components/SHDNALoading";
+import { graphql, useMutation } from "react-relay";
+import { SHDNACurrenViewMutation } from "./__generated__/SHDNACurrenViewMutation.graphql";
 
 export default function SHDNACurrenView() {
-  const { userId } = useUserData();
+ const { userId, sessionToken } = useUserData();
 
-  if (userId === null) {
-    return (
-      <Suspense
-        fallback={
-          <View
-            style={{
-              height: "100%",
-              alignSelf: "center",
-              justifyContent: "center",
-            }}
-          >
-            <SHDNALoading />
-          </View>
-        }
-      >
-        <TokenAuthWrapper />
-      </Suspense>
-    );
-  }
+  if (sessionToken == null && userId === null) return <LoadingApp />;
 
-  if (userId === "none") {
+  if (userId === "none" || userId === "") {
     return (
       <View style={styles.content}>
         <SHDNAWebSignIn />
@@ -53,18 +37,58 @@ export default function SHDNACurrenView() {
   );
 }
 
-const TokenAuthWrapper = () => {
-  const sessionId = useSHDNATokenAuth();
-  const { setUserId } = useUserData();
+const LoadingApp = () => {
+  const { setUserId, setSessionToken } = useUserData();
+
+  const [commitMutation] = useMutation<SHDNACurrenViewMutation>(graphql`
+    mutation SHDNACurrenViewMutation($token: String!) {
+      verifyToken(token: $token) {
+        id
+      }
+    }
+  `);
+
+  const handleToken = (token: string) => {
+    commitMutation({
+      variables: {
+        token,
+      },
+      onCompleted: (response) => {
+        setUserId(response.verifyToken?.id ?? "none");
+      },
+      onError(error) {
+        setUserId("none");
+        console.log(error);
+      },
+    });
+  };
 
   useEffect(() => {
-    setUserId(sessionId ?? "none");
-  }, [sessionId]);
+    const fetchToken = async () => {
+      const token = "";
 
-  return <View />;
+      setSessionToken(token);
+      handleToken(token);
+    };
+
+    setTimeout(() => {
+      fetchToken();
+    }, 2000);
+  }, []);
+
+  return (
+    <View style={styles.logoContainer}>
+      <SHDNALoading/>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
+  debugTransaltions: {
+    position: "absolute",
+    top: 50,
+    zIndex: 1000,
+  },
   container: {
     flex: 1,
     alignItems: "center",
@@ -74,6 +98,15 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     width: "100%",
-    backgroundColor: Colors.Background,
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    objectFit: "contain",
+  },
+  logoContainer: {
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
   },
 });
