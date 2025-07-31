@@ -57,7 +57,7 @@ type Mutation {
   createEpisode(input: EpisodeInput!): Int
   updateEpisode(input: UpdateEpisodeInput!): Int
   deleteEpisode(id: ID!): Int
-  createInvitationCode(sendTo: [String!]): String!
+  createInvitationCode(sendTo: [String!]): [String!]
   retrieveInvitationCode(code: String!): Int
 }
 

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3296d1f68ab1c4e9b1fc0d5e21405e1c>>
+ * @generated SignedSource<<f00795c3bcbb38a9305039c95bfa0ad4>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,7 +13,7 @@ export type SHDNASendInvitationViewMutation$variables = {
   sendTo?: ReadonlyArray<string> | null | undefined;
 };
 export type SHDNASendInvitationViewMutation$data = {
-  readonly createInvitationCode: string;
+  readonly createInvitationCode: ReadonlyArray<string> | null | undefined;
 };
 export type SHDNASendInvitationViewMutation = {
   response: SHDNASendInvitationViewMutation$data;

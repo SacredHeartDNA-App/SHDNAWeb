@@ -30,6 +30,9 @@ export default function SHDNASendInvitationView() {
     commitMutation({
       variables: { sendTo: emails },
       onCompleted: (response) => {
+        const codes = response.createInvitationCode ?? []
+        if (codes.length == 0) return;
+
         emailjs.init({
           publicKey: process.env.EMAILJS_PUBLIC_KEY,
         });
@@ -37,12 +40,12 @@ export default function SHDNASendInvitationView() {
         (async () => {
           try {
             await Promise.all(
-              emails.map((email) => {
+              emails.map((email, idx) => {
                 emailjs.send(
                   process.env.EMAILJS_SERVICE_ID ?? "",
                   process.env.EMAILJS_TEMPLATE_ID ?? "",
                   {
-                    password: response.createInvitationCode,
+                    password: codes[idx] ,
                     email: email,
                   }
                 );
