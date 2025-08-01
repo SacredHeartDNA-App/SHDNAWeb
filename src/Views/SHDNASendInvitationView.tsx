@@ -41,7 +41,7 @@ export default function SHDNASendInvitationView() {
           try {
             await Promise.all(
               emails.map((email, idx) => {
-                emailjs.send(
+                return emailjs.send(
                   process.env.EMAILJS_SERVICE_ID ?? "",
                   process.env.EMAILJS_TEMPLATE_ID ?? "",
                   {
