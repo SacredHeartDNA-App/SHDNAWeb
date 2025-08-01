@@ -9,7 +9,7 @@ import { useSheet } from "../Components/Sheet/SHDNASheetContext";
 import { useModal } from "../Components/Modal/SHDNAModalContext";
 import SHDNAText from "../Components/SHDNAText";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
-import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser"; 
 
 export default function SHDNASendInvitationView() {
   const [emails, setEmails] = useState<string[]>([]);
@@ -34,7 +34,7 @@ export default function SHDNASendInvitationView() {
         if (codes.length == 0) return;
 
         emailjs.init({
-          publicKey: process.env.EMAILJS_PUBLIC_KEY,
+          publicKey: "_TXqBbTuCas263VpA",
         });
 
         (async () => {
@@ -42,8 +42,8 @@ export default function SHDNASendInvitationView() {
             await Promise.all(
               emails.map((email, idx) => {
                 return emailjs.send(
-                  process.env.EMAILJS_SERVICE_ID ?? "",
-                  process.env.EMAILJS_TEMPLATE_ID ?? "",
+                  "service_4zmlkab",
+                  "template_tlmgm2l",
                   {
                     password: codes[idx] ,
                     email: email,

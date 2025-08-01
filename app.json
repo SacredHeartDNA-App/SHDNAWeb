@@ -39,6 +39,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+"extra": {
+      "emailJsPublicKey": "_TXqBbTuCas263VpA",
+      "emailJsServiceId": "service_4zmlkab",
+      "emailJsTemplateId": "template_tlmgm2l"
+    
   }
+}
 }
