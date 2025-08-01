@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SHDNATextList from "../Components/SHDNATextList";
 import SHDNAButton from "../Components/SHDNAButton";
 import { graphql, useMutation } from "react-relay";
@@ -24,6 +24,10 @@ export default function SHDNASendInvitationView() {
     }
   `);
 
+  useEffect(() => {
+  emailjs.init("_TXqBbTuCas263VpA");
+}, []);
+
   const handleSendInvitations = () => {
     openFloatingView(<SHDNALoadingBlackView />);
 
@@ -32,25 +36,24 @@ export default function SHDNASendInvitationView() {
       onCompleted: (response) => {
         const codes = response.createInvitationCode ?? []
         if (codes.length == 0) return;
-
-        emailjs.init({
-          publicKey: "_TXqBbTuCas263VpA",
-        });
+        console.log("Sending emails with codes:", emails, codes);
 
         (async () => {
           try {
+            if (codes.length !== emails.length) {
+  throw new Error("Invitation codes and email count mismatch.");
+}
             await Promise.all(
-              emails.map((email, idx) => {
-                return emailjs.send(
-                  "service_4zmlkab",
-                  "template_tlmgm2l",
-                  {
-                    password: codes[idx] ,
-                    email: email,
-                  }
-                );
-              })
-            );
+  emails.map((email, idx) => {
+    return emailjs.send("service_4zmlkab", "template_tlmgm2l", {
+      password: codes[idx],
+      email,
+    }).catch(err => {
+      console.error(`Email to ${email} failed`, err);
+      throw err; // o puedes ignorar el error si no quieres que se detenga todo
+    });
+  })
+);
             closeFloatingView();
             closeSheet();
             openModal(
