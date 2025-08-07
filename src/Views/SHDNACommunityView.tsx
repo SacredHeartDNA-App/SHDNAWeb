@@ -2,9 +2,6 @@ import React from "react";
 import SHDNAView from "../Components/SHDNAView";
 import SHDNAPostBlock from "../Components/SHDNAPostBlock";
 import { StyleSheet, View } from "react-native";
-import AddSVG from "../../assets/RNSvgs/AddSVG";
-import { useSubview } from "../Components/Subview/SHDNASubviewContext";
-import SHDNACreatePostView from "./SHDNACreatePostView";
 import { useSHDNAPostList } from "../hooks/useSHDNAPostList";
 
 export default function SHDNACommunityView() {

@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import SHDNAFootInsignts from "./SHDNAFootInsights";
 import SHDNABlock from "./SHDNABlock";
 import SHDNAPostView from "../Views/SHDNAPostView";
@@ -8,7 +8,6 @@ import { graphql, useFragment } from "react-relay";
 import { SHDNAPostBlock_Fragment$key } from "./__generated__/SHDNAPostBlock_Fragment.graphql";
 import SHDNAUserRow from "./SHDNAUserRow";
 import { useSheet } from "./Sheet/SHDNASheetContext";
-import { useFloatingView } from "./FloatingView/SHDNAFloatingViewContext";
 import SHDNAImage from "./SHDNAImage";
 import SHDNAText from "./SHDNAText";
 
@@ -21,9 +20,7 @@ export default function SHDNAPostBlock({
   postKey,
   refetch,
 }: SHDNAPostBlocksProps) {
-  const { openFloatingView, closeFloatingView } = useFloatingView();
-  const [displayMenu, setDisplayMenu] = useState(false);
-  const { openSheet, triggerCloseSheet } = useSheet();
+  const { openSheet } = useSheet();
 
   const postData = useFragment<SHDNAPostBlock_Fragment$key>(
     graphql`

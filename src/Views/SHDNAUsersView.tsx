@@ -11,7 +11,7 @@ import AddSVG from "@/assets/RNSvgs/AddSVG";
 
 export default function SHDNAUsersView() {
   const { openSheet } = useSheet();
-/*
+
   const data = useLazyLoadQuery<SHDNAUsersViewQuery>(
     graphql`
       query SHDNAUsersViewQuery {
@@ -21,9 +21,9 @@ export default function SHDNAUsersView() {
       }
     `,
     {}
-  );*/
+  );
 
-  //const users = data.users ?? [];
+  const users = data.users ?? [];
 
   const AddButton = () => {
     return (
@@ -43,13 +43,13 @@ export default function SHDNAUsersView() {
   return (
     <SHDNAView title="Users" secondaryButtons={<AddButton />}>
       <></>
-     {/* <View style={styles.list}>
+      <View style={styles.list}>
         {users.map((user) => (
           <View style={styles.block}>
             <SHDNAUserRow userKey={user} />
           </View>
         ))}
-      </View>*/}
+      </View>
     </SHDNAView>
   );
 }
