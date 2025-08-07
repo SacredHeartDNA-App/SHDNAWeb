@@ -9,7 +9,7 @@ import { useSheet } from "../Components/Sheet/SHDNASheetContext";
 import { useModal } from "../Components/Modal/SHDNAModalContext";
 import SHDNAText from "../Components/SHDNAText";
 import SHDNALoadingBlackView from "./SHDNALoadingBlackView";
-import emailjs from "@emailjs/browser"; 
+import emailjs from "@emailjs/browser";
 
 export default function SHDNASendInvitationView() {
   const [emails, setEmails] = useState<string[]>([]);
@@ -25,8 +25,10 @@ export default function SHDNASendInvitationView() {
   `);
 
   useEffect(() => {
-  emailjs.init("_TXqBbTuCas263VpA");
-}, []);
+    emailjs.init("_TXqBbTuCas263VpA");
+  }, []);
+
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
   const handleSendInvitations = () => {
     openFloatingView(<SHDNALoadingBlackView />);
@@ -34,26 +36,27 @@ export default function SHDNASendInvitationView() {
     commitMutation({
       variables: { sendTo: emails },
       onCompleted: (response) => {
-        const codes = response.createInvitationCode ?? []
-        if (codes.length == 0) return;
-        console.log("Sending emails with codes:", emails, codes);
+        const codes = response.createInvitationCode ?? [];
+        if (codes.length === 0) return;
 
         (async () => {
           try {
             if (codes.length !== emails.length) {
-  throw new Error("Invitation codes and email count mismatch.");
-}
-            await Promise.all(
-  emails.map((email, idx) => {
-    return emailjs.send("service_4zmlkab", "template_tlmgm2l", {
-      password: codes[idx],
-      email,
-    }).catch(err => {
-      console.error(`Email to ${email} failed`, err);
-      throw err; // o puedes ignorar el error si no quieres que se detenga todo
-    });
-  })
-);
+              throw new Error("Invitation codes and email count mismatch.");
+            }
+
+            for (let i = 0; i < emails.length; i++) {
+              try {
+                await emailjs.send("service_4zmlkab", "template_tlmgm2l", {
+                  password: codes[i],
+                  email: emails[i],
+                });
+                await delay(500);
+              } catch (err) {
+                console.error(`Failed to send to ${emails[i]}`, err);
+              }
+            }
+
             closeFloatingView();
             closeSheet();
             openModal(
