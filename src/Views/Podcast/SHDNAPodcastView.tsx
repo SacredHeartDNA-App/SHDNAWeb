@@ -1,4 +1,11 @@
-import { View, Image, StyleSheet, Pressable, Dimensions, ScrollView } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Pressable,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import React, { Suspense, useState } from "react";
 import SHDNAText from "../../Components/SHDNAText";
 import SHDNAVideoPlayer from "../../Components/SHDNAVideoPlayer";
@@ -80,40 +87,40 @@ export default function SHDNAPodcastView({}: SHDNAPodcastViewProps) {
       scrollEnabled={false}
     >
       <View style={{ flexDirection: "row" }}>
-        <ScrollView>
-        <View style={styles.subview}>
-          <Image
-            source={require("../../../assets/imgs/Bar_background_horizontal.png")}
-            style={styles.bar}
-          />
-          <SHDNAVideoPlayer videoSource="https://euijwuwbczxgtqisbump.supabase.co/storage/v1/object/public/podcast//SHDNA%20Podcast%20Intro%20Video-2.mp4" />
-          <Image
-            source={require("../../../assets/imgs/Bar_background_horizontal.png")}
-            style={styles.bar}
-          />
-          <SHDNAText style={styles.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </SHDNAText>
-          <SHDNAText
-            style={{ fontSize: 24, width: 260, marginVertical: 15 }}
-            fontWeight="Bold"
-          >
-            Chapters
-          </SHDNAText>
-          <Suspense fallback={<SHDNALoadingBlock />}>
-            <SHDNAPodcastList
-              episodes={podcastChapters}
-              currentEp={selectedEpisode}
-              setCurrentEp={handleSetSelectedEpisode}
+        <ScrollView style={{ flex: 1 }}>
+          <View style={styles.subview}>
+            <Image
+              source={require("../../../assets/imgs/Bar_background_horizontal.png")}
+              style={styles.bar}
             />
-          </Suspense>
-        </View>
+            <SHDNAVideoPlayer videoSource="https://euijwuwbczxgtqisbump.supabase.co/storage/v1/object/public/podcast//SHDNA%20Podcast%20Intro%20Video-2.mp4" />
+            <Image
+              source={require("../../../assets/imgs/Bar_background_horizontal.png")}
+              style={styles.bar}
+            />
+            <SHDNAText style={styles.description}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </SHDNAText>
+            <SHDNAText
+              style={{ fontSize: 24, width: 260, marginVertical: 15 }}
+              fontWeight="Bold"
+            >
+              Chapters
+            </SHDNAText>
+            <Suspense fallback={<SHDNALoadingBlock />}>
+              <SHDNAPodcastList
+                episodes={podcastChapters}
+                currentEp={selectedEpisode}
+                setCurrentEp={handleSetSelectedEpisode}
+              />
+            </Suspense>
+          </View>
         </ScrollView>
         <View style={styles.middleBar} />
         <View style={styles.subview}>
