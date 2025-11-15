@@ -4,14 +4,21 @@ import { Colors } from "../../assets/SHDNAColors";
 import useSHDNATokenAuth from "../hooks/useSHDNATokenAuth";
 import { useUserData } from "../Context/SHDNAUserContext";
 import SHDNASideBar from "../Components/SHDNASideBar";
-import { Stack } from "expo-router";
+import { Stack, usePathname, useSegments } from "expo-router";
 import SHDNAWebSignIn from "./SHDNAWebSignIn";
 import SHDNALoading from "../Components/SHDNALoading";
 import { graphql, useMutation } from "react-relay";
 import { SHDNACurrenViewMutation } from "./__generated__/SHDNACurrenViewMutation.graphql";
 
 export default function SHDNACurrenView() {
- const { userId, sessionToken } = useUserData();
+  const { userId, sessionToken } = useUserData();
+
+  const segments = usePathname().split("/");
+
+  console.log(segments);
+  if (segments[1] === "lox") {
+    return <Stack screenOptions={{ headerShown: false }} />;
+  }
 
   if (sessionToken == null && userId === null) return <LoadingApp />;
 
@@ -78,7 +85,7 @@ const LoadingApp = () => {
 
   return (
     <View style={styles.logoContainer}>
-      <SHDNALoading/>
+      <SHDNALoading />
     </View>
   );
 };
