@@ -1,13 +1,105 @@
-// src/screens/SHDNAAndroidWelcomeScreen.tsx
 import React from "react";
-import { View, Text, StyleSheet, Pressable, Platform } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import * as Linking from "expo-linking";
 import SHDNAText from "@/src/Components/SHDNAText";
+import { isIOSWeb } from "./confirmedEmail";
+import { Colors } from "@/assets/SHDNAColors";
 
 const APK_URL =
   "https://euijwuwbczxgtqisbump.supabase.co/storage/v1/object/public/build/application-598df335-83b5-4b08-afb3-38ddc8673d7e.apk";
 
-const SHDNAAndroidWelcomeScreen: React.FC = () => {
+const SHDNAWelcomeInvitationScreen = () => {
+  if (isIOSWeb) {
+    return <IOSView />;
+  } else {
+    return <AndroidView />;
+  }
+};
+
+const IOSView = () => {
+  const APP_STORE_URL =
+    "https://apps.apple.com/us/app/sacredheartdna/id6744028554";
+
+  const DEEP_LINK_IOS = "shdnaapp://userInvitation";
+
+  const handleOpenStore = async () => {
+    try {
+      await Linking.openURL(APP_STORE_URL);
+    } catch (e) {
+      console.warn("Error opening App Store link:", e);
+    }
+  };
+
+  const handleOpenApp = async () => {
+    try {
+      await Linking.openURL(DEEP_LINK_IOS);
+    } catch (e) {
+      console.warn("Error opening deep link:", e);
+    }
+  };
+
+  return (
+    <View style={styles.root}>
+      <View style={styles.card}>
+        <View style={styles.left}>
+          <Text
+            style={[
+              styles.tag,
+              { backgroundColor: Colors.LightBlue1, color: Colors.Blue1 },
+            ]}
+          >
+            iOS Only!
+          </Text>
+
+          <SHDNAText style={styles.title}>
+            Welcome to the SacredHeartDNA Community
+          </SHDNAText>
+
+          <SHDNAText style={styles.subtitle}>
+            Thank you for joining the SacredHeartDNA community. You can download
+            SacredHeartDNA from the App Store and start your journey.
+          </SHDNAText>
+
+          <View style={styles.bulletList}>
+            <SHDNAText style={styles.bullet}>
+              • Go to the App Store page.
+            </SHDNAText>
+            <SHDNAText style={styles.bullet}>
+              • Install the SacredHeartDNA App on your device.
+            </SHDNAText>
+            <SHDNAText style={styles.bullet}>
+              • If the app is already installed, tap the button below to open
+              it.
+            </SHDNAText>
+          </View>
+
+          {/* Primary button → App Store */}
+          <Pressable style={styles.button} onPress={handleOpenStore}>
+            <SHDNAText style={styles.buttonLabel}>
+              Go to the App Store
+            </SHDNAText>
+          </Pressable>
+
+          {/* Secondary button → Open the app */}
+          <SHDNAText style={styles.helperText}>
+            Already installed the SacredHeartDNA App?
+          </SHDNAText>
+
+          <Pressable style={styles.button2} onPress={handleOpenApp}>
+            <SHDNAText style={styles.buttonLabel}>
+              Open SacredHeartDNA App
+            </SHDNAText>
+          </Pressable>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const AndroidView = () => {
+  const URL_ANDROID =
+    "intent://userInvitation#Intent;scheme=shdnaapp;package=com.sacredheartdnaapp.shdnamobileapp;end";
+
   const handleDownload = async () => {
     try {
       await Linking.openURL(APK_URL);
@@ -18,9 +110,7 @@ const SHDNAAndroidWelcomeScreen: React.FC = () => {
 
   const handleOpenApp = async () => {
     try {
-      await Linking.openURL(
-        "intent://userInvitation#Intent;scheme=shdnaapp;package=com.sacredheartdnaapp.shdnamobileapp;end"
-      );
+      await Linking.openURL(URL_ANDROID);
     } catch (e) {
       console.warn("Error opening APK link:", e);
     }
@@ -29,7 +119,6 @@ const SHDNAAndroidWelcomeScreen: React.FC = () => {
   return (
     <View style={styles.root}>
       <View style={styles.card}>
-        {/* Left Section - Text */}
         <View style={styles.left}>
           <Text style={styles.tag}>Android only!</Text>
           <SHDNAText style={styles.title}>
@@ -74,7 +163,7 @@ const SHDNAAndroidWelcomeScreen: React.FC = () => {
   );
 };
 
-export default SHDNAAndroidWelcomeScreen;
+export default SHDNAWelcomeInvitationScreen;
 
 const colors = {
   red: "#AB023B",

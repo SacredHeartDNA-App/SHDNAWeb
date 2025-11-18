@@ -1,12 +1,27 @@
-import { View, Image, StyleSheet, Linking } from "react-native";
+import { View, Image, StyleSheet, Linking, Platform } from "react-native";
 import React from "react";
 import SHDNAButton from "@/src/Components/SHDNAButton";
 import SHDNAText from "@/src/Components/SHDNAText";
 import { Colors } from "@/assets/SHDNAColors";
 
+export const isWeb = Platform.OS === "web";
+
+export const isIOSWeb =
+  isWeb && typeof navigator !== "undefined"
+    ? /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    : false;
+
+export const getURLByPlatform = () => {
+  const URL_IOS = "shdnaapp://userInvitation";
+  const URL_ANDROID =
+    "intent://userInvitation#Intent;scheme=shdnaapp;package=com.sacredheartdnaapp.shdnamobileapp;end";
+  return isWeb && isIOSWeb ? URL_IOS : URL_ANDROID;
+};
+
 export default function ConfirmedEmail() {
   const handleOpenURL = async () => {
-    const url = "shdnaapp://";
+    const url = getURLByPlatform();
+
     const supported = await Linking.canOpenURL(url);
 
     if (supported) {
