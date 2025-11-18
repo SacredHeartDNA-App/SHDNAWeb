@@ -18,7 +18,9 @@ const SHDNAAndroidWelcomeScreen: React.FC = () => {
 
   const handleOpenApp = async () => {
     try {
-      await Linking.openURL("shdnapp://userInvitation");
+      await Linking.openURL(
+        "intent://welcome#Intent;scheme=shdnaapp;package=com.sacredheartdnaapp.shdnamobileapp;end"
+      );
     } catch (e) {
       console.warn("Error opening APK link:", e);
     }
