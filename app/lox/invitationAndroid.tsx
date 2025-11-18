@@ -16,6 +16,14 @@ const SHDNAAndroidWelcomeScreen: React.FC = () => {
     }
   };
 
+  const handleOpenApp = async () => {
+    try {
+      await Linking.openURL("shdnapp://userInvitation");
+    } catch (e) {
+      console.warn("Error opening APK link:", e);
+    }
+  };
+
   return (
     <View style={styles.root}>
       <View style={styles.card}>
@@ -50,13 +58,14 @@ const SHDNAAndroidWelcomeScreen: React.FC = () => {
               Download the SacredHeartDNA App!
             </SHDNAText>
           </Pressable>
-
-          {Platform.OS === "web" && (
-            <SHDNAText style={styles.helperText}>
-              *This page is designed for web use. The button will open the
-              download link in a new tab.
+          <SHDNAText style={styles.helperText}>
+            Or if you already installed the app and still not registered:
+          </SHDNAText>
+          <Pressable style={styles.button2} onPress={handleOpenApp}>
+            <SHDNAText style={styles.buttonLabel}>
+              Open the SacredHeartDNA App!
             </SHDNAText>
-          )}
+          </Pressable>
         </View>
       </View>
     </View>
@@ -146,7 +155,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blue,
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 999,
+    borderRadius: 10,
+    alignSelf: "flex-start",
+  },
+  button2: {
+    backgroundColor: colors.red,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
     alignSelf: "flex-start",
     marginBottom: 10,
   },
@@ -158,7 +174,8 @@ const styles = StyleSheet.create({
   helperText: {
     fontSize: 11,
     color: colors.gray,
-    marginTop: 4,
+    marginVertical: 15,
+    marginLeft: 10,
   },
   badge: {
     backgroundColor: colors.red,
