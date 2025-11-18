@@ -82,7 +82,8 @@ const IOSView = () => {
 
           {/* Secondary button → Open the app */}
           <SHDNAText style={styles.helperText}>
-            Already installed the SacredHeartDNA App?
+            Already installed the SacredHeartDNA App?, Click here to start the
+            registration process
           </SHDNAText>
 
           <Pressable style={styles.button2} onPress={handleOpenApp}>
@@ -150,7 +151,8 @@ const AndroidView = () => {
             </SHDNAText>
           </Pressable>
           <SHDNAText style={styles.helperText}>
-            Or if you already installed the app and still not registered:
+            Already installed the SacredHeartDNA App?, Click here to start the
+            registration process
           </SHDNAText>
           <Pressable style={styles.button2} onPress={handleOpenApp}>
             <SHDNAText style={styles.buttonLabel}>
