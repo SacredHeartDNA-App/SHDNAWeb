@@ -20,7 +20,7 @@ const ICON_SCALE = 0.9;
 
 export default function SHDNASideBar() {
   const segments = useSegments();
-  const { setUserId } = useUserData();
+  const { setUserId, setSessionToken } = useUserData();
   const activeSection = segments[0];
   const { openFloatingView, closeFloatingView } = useFloatingView();
   const [optionHovered, setOptionHovered] = useState(0);
@@ -37,7 +37,8 @@ export default function SHDNASideBar() {
       variables: {},
       onCompleted: () => {
         closeFloatingView();
-        setUserId(null);
+        setUserId("none");
+        setSessionToken("");
         router.navigate("/");
       },
     });
